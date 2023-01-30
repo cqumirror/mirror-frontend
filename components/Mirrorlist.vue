@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-main>
+    <el-main v-loading="fullscreenLoading">
       <el-table
         :data="listData"
         style="width: 100%"
@@ -66,7 +66,7 @@ export default {
         },
         {
           prop: 'tag',
-          label: 'Status1',
+          label: 'Status',
           width: '100',
           hidden: false,
         }
@@ -77,7 +77,8 @@ export default {
         paused: 'warning',
         failed: 'danger',
       },
-      listData: []
+      listData: [],
+      fullscreenLoading: false
     }
   },
   created() {
@@ -98,8 +99,13 @@ export default {
       return ''
     },
     async init() {
+      this.fullscreenLoading = true
       await this.$axios.get(Api_mirror.getMirror()).then(res => {
         this.generateList(res.data)
+        this.fullscreenLoading = false
+      }).catch(err => {
+        this.fullscreenLoading = false
+        // TODO add error message
       })
     },
     generateList(data) {
