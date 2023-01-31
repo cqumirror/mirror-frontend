@@ -1,10 +1,13 @@
-# nuxt-frontend
+# CQU mirror frontend
 
 ## Build Setup
+**!!!IMPORTANT!!!**</br>
+Before you setup this project, make sure you have install `nvm` and set NodeJS version to v14.20.0.
+
 
 ```bash
 # install dependencies
-$ yarn install
+$ yarn
 
 # serve with hot reload at localhost:3000
 $ yarn dev
@@ -67,3 +70,13 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+## `plugins`
+This project use Element UI as UI framework for vue2 and element-ui are vue2
+frontend best practice in commercial usage.
+- Element UI: add element components using tag
+- Fontawesome 5: fontawesome prefix has been imported as :`fas` for solid, `fab` for brand and `far` for regular. Use font icons by the method below:
+  ```vue
+    <fa :icon="['PREFIX','ICON NAME']"/>
+  ```
+  All icon's names can be find in cheatsheet.
