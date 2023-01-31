@@ -1,22 +1,37 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
   <div class="mirror-footer">
-    <el-row :gutter="5" style="margin:0;padding:0;">
-      <el-col :span="6" :offset="2">
+    <div class="mirror-footer-content" >
+      <el-row :gutter="5">
+        <el-col :span="12" :offset="2">
       <span>
-      本站在重庆大学信息化办公室的支持下创办，由重庆大学蓝盟运行维护。
-      本站的主页和镜像同步工具分别 fork 自清华大学 TUNA 协会的 镜像管理器 项目和 镜像站网页 项目。
+        <el-row>
+          <el-col>
+            本站在重庆大学信息化办公室的支持下创办，由重庆大学蓝盟运行维护。
+            <br/>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col>
+            本站镜像同步工具 fork 自清华大学 TUNA 协会的 镜像管理器 项目。网页项目使用 Nuxt.js 构建。
+          </el-col>
+        </el-row>
       </span>
-      </el-col>
-      <el-col :span="4" :offset="2">
+        </el-col>
+        <el-col :span="6" :offset="2">
       <span>
-        Contact Us:
+        <b>Contact Us:</b>
         <ul>
-          <li>Mailing List</li>
-          <li>Github</li>
+          <li>
+            <fa :icon="['fas','envelope']"/>{{ "\xa0" }}Mailing List
+          </li>
+          <li>
+            <fa :icon="['fab','github']"/>{{ "\xa0" }}Github
+          </li>
         </ul>
       </span>
-      </el-col>
-    </el-row>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
@@ -30,8 +45,11 @@ export default {
 .mirror-footer {
   background-color: #384452;
   color: #f0ffff;
-  margin: 0 0;
-  padding: 0 0;
+  display: flex;
+}
+
+.mirror-footer-content {
+  margin: 6vh 4vw;
 }
 
 </style>

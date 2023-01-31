@@ -2,7 +2,8 @@
   <div>
     <span>status</span>
     <!-- Add the style and icon you want using the String format -->
-    <font-awesome-icon icon="fa-solid fa-user-secret" />
+    <fa icon="fa-solid fa-user-secret" />
+    <fa icon="fa-light fa-warehouse" />
   </div>
 </template>
 
