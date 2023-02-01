@@ -101,9 +101,11 @@ export default {
     async init() {
       this.fullscreenLoading = true
       await this.$axios.get(Api_mirror.getMirror()).then(res => {
+        console.log(res.data)
         this.generateList(res.data)
         this.fullscreenLoading = false
       }).catch(err => {
+        console.log(err)
         this.fullscreenLoading = false
         // TODO add error message
       })
