@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "nuxt start --port 3010",
     "generate": "nuxt generate"
   },
   "dependencies": {
