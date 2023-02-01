@@ -56,12 +56,12 @@ export default {
   },
   axios: {
     proxy: true,
-    baseURL: 'http://localhost:3000/api',
+    baseURL: process.env.baseURL,
     proxyHeaders: false,
     credentials: false
   },
   env: {
-    baseURL: (process.env.NODE_ENV === 'production' ? 'https://mirrors.cqu.edu.cn' : 'http://localhost:3000')
+    baseURL: (process.env.NODE_ENV === 'production' ? 'https://test-nuxtjs-tan.vercel.app' : 'http://localhost:3000')
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
