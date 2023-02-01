@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const prefix = process.env.baseURL + "/static/tunasync.json"
+const prefix = '/api' + "/static/tunasync.json"
 
 export default {
   getMirror: params => {

@@ -1,6 +1,8 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  // target: 'static',
+  target: 'server',
+  // ssr: false,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -40,10 +42,21 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
+  proxy: {
+    '/api': {
+      target: 'https://mirrors.cqu.edu.cn',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api': ''
+      }
+    }
+  },
   axios: {
-    baseURL: 'http://localhost:3000',
+    proxy: true,
+    baseURL: 'http://localhost:3000/api',
     proxyHeaders: false,
     credentials: false
   },
