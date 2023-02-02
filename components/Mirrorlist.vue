@@ -32,7 +32,8 @@
               v-else
               :prop="item.prop"
               :label="item.label"
-            />
+            >
+            </el-table-column>
           </template>
         </template>
       </el-table>
@@ -101,7 +102,6 @@ export default {
     async init() {
       this.fullscreenLoading = true
       await this.$axios.get(Api_mirror.getMirror()).then(res => {
-        console.log(res.data)
         this.generateList(res.data)
         this.fullscreenLoading = false
       }).catch(err => {
@@ -123,11 +123,30 @@ export default {
       data.forEach(item => {
         this.listData.push({
           name: item.name,
-          lastUpdate: item['last_update'],
+          lastUpdate: this.timeConvert(item['last_update']),
           status: item.status,
           tag: this.tagList[item.status]
         })
       })
+    },
+    timeConvert(timeStr) {
+      const splitStr = timeStr.split(" ")
+      const d = splitStr[0].split("-")
+      const t = splitStr[1].split(":")
+      const UTCDate = new Date(Date.UTC(d[0],d[1],d[2],t[0],t[1],t[2]))
+
+      const clientTimezone = new Intl.DateTimeFormat().resolvedOptions().timeZone
+      const options = {
+        year: 'numeric', month: 'numeric', day: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric',
+        hour12: false,
+        timeZone: clientTimezone
+      };
+      const timeObject = new Intl.DateTimeFormat(
+        navigator.language,
+        options
+      ).format(UTCDate)
+      return timeObject.toString()
     },
   },
 }
