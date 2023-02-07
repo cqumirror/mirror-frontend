@@ -32,7 +32,9 @@
               v-else
               :prop="item.prop"
               :label="item.label"
-            >
+            ><template slot-scope="scope">
+              <a class="mirror-href" :href="mirror_url + scope.row.name.toLowerCase()">{{ scope.row.name }}</a>
+            </template>
             </el-table-column>
           </template>
         </template>
@@ -43,8 +45,14 @@
 
 <script>
 import Api_mirror from "@/components/Api/Api_mirror";
+
 export default {
   name: "Mirrorlist",
+  computed: {
+    scoped() {
+      return scoped
+    }
+  },
   data() {
     return {
       listCol: [
@@ -79,11 +87,13 @@ export default {
         failed: 'danger',
       },
       listData: [],
-      fullscreenLoading: false
+      fullscreenLoading: false,
+      mirror_url: process.env.mirrorURL,
     }
   },
   created() {
     this.init()
+    console.log(process.env.mirrorURL)
   },
   methods: {
     tableRowClassName({row, rowIndex}) {
@@ -130,6 +140,7 @@ export default {
       })
     },
     timeConvert(timeStr) {
+      // TODO 时间转换还有问题需要修理
       const splitStr = timeStr.split(" ")
       const d = splitStr[0].split("-")
       const t = splitStr[1].split(":")
@@ -171,4 +182,10 @@ export default {
 .el-table /deep/ .success-row {
   background: #FFFFFF;
 }
+
+.mirror-href {
+  color: #1ccb4c;
+  text-decoration: none;
+}
+
 </style>

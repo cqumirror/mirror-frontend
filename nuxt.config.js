@@ -43,8 +43,10 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxt/content'
   ],
+  // module configs
   proxy: {
     '/api': {
       target: 'https://mirrors.cqu.edu.cn',
@@ -60,8 +62,13 @@ export default {
     proxyHeaders: false,
     credentials: false
   },
+  content: {
+
+  },
   env: {
-    baseURL: (process.env.NODE_ENV === 'production' ? 'https://mirrors.cqu.edu.cn' : 'http://localhost:3000')
+    baseURL: (process.env.NODE_ENV === 'production' ? 'https://mirrors.cqu.edu.cn' : 'http://localhost:3000'),
+    mirrorURL: "https://mirrors.cqu.edu.cn/",
+    baseLinkColor: '#1ccb4c'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
