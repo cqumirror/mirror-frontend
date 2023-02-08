@@ -63,7 +63,12 @@ export default {
     credentials: false
   },
   content: {
-
+    markdown: {
+      remarkPlugins: [
+        ['remark-gfm'],
+        ['@/utils/shortcode', {startBlock: "[[",endBlock: "]]"}]
+      ]
+    }
   },
   env: {
     baseURL: (process.env.NODE_ENV === 'production' ? 'https://mirrors.cqu.edu.cn' : 'http://localhost:3000'),

@@ -6,7 +6,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start --port 3010",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "test": "clear && yarn run dev"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.0-14",
@@ -21,6 +22,9 @@
     "element-ui": "^2.15.10",
     "moment": "^2.29.4",
     "nuxt": "^2.15.8",
+    "remark-gfm": "1.0.0",
+    "remark-shortcodes": "^0.3.1",
+    "unist-util-visit": "2.0.3",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10"
