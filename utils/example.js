@@ -1,0 +1,18 @@
+const vfile = require('to-vfile')
+const report = require('vfile-reporter')
+const unified = require('unified')
+const parse = require('remark-parse')
+const gfm = require('remark-gfm')
+const remark2rehype = require('remark-rehype')
+const stringify = require('rehype-stringify')
+const shortcode = require('remark-shortcodes')
+
+unified()
+  .use(shortcode,{startBlock:"{{ ",endBlock:" }}"})
+  .use(parse)
+  .use(remark2rehype)
+  .use(stringify)
+  .process(vfile.readSync('example.md'), function (err, file) {
+    console.error(report(err || file))
+    console.log(String(file))
+  })
