@@ -1,17 +1,17 @@
 <template>
-  <el-menu class="navbar" mode="horizontal" @select="handleSelect">
-    <!--一级目录--->
-    <template v-for="item in menu">
-      <el-menu-item v-if="!item.childNode" :index="item.index.toString()">
-        <a v-if="item.type==='url'" :href="item.url" target="_blank"> {{ item.label }}</a>
-<!--        <span v-else>{{ item.label }}</span>-->
-        <template v-else>
-          <nuxt-link :to="item.index">{{ item.label }}</nuxt-link>
-        </template>
-      </el-menu-item>
-    </template>
-  </el-menu>
+  <div class="navbar">
+      <a class="nav-brand" href="https://mirrors.cqu.edu.cn">重庆大学开源镜像站</a>
+      <div class="nav-right">
+        <ul class="nav">
+          <li v-for="item in menu" :key="item.key">
+            <NuxtLink :to="item.index">{{ item.label }}</NuxtLink>
+          </li>
+        </ul>
+      </div>
+      <button class="nav-toggle">&#8943</button>
+  </div>
 </template>
+
 
 <script>
 export default {
@@ -26,7 +26,7 @@ export default {
           index: "/"
         },
         {
-          label: "MIRROR STATUS",
+          label: "STATUS",
           key: "mirror_status",
           index: "/status"
         },
