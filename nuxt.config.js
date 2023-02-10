@@ -24,8 +24,9 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
-    'element-ui/lib/theme-chalk/index.css'
-    // '@/assets/css/main.css'
+    'element-ui/lib/theme-chalk/index.css',
+    '@/assets/css/fonts.css',
+    '@/assets/css/global.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -45,7 +46,8 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/google-fonts'
   ],
   // module configs
   proxy: {
@@ -70,6 +72,22 @@ export default {
         ['@/utils/shortcode', {startBlock: "[[",endBlock: "]]"}]
       ]
     }
+  },
+  googleFonts: {
+    families: {
+      Roboto: true,
+      Lato: [100, 300],
+      'Noto+Sans+SC': true
+    },
+    display: 'swap',
+    useStylesheet: true,
+    download: true,
+    base64: false,
+    inject: true,
+    overwriting: false,
+    outputDir: '@/assets',
+    stylePath: 'css/fonts.css',
+    fontsPath: '@/assets/fonts'
   },
   env: {
     baseURL: (process.env.NODE_ENV === 'production' ? 'https://mirrors.cqu.edu.cn' : 'http://localhost:3000'),

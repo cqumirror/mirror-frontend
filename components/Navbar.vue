@@ -9,11 +9,14 @@
     <div class="nav-right">
       <ul class="nav">
         <li v-for="item in menu" :key="item.key">
-          <NuxtLink :to="item.index" :custom="true">
+          <NuxtLink :to="item.index" :custom="true" v-if="item.type !== 'url'">
             <a @click="handleToggle">
               {{ item.label }}
             </a>
           </NuxtLink>
+          <a @click="handleToggle" :href="item.url" target="_blank" v-else>
+            {{ item.label }}
+          </a>
         </li>
       </ul>
     </div>
@@ -45,6 +48,13 @@ export default {
           index: "/wiki"
         },
         {
+          label: 'LANUNION',
+          key: 'lanunion',
+          index: "/lanunion",
+          type: "url",
+          url: "https://lanunion.cqu.edu.cn"
+        },
+        {
           label: 'MIRRORZ.ORG',
           key: "mirrorz_org",
           index: "/mirrorz",
@@ -57,9 +67,7 @@ export default {
     }
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath)
-    },
+
     handleToggle(e) {
       // TODO 非常迷惑的处理方式，没想到其他的方法，我菜
       const child = document.getElementsByClassName('nav-right')
