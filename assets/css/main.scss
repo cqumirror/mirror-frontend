@@ -1,3 +1,6 @@
+$mobile-size: 767px;
+
+// nav bar
 #nav-parent {
   min-height: 2vh;
   //width: 100vw;
@@ -11,12 +14,10 @@
 
   .navbar {
     width: 100%;
-    .nav-toggle {
-      @media (min-width: 768px) {
-        display: none;
-      }
-    }
+    display: flex;
+
     .nav-right {
+      display: block;
       line-height: 50px;
 
       .nav {
@@ -26,6 +27,7 @@
         margin-inline-start: 0;
         margin-inline-end: 0;
         padding-inline-start: 40px;
+
         li {
           a {
             text-decoration: none;
@@ -34,43 +36,103 @@
             font-weight: 700;
             font-size: 15px;
           }
-          @media (min-width: 768px) {
+
+          @media (min-width: $mobile-size) {
             display: inline-block;
             margin-left: 20px;
           }
         }
-        @media (min-width: 768px) {
+
+        @media (min-width: $mobile-size) {
           float: right;
           margin: 0;
           list-style: none;
-
-
-
+        }
+        @media (max-width: $mobile-size) {
+          list-style: none;
         }
       }
 
-      @media (min-width: 768px) {
-        //float: right;
-        //flex: 1;
-        //text-align: right;
-        //margin-left: auto;
+      @media (min-width: $mobile-size) {
+        float: right;
+        margin-left: auto;
+      }
+      @media (max-width: $mobile-size) {
+        //display: none;
+        height: 0;
+        max-height: 6000px;
+        overflow: hidden;
+        transition: height .75s;
       }
     }
-    .nav-brand {
-      color: #384452;
-      font-weight: 900;
-      font-size: 20px;
-      padding: 0;
-      line-height: 50px;
-      float: left;
-      text-decoration: none;
-      background-color: transparent;
+
+    .nav-container {
+
+      display: flex;
+
+      .nav-brand {
+        color: #384452;
+        font-weight: 900;
+        font-size: 20px;
+        padding: 0;
+        line-height: 50px;
+        float: left;
+        text-decoration: none;
+        background-color: transparent;
+        display: inline-block;
+        margin-left: 5vw;
+      }
+
+      .nav-toggle {
+
+        background-color: #ffffff;
+        border: none;
+        color: #333333;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        &:hover {
+          background-color: #70ca73;
+        }
+        cursor: pointer;
+        @media (max-width: $mobile-size) {
+          margin-left: auto;
+          float: right;
+          position: relative;
+
+        }
+        @media (min-width: $mobile-size) {
+          display: none;
+        }
+      }
+
+      @media (max-width: $mobile-size) {
+        box-sizing: border-box;
+        //border-bottom: 4px groove rgb(227 227 227);
+      }
     }
+
     a:-webkit-any-link {
       cursor: pointer;
     }
+
     a:-moz-any-link {
       cursor: pointer;
     }
+
+    @media (max-width: $mobile-size) {
+
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: $mobile-size) {
+    padding: inherit;
+    box-sizing: border-box;
+    border-bottom: 4px groove rgb(227 227 227 / 58%);
+
+
   }
 }
