@@ -3,6 +3,7 @@ title: "markdown 解析测试文件"
 draft: false
 weight: 2
 ---
+
 # title
 ## title
 ### title
@@ -35,6 +36,8 @@ rm -rf /*
 ## 图片
 
 ![cqu](https://www.cqu.edu.cn/uploadfile/2023/0119/20230119124238297.jpg)
+
+<img src="https://www.cqu.edu.cn/uploadfile/2023/0119/20230119124238297.jpg" style="zoom:25%;" />
 
 ## vue component
 <IndexPage/>

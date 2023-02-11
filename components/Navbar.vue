@@ -70,14 +70,16 @@ export default {
   methods: {
 
     handleToggle(e) {
-      // TODO 非常迷惑的处理方式，没想到其他的方法，我菜
-      const child = document.getElementsByClassName('nav-right')
-      if (this.isOpened) {
-        child[0].style.height = '0'
-        this.isOpened = !this.isOpened
-      } else {
-        child[0].style.height = this.height
-        this.isOpened = !this.isOpened
+      if (window.innerWidth < 767) {
+        // TODO 非常迷惑的处理方式，没想到其他的方法，我菜
+        const child = document.getElementsByClassName('nav-right')
+        if (this.isOpened) {
+          child[0].style.height = '0'
+          this.isOpened = !this.isOpened
+        } else {
+          child[0].style.height = this.height
+          this.isOpened = !this.isOpened
+        }
       }
     },
     handleResize(e) {

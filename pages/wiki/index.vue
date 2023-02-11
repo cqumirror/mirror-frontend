@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin: 0;padding: 0">
     <h1>Wiki Content</h1>
     <ul>
       <template v-for="article in articles">

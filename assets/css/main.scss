@@ -2,6 +2,16 @@
 
 $mobile-size: 767px;
 
+*::before, *::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+}
+
 // nav bar
 #nav-parent {
   min-height: 2vh;
@@ -135,6 +145,126 @@ $mobile-size: 767px;
     box-sizing: border-box;
     border-bottom: 4px groove rgb(227 227 227 / 58%);
 
+
+  }
+}
+
+// wiki content
+#md-content {
+  .nuxt-content {
+    // short code
+    .notice-note {
+      border-top: 30px solid #6AB0DE;
+      background: #E7F2FA;
+      position: relative;
+      padding: 15px;
+      display: block;
+      font-size: 1rem;
+      margin-top: 0rem;
+      margin-bottom: 0rem;
+      color: #666;
+
+      p:first-child:before {
+        position: absolute;
+        top: -22px;
+        color: #fff;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f06a";
+        left: 10px;
+      }
+      p:first-child:after {
+        position: absolute;
+        top: -28px;
+        color: #fff;
+        left: 2rem;
+        content: 'Note';
+      }
+    }
+    .notice-warn {
+      border-top: 30px solid #ffcc71;
+      background: #fff2e6;
+      position: relative;
+      padding: 15px;
+      display: block;
+      font-size: 1rem;
+      margin-top: 0rem;
+      margin-bottom: 0rem;
+      color: #666;
+
+      p:first-child:before {
+        position: absolute;
+        top: -22px;
+        color: #fff;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f06a";
+        left: 10px;
+      }
+      p:first-child:after {
+        position: absolute;
+        top: -28px;
+        color: #fff;
+        left: 2rem;
+        content: 'Warn';
+      }
+    }
+    .notice-info {
+      border-top: 30px solid #9cd275;
+      background: #edfce7;
+      position: relative;
+      padding: 15px;
+      display: block;
+      font-size: 1rem;
+      margin-top: 0rem;
+      margin-bottom: 0rem;
+      color: #666;
+
+      p:first-child:before {
+        position: absolute;
+        top: -22px;
+        color: #fff;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f06a";
+        left: 10px;
+      }
+      p:first-child:after {
+        position: absolute;
+        top: -28px;
+        color: #fff;
+        left: 2rem;
+        content: 'Info';
+      }
+    }
+    .notice-error {
+      border-top: 30px solid #f07373;
+      background: #ffe1e1;
+      position: relative;
+      padding: 15px;
+      display: block;
+      font-size: 1rem;
+      margin-top: 0rem;
+      margin-bottom: 0rem;
+      color: #666;
+
+      p:first-child:before {
+        position: absolute;
+        top: -22px;
+        color: #fff;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f06a";
+        left: 10px;
+      }
+      p:first-child:after {
+        position: absolute;
+        top: -28px;
+        color: #fff;
+        left: 2rem;
+        content: 'Error0';
+      }
+    }
 
   }
 }

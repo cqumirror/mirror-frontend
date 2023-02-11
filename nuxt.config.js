@@ -25,6 +25,7 @@ export default {
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
     'element-ui/lib/theme-chalk/index.css',
+    '@/assets/css/lib/fontawesome.min.css',
     '@/assets/css/fonts.css',
     '@/assets/css/global.scss'
   ],
@@ -71,7 +72,8 @@ export default {
         ['remark-gfm'],
         ['@/utils/shortcode', {startBlock: "[[",endBlock: "]]"}]
       ]
-    }
+    },
+    liveEdit: false,
   },
   googleFonts: {
     families: {
