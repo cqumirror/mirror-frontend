@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="nav-container">
       <a class="nav-brand" href="https://mirrors.cqu.edu.cn">
-        11111
+        {{ siteTitle }}
       </a>
       <button class="nav-toggle" @click="handleToggle">&#8943</button>
     </div>
@@ -29,6 +29,7 @@ export default {
   name: "Navbar",
   data() {
     return {
+      siteTitle: process.env.siteTitle,
       isOpened: false,
       activeIndex: '/',
       menu: [
@@ -78,14 +79,30 @@ export default {
         child[0].style.height = this.height
         this.isOpened = !this.isOpened
       }
-
+    },
+    handleResize(e) {
+      const child = document.getElementsByClassName('nav-right')
+      if (window.innerWidth >= 768) {
+        child[0].style.height = '0'
+        console.log(this.isOpened);
+        this.isOpened = false
+      }
     },
     computeHeight() {
       this.height = (this.menu.length * 57).toString() + 'px'
-    }
+    },
   },
   created() {
     this.computeHeight()
+  },
+  mounted() {
+    window.onresize = () => {
+      setTimeout(() => {
+        // TODO 不优雅 虽然解决了窗口缩放的监听问题
+        // console.log(window.innerWidth+"====> windows width")
+        this.handleResize()
+      }, 400)
+    }
   }
 }
 </script>

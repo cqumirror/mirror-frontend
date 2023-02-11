@@ -6,9 +6,9 @@
     <el-main>
       <nuxt/>
     </el-main>
-    <el-footer style="margin: 0;padding: 0;">
+    <div style="margin: 0;padding: 0;">
       <Footer/>
-    </el-footer>
+    </div>
   </div>
 </template>
 
