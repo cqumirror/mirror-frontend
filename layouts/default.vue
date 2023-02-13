@@ -1,23 +1,25 @@
 <template>
-  <el-container style="padding: 0;margin: 0">
-    <el-header>
+  <div style="padding: 0;margin: 0">
+    <div id="nav-parent">
       <Navbar/>
-    </el-header>
+    </div>
     <el-main>
       <nuxt/>
     </el-main>
-    <el-footer style="margin: 0;padding: 0;">
+    <div style="margin: 0;padding: 0;">
       <Footer/>
-    </el-footer>
-  </el-container>
+    </div>
+  </div>
 </template>
 
 <script>
+import '@/assets/css/main.scss'
 export default {
   name: "default"
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+
 
 </style>

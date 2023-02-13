@@ -2,7 +2,10 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   // target: 'static',
   target: 'server',
-  // ssr: false,
+  server: {
+    port: 3010, //线上端口
+    host: '0.0.0.0'
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -17,14 +20,17 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    '@/assets/css/lib/fontawesome.min.css',
+    '@/assets/css/fonts.css',
+    '@/assets/css/global.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -44,7 +50,8 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/google-fonts'
   ],
   // module configs
   proxy: {
@@ -63,19 +70,35 @@ export default {
     credentials: false
   },
   content: {
-    remarkPlugins: [
-      ['remark-gfm'],
-      ['remark-hugo-shortcodes',{
-        tokens: [["{{%", "%}}"]],
-        inlineMode: true,
-        markdownAttributes: ['title', 'alt', 'caption']
-      }]
-    ]
+    markdown: {
+      remarkPlugins: [
+        ['remark-gfm'],
+        ['@/utils/shortcode', {startBlock: "[[",endBlock: "]]"}]
+      ]
+    },
+    liveEdit: false,
+  },
+  googleFonts: {
+    families: {
+      Roboto: true,
+      Lato: [100, 300],
+      'Noto+Sans+SC': true
+    },
+    display: 'swap',
+    useStylesheet: true,
+    download: true,
+    base64: false,
+    inject: true,
+    overwriting: false,
+    outputDir: '@/assets',
+    stylePath: 'css/fonts.css',
+    fontsPath: '@/assets/fonts'
   },
   env: {
     baseURL: (process.env.NODE_ENV === 'production' ? 'https://mirrors.cqu.edu.cn' : 'http://localhost:3000'),
     mirrorURL: "https://mirrors.cqu.edu.cn/",
-    baseLinkColor: '#1ccb4c'
+    baseLinkColor: '#1ccb4c',
+    siteTitle: "重庆大学开源软件镜像站"
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

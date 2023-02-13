@@ -1,23 +1,36 @@
 <template>
-  <el-menu class="navbar" mode="horizontal" @select="handleSelect">
-    <!--一级目录--->
-    <template v-for="item in menu">
-      <el-menu-item v-if="!item.childNode" :index="item.index.toString()">
-        <a v-if="item.type==='url'" :href="item.url" target="_blank"> {{ item.label }}</a>
-<!--        <span v-else>{{ item.label }}</span>-->
-        <template v-else>
-          <nuxt-link :to="item.index">{{ item.label }}</nuxt-link>
-        </template>
-      </el-menu-item>
-    </template>
-  </el-menu>
+  <div class="navbar">
+    <div class="nav-container">
+      <a class="nav-brand" href="https://mirrors.cqu.edu.cn">
+        {{ siteTitle }}
+      </a>
+      <button class="nav-toggle" @click="handleToggle">&#8943</button>
+    </div>
+    <div class="nav-right">
+      <ul class="nav">
+        <li v-for="item in menu" :key="item.key">
+          <NuxtLink :to="item.index" :custom="true" v-if="item.type !== 'url'">
+            <a @click="handleToggle">
+              {{ item.label }}
+            </a>
+          </NuxtLink>
+          <a @click="handleToggle" :href="item.url" target="_blank" v-else>
+            {{ item.label }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
+
 
 <script>
 export default {
   name: "Navbar",
   data() {
     return {
+      siteTitle: process.env.siteTitle,
+      isOpened: false,
       activeIndex: '/',
       menu: [
         {
@@ -26,7 +39,7 @@ export default {
           index: "/"
         },
         {
-          label: "MIRROR STATUS",
+          label: "STATUS",
           key: "mirror_status",
           index: "/status"
         },
@@ -36,6 +49,13 @@ export default {
           index: "/wiki"
         },
         {
+          label: 'LANUNION',
+          key: 'lanunion',
+          index: "/lanunion",
+          type: "url",
+          url: "https://lanunion.cqu.edu.cn"
+        },
+        {
           label: 'MIRRORZ.ORG',
           key: "mirrorz_org",
           index: "/mirrorz",
@@ -43,13 +63,48 @@ export default {
           url: "https://mirrorz.org"
         }
 
-      ]
+      ],
+      height: '',
     }
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath)
+
+    handleToggle(e) {
+      if (window.innerWidth < 767) {
+        // TODO 非常迷惑的处理方式，没想到其他的方法，我菜
+        const child = document.getElementsByClassName('nav-right')
+        if (this.isOpened) {
+          child[0].style.height = '0'
+          this.isOpened = !this.isOpened
+        } else {
+          child[0].style.height = this.height
+          this.isOpened = !this.isOpened
+        }
+      }
     },
+    handleResize(e) {
+      const child = document.getElementsByClassName('nav-right')
+      if (window.innerWidth >= 768) {
+        child[0].style.height = '0'
+        console.log(this.isOpened);
+        this.isOpened = false
+      }
+    },
+    computeHeight() {
+      this.height = (this.menu.length * 57).toString() + 'px'
+    },
+  },
+  created() {
+    this.computeHeight()
+  },
+  mounted() {
+    window.onresize = () => {
+      setTimeout(() => {
+        // TODO 不优雅 虽然解决了窗口缩放的监听问题
+        // console.log(window.innerWidth+"====> windows width")
+        this.handleResize()
+      }, 400)
+    }
   }
 }
 </script>

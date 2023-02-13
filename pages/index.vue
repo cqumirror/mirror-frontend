@@ -2,9 +2,9 @@
   <el-container>
     <el-aside width="10vw"></el-aside>
     <Mirrorlist/>
-    <el-aside width="40vw">
-      <SideBar/>
-    </el-aside>
+<!--    <el-aside width="40vw">-->
+<!--      <SideBar/>-->
+<!--    </el-aside>-->
   </el-container>
 
 </template>
