@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div class="nav-container">
-      <a class="nav-brand" href="https://mirrors.cqu.edu.cn">
+      <a class="nav-brand" href="/">
         {{ siteTitle }}
       </a>
       <button class="nav-toggle" @click="handleToggle">&#8943</button>
