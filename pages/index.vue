@@ -1,21 +1,21 @@
 <template>
-  <el-container>
-    <el-aside width="10vw"></el-aside>
+  <div id="index-container">
     <Mirrorlist/>
-<!--    <el-aside width="40vw">-->
-<!--      <SideBar/>-->
-<!--    </el-aside>-->
-  </el-container>
+    <div id="side-car">
+      <SideBar/>
+    </div>
+  </div>
 
 </template>
 
 <script>
+import '@/assets/css/main.scss'
 export default {
   name: 'IndexPage'
 }
 </script>
 
-<style>
+<style lang="scss">
 body {
   padding: 0;
   margin: 0;

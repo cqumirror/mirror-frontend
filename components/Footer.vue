@@ -31,7 +31,7 @@
             <fa :icon="['fas','envelope']"/>{{ "\xa0" }}<a href="mailto:cqumirror@gmail.com"style="text-decoration: none;color: white;"> Mail</a>
           </li>
           <li>
-            <fa :icon="['fab','github']"/>{{ "\xa0" }}<a style="text-decoration: none;color: white" href="https://github.com/cqumirror/mirror-frontend">Github</a>
+            <fa :icon="['fab','github']"/>{{ "\xa0" }}<a style="text-decoration: none;color: white" href="https://github.com/cqumirror/feedback">Github</a>
           </li>
         </ul>
       </span>

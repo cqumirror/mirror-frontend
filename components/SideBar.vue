@@ -1,36 +1,32 @@
 <template>
-  <el-container style="display: flex;flex-wrap:wrap;">
+  <div style="display: flex;" class="right-bar">
     <!--news-->
-    <el-row>
-      <el-col>
-        <h4>新闻公告</h4>
-      </el-col>
-    </el-row>
+    <div>
+      <fa :icon="['fas','newspaper']"/>
+      <h4>新闻公告</h4>
+    </div>
+
     <!--url-->
-    <el-row>
-      <el-col>
-        <h4>域名选择</h4>
-      </el-col>
-    </el-row>
+    <div>
+      <h4>域名选择</h4>
+    </div>
+
     <!--download link-->
-    <el-row>
-      <el-col>
-        <h4>下载链接</h4>
-      </el-col>
-    </el-row>
+    <div>
+      <h4>下载链接</h4>
+    </div>
+
     <!--contact-->
-    <el-row>
-      <el-col>
-        <h4>联系我们</h4>
-      </el-col>
-    </el-row>
+    <div>
+      <h4>联系我们</h4>
+    </div>
+
     <!--links-->
-    <el-row>
-      <el-col>
-        <h4>相关链接</h4>
-      </el-col>
-    </el-row>
-  </el-container>
+    <div>
+      <h4>相关链接</h4>
+    </div>
+
+  </div>
 </template>
 
 <script>

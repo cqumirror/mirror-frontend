@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container id="mirror-list">
     <el-main v-loading="fullscreenLoading">
       <el-table
         :data="listData"
@@ -33,7 +33,7 @@
               :prop="item.prop"
               :label="item.label"
             ><template slot-scope="scope">
-              <a class="mirror-href" :href="mirror_url + scope.row.name.toLowerCase()">{{ scope.row.name }}</a>
+              <a class="mirror-href" :href="mirror_url + scope.row.name">{{ scope.row.name }}</a>
             </template>
             </el-table-column>
           </template>
@@ -93,7 +93,6 @@ export default {
   },
   created() {
     this.init()
-    console.log(process.env.mirrorURL)
   },
   methods: {
     tableRowClassName({row, rowIndex}) {
@@ -110,15 +109,17 @@ export default {
       return ''
     },
     async init() {
-      this.fullscreenLoading = true
-      await this.$axios.get(Api_mirror.getMirror()).then(res => {
-        this.generateList(res.data)
-        this.fullscreenLoading = false
-      }).catch(err => {
-        console.log(err)
-        this.fullscreenLoading = false
-        // TODO add error message
-      })
+      if (typeof window === 'object') {
+        this.fullscreenLoading = true
+        await this.$axios.get(Api_mirror.getMirror()).then(res => {
+          this.generateList(res.data)
+          this.fullscreenLoading = false
+        }).catch(err => {
+          console.log(err)
+          this.fullscreenLoading = false
+          // TODO add error message
+        })
+      }
     },
     generateList(data) {
       // sort by names

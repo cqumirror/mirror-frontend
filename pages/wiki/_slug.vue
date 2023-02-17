@@ -1,5 +1,5 @@
 <template>
-  <article id="md-content">
+  <article id="md-content" @click="imgProxy">
     <nuxt-content :document="article" />
   </article>
 </template>
@@ -13,6 +13,19 @@ export default {
   data() {
     return {
       article: {}
+    }
+  },
+  methods: {
+    imgProxy(e) {
+      const element = {
+        name: e.target.alt,
+        url: e.target.src,
+        tag: e.target.tagName.toLowerCase()
+      }
+      if (element.tag === 'img') {
+        console.info("img clicked")
+        // TODO imgViewer
+      }
     }
   },
   async asyncData({ $content, params }) {

@@ -3,9 +3,9 @@
     <div id="nav-parent">
       <Navbar/>
     </div>
-    <el-main>
+    <div>
       <nuxt/>
-    </el-main>
+    </div>
     <div style="margin: 0;padding: 0;">
       <Footer/>
     </div>
