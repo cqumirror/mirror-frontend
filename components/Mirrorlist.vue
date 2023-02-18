@@ -141,12 +141,10 @@ export default {
       })
     },
     timeConvert(timeStr) {
-      // TODO 时间转换还有问题需要修理
       const splitStr = timeStr.split(" ")
       const d = splitStr[0].split("-")
       const t = splitStr[1].split(":")
-      const UTCDate = new Date(Date.UTC(d[0],d[1],d[2],t[0],t[1],t[2]))
-
+      const UTCDate = new Date(Date.UTC(d[0],d[1]-1,d[2],t[0]-8,t[1],t[2]))
       const clientTimezone = new Intl.DateTimeFormat().resolvedOptions().timeZone
       const options = {
         year: 'numeric', month: 'numeric', day: 'numeric',
