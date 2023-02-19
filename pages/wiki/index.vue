@@ -4,10 +4,8 @@
     <ul>
       <template v-for="(article,k) in articles">
         <li :key="article.slug" :class="{active : isActive === k}" @click="toActive(k)" >
-          <NuxtLink :to="{name: 'wiki-index-slug', params: { slug: article.slug } }" class="wiki-content">
-            <div class="wiki-title">
+          <NuxtLink :to="{name: 'wiki-index-slug', params: { slug: article.slug } }" class="wiki-content" >
                 {{ article.slug }}
-            </div>
           </NuxtLink>
         </li>
       </template>
@@ -20,7 +18,7 @@
 </template>
 
 <script>
-
+import '@/assets/css/main.scss'
 export default {
   name: "wiki",
   data() {
@@ -48,34 +46,33 @@ export default {
 
 <style scoped>
 li {
+  display: block;
   list-style: none;
-  height: 2rem;
-  margin-top:0.1rem ;
-  padding-top:0.8rem ;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
 }
-a {
-  text-decoration: none;
+li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
+
 .active {
-  background-color: #53CAFF;
+background-color: #53CAFF !important; 
+  
 }
-li .nuxt-link-active {
+.active .wiki-content {
   color: #fff;
 }
 .wiki-content {
-  
+  display: block;
+
   color: #53CAFF;
-}
-
-
-.wiki-title{
   height: 1rem;
   font-size: 1rem;
   line-height: 1rem;
-  margin-left: 1rem;
   font-weight: 400;
+  padding: 1rem 1rem;
+  text-decoration: none;
 }
+
 .wiki-container{
   margin-left: 10vw;
 
