@@ -4,7 +4,8 @@
     <ul>
       <template v-for="(article,k) in articles">
         <li :key="article.slug" :class="{active : isActive === k}" @click="toActive(k)" >
-          <NuxtLink :to="{name: 'wiki-index-slug', params: { slug: article.slug } }" class="wiki-content" >
+          <NuxtLink :to="{name: 'wiki-index-slug', params: { slug: article.slug } }" class="wiki-content" :id="k"
+          >
                 {{ article.slug }}
           </NuxtLink>
         </li>
@@ -40,6 +41,9 @@ export default {
     toActive(k){
       this.isActive = k;
     }
+  },
+  mounted(){
+    this.$router.replace('/wiki/'+this.articles[0].slug); //自动重定向到第一个帮助
   }
 }
 </script>
@@ -48,12 +52,11 @@ export default {
 li {
   display: block;
   list-style: none;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
 }
 li:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
-
 .active {
 background-color: #53CAFF !important; 
   
@@ -63,7 +66,6 @@ background-color: #53CAFF !important;
 }
 .wiki-content {
   display: block;
-
   color: #53CAFF;
   height: 1rem;
   font-size: 1rem;
