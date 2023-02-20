@@ -40,7 +40,12 @@ export default {
 </script>
 
 <style lang="scss">
+$mobile-size: 767px;
 #md-content {
   width: 80%;
+  @media (max-width: $mobile-size) {
+    width: 100%;
+    transition: width .75s;
+  }
 }
 </style>
