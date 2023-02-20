@@ -80,6 +80,7 @@ export default {
           child[0].style.height = this.height
           this.isOpened = !this.isOpened
         }
+
       }
     },
     handleResize(e) {

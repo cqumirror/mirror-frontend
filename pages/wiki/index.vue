@@ -4,17 +4,20 @@
     <ul>
       <template v-for="(article,k) in articles">
         <li :key="article.slug" :class="{active : isActive === k}" @click="toActive(k)" >
-          <NuxtLink :to="{name: 'wiki-index-slug', params: { slug: article.slug } }" class="wiki-content" :id="k"
-          >
+
+          <NuxtLink :to="{name: 'wiki-index-slug', params: { slug: article.slug } }" class="wiki-content" :id="k">
                 {{ article.slug }}
           </NuxtLink>
+
         </li>
       </template>
     </ul>
   </el-aside>
+
   <el-main>
     <nuxt-child/>
   </el-main>
+
   </el-container>
 </template>
 
@@ -43,8 +46,17 @@ export default {
     }
   },
   mounted(){
-    this.$router.replace('/wiki/'+this.articles[0].slug); //自动重定向到第一个帮助
+    console.log('22')
+    this.$router.replace('/wiki'+'/'+this.articles[0].slug); //自动重定向到第一个帮助
+  },
+  watch:{
+    $router:function (){
+      console.log(this.$router)
+    }
   }
+
+
+
 }
 </script>
 
@@ -58,7 +70,7 @@ li:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
 .active {
-background-color: #53CAFF !important; 
+background-color: #1ccb4c !important; 
   
 }
 .active .wiki-content {
@@ -66,7 +78,7 @@ background-color: #53CAFF !important;
 }
 .wiki-content {
   display: block;
-  color: #53CAFF;
+  color: #1ccb4c;
   height: 1rem;
   font-size: 1rem;
   line-height: 1rem;
