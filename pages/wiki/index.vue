@@ -46,7 +46,6 @@ export default {
     }
   },
   mounted(){
-    console.log('22')
     this.$router.replace('/wiki'+'/'+this.articles[0].slug); //自动重定向到第一个帮助
   },
   watch:{
