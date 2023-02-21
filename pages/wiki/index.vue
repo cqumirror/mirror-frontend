@@ -1,31 +1,44 @@
 <template>
   <el-container class="wiki-container"> 
-    <el-aside style="margin: 0 auto; width: 13rem;">
-    <ul>
+    <el-aside style="margin: 0 auto; width: 13rem;" class="wiki-hidden">
+    <ul class="wiki-aside">
       <template v-for="(article,k) in articles">
         <li :key="article.slug" :class="{active : isActive === k}" @click="toActive(k)" >
-          <NuxtLink :to="{name: 'wiki-index-slug', params: { slug: article.slug } }" class="wiki-content" :id="k"
-          >
+
+          <NuxtLink :to="{name: 'wiki-index-slug', params: { slug: article.slug } }" class="wiki-content">
                 {{ article.slug }}
           </NuxtLink>
+
         </li>
       </template>
     </ul>
   </el-aside>
+
   <el-main>
+    <el-select v-model="ChoosedSlug" class="wiki-mobile-nav">
+    <el-option class="option"
+    v-for="article in articles"
+      :key="article.slug"
+      :label="article.slug"
+      :value="article.slug"
+      >
+      
+    </el-option>
+  </el-select>
     <nuxt-child/>
   </el-main>
+
   </el-container>
 </template>
 
 <script>
-import '@/assets/css/main.scss'
 export default {
   name: "wiki",
   data() {
     return {
       articles: [],
       isActive: 0,
+      ChoosedSlug:''
     }
   },
   async asyncData({ $content, params }) {
@@ -34,7 +47,8 @@ export default {
       .sortBy('createdAt', 'asc')
       .fetch()
     return {
-      articles
+      articles,
+      ChoosedSlug:articles[0].slug
     }
   },
   methods:{
@@ -42,32 +56,60 @@ export default {
       this.isActive = k;
     }
   },
+  watch:{
+    ChoosedSlug(){
+      this.$router.push({name: 'wiki-index-slug', params: { slug: this.ChoosedSlug} });
+    }
+  },
   mounted(){
-    this.$router.replace('/wiki/'+this.articles[0].slug); //自动重定向到第一个帮助
-  }
+    this.$router.push({name: 'wiki-index-slug', params: { slug: this.articles[0].slug} }); //自动重定向到第一个帮助
+  },
+
 }
 </script>
 
-<style scoped>
-li {
+<style scoped lang="scss">
+
+$mobile-size: 767px;
+
+.wiki-aside {
+  display: flex;
+  flex-direction:column;
+  li {
   display: block;
   list-style: none;
+  margin-top: 0.5rem;
   border-radius: 0.3rem;
-}
+  }
 li:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
+}
+
+.wiki-hidden {
+  @media (max-width: $mobile-size) {
+    display: none;
+  }
+}
+.wiki-mobile-nav{
+  display: none;
+  @media (max-width: $mobile-size) {
+    display: block;
+  }
+}
+
 .active {
-background-color: #53CAFF !important; 
+background-color: #1ccb4c !important; 
   
 }
-.active .wiki-content {
+.active {
+  .wiki-content {
   color: #fff;
+  }
 }
 .wiki-content {
   display: block;
-  color: #53CAFF;
-  height: 1rem;
+  color: #1ccb4c;
   font-size: 1rem;
   line-height: 1rem;
   font-weight: 400;
@@ -77,6 +119,10 @@ background-color: #53CAFF !important;
 
 .wiki-container{
   margin-left: 10vw;
-
+  @media (max-width: $mobile-size) {
+    margin-left: 1vw;
+    margin-right: 1vw;
+  }
 }
+
 </style>

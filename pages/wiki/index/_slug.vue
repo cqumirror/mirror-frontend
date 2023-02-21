@@ -40,7 +40,4 @@ export default {
 </script>
 
 <style lang="scss">
-#md-content {
-  width: 80%;
-}
 </style>

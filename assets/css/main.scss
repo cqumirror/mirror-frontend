@@ -170,6 +170,11 @@ img {
 
 // wiki content
 #md-content {
+  width: 80%;
+  @media (max-width: $mobile-size) {
+    width: 100%;
+    transition: width .75s;
+  } // 响应式
   .nuxt-content {
     // short code
     .notice-note {
