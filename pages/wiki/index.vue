@@ -15,16 +15,16 @@
   </el-aside>
 
   <el-main>
-    <el-select v-model="ChoosedSlug" class="wiki-mobile-nav">
-    <el-option class="option"
-    v-for="article in articles"
-      :key="article.slug"
-      :label="article.slug"
-      :value="article.slug"
-      >
-      
-    </el-option>
-  </el-select>
+    <div>
+      <select class = "wiki-mobile-nav" v-model="ChoosedSlug">
+        <template v-for="article in articles">
+          <option :value="article.slug">
+            <div>{{article.slug}}</div> 
+            
+            </option>
+        </template>
+      </select>
+    </div>
     <nuxt-child/>
   </el-main>
 
@@ -64,7 +64,7 @@ export default {
   mounted(){
     this.$router.push({name: 'wiki-index-slug', params: { slug: this.articles[0].slug} }); //自动重定向到第一个帮助
   },
-
+  
 }
 </script>
 
@@ -93,6 +93,14 @@ li:hover {
 }
 .wiki-mobile-nav{
   display: none;
+  width : 100%;
+  height: 2rem;
+  border: 1px solid #000;
+  border-radius: 0.2rem;
+  option {
+
+    color: #1ccb4c;
+  }
   @media (max-width: $mobile-size) {
     display: block;
   }
