@@ -95,8 +95,8 @@ export default {
     fontsPath: '@/assets/fonts'
   },
   env: {
-    baseURL: (process.env.NODE_ENV === 'production' ? 'https://mirrors.cqu.edu.cn' : 'http://localhost:3000'),
-    mirrorURL: (process.env.NODE_ENV === 'production' ? '/' : 'https://mirrors.cqu.edu.cn'),
+    baseURL: (process.env.NODE_ENV === 'production' ? 'https://mirrors.cqu.edu.cn/' : 'http://localhost:3000'),
+    mirrorURL: (process.env.NODE_ENV === 'production' ? '/' : 'https://mirrors.cqu.edu.cn/'),
     baseLinkColor: '#1ccb4c',
     siteTitle: "重庆大学开源软件镜像站",
     exportUrls: [

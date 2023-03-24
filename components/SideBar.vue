@@ -2,13 +2,13 @@
   <div style="display: flex;" class="right-bar">
     <!--news-->
     <div>
-      <fa :icon="['fas','newspaper']"/>
-      <h4>新闻公告</h4>
+      <h4><fa :icon="['fas','newspaper']" style="margin-right: 1vw"/>新闻公告</h4>
+      <SideBarNewsPreview :style-news="style"/>
     </div>
 
     <!--url-->
     <div>
-      <h4>域名选择</h4>
+      <h4><fa :icon="['fas','paperclip']" style="margin-right: 1vw"/>域名选择</h4>
       <ul>
         <li v-for="item in exportUrls">
           <a :href="item.url" target="_blank" :style="style">
@@ -20,14 +20,14 @@
 
     <!--download link-->
     <div>
-      <h4>下载链接</h4>
+      <h4><fa :icon="['far','file-archive']" style="margin-right: 1vw"/>下载链接</h4>
       <span>常用发行版 iso 和应用工具安装包直接下载</span>
       <button @click="showDialog = true">获取下载链接</button>
     </div>
 
     <!--contact-->
     <div>
-      <h4>联系我们</h4>
+      <h4><fa :icon="['far','paper-plane']" style="margin-right: 1vw"/>联系我们</h4>
       <ul>
         <li v-for="item in contactUrls">
           <a :href="item.url" target="_blank" :style="style">
@@ -39,7 +39,7 @@
 
     <!--links-->
     <div v-if="siteLinks.enabled">
-      <h4>相关链接</h4>
+      <h4><fa :icon="['fas','inbox']" style="margin-right: 1vw"/>相关链接</h4>
       <ul>
         <li v-for="item in siteLinks.links">
           <a :href="item.url" :style="style">
@@ -67,6 +67,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

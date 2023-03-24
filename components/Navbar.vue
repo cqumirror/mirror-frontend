@@ -44,6 +44,11 @@ export default {
           index: "/status"
         },
         {
+          label: "NEWS",
+          key: "news",
+          index: "/news"
+        },
+        {
           label: "WIKI",
           key: "wiki",
           index: "/wiki"

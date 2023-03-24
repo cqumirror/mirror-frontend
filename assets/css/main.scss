@@ -31,6 +31,30 @@ img {
 
 }
 
+// side bar (news)
+#index-news-container {
+  a {
+    text-decoration: none;
+  }
+  #news-list {
+    text-decoration: none;
+  }
+
+  #more-news {
+    text-decoration: none;
+    text-align: end;
+    padding-right: 5vw;
+  }
+  #more-news:first-child:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f101";
+    font-size: 0.8rem;
+    margin-left: 0.5px;
+
+
+  }
+}
+
 // nav bar
 #nav-parent {
   min-height: 2vh;

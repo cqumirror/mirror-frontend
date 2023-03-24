@@ -1,19 +1,23 @@
 <template>
-  <article id="md-content" @click="imgProxy">
+  <article id="md1-content" @click="imgProxy">
     <nuxt-content :document="article" />
   </article>
+
 </template>
 
 <script>
-import '@/assets/css/lib/fontawesome.min.css'
-import '@/assets/css/main.scss'
+import 'assets/css/lib/fontawesome.min.css'
+import 'assets/css/main.scss'
 
 export default {
-  name: "slug",
+  name: "page",
   data() {
     return {
       article: {}
     }
+  },
+  created() {
+    console.log("loaded pages")
   },
   methods: {
     imgProxy(e) {
@@ -29,8 +33,8 @@ export default {
     }
   },
   async asyncData({ $content, params }) {
-
-    const article = await $content('wiki', params.slug).fetch()
+    console.log("data fetch data",params)
+    const article = await $content('news', params.page).fetch()
     console.log(article)
     return {
       article
