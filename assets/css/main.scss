@@ -1,4 +1,5 @@
 $mobile-size: 887px;
+$middle-size-1: 1067px;
 
 *::before, *::after {
   -webkit-box-sizing: border-box;
@@ -29,12 +30,19 @@ img {
   #side-car {
     .right-bar {
       display: flex;
-      flex-direction: column ;
+      flex-direction: column;
+      margin-right: 15vw;
+    }
+
+    @media (max-width: $middle-size-1) {
+      margin-right: 0;
     }
 
     @media (max-width: $mobile-size) {
+      margin-right: 0;
       margin-left: 5vw;
     }
+
   }
   @media (max-width: $mobile-size) {
     flex-direction: column;
@@ -54,7 +62,7 @@ img {
   #more-news {
     text-decoration: none;
     text-align: end;
-    padding-right: 5vw;
+    padding-right: 0vw;
   }
   #more-news:first-child:after {
     font-family: "Font Awesome 5 Free";
@@ -325,5 +333,34 @@ img {
       }
     }
 
+  }
+}
+
+
+// download button
+#download-pkg {
+  display: inline-block;
+  padding: 6px 12px;
+  width: 117px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #6da91e;
+  border-color: #cfff8a;
+
+  &:hover {
+    color: #f1f1f1;
+    background-color: #75b612;
+    border-color: #a3c46b;
   }
 }

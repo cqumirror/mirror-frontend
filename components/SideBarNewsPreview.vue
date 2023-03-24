@@ -25,7 +25,6 @@ export default {
   async fetch() {
     this.content = await this.$content('news').only(['title','slug'])
       .sortBy('createdAt', 'desc').limit(3).fetch()
-    console.log(this.content,"=== prefetch")
   },
   props: {
     styleNews: { type: String }

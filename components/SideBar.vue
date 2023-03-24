@@ -21,8 +21,10 @@
     <!--download link-->
     <div>
       <h4><fa :icon="['far','file-archive']" style="margin-right: 1vw"/>下载链接</h4>
-      <span>常用发行版 iso 和应用工具安装包直接下载</span>
-      <button @click="showDialog = true">获取下载链接</button>
+      <div style="display: flex;flex-direction: column; margin-left: 2vw;">
+        <span>常用发行版 iso 和应用工具安装包下载</span>
+        <button id="download-pkg" @click="showDialog = true">获取下载链接</button>
+      </div>
     </div>
 
     <!--contact-->
