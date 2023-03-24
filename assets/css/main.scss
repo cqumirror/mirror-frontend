@@ -1,4 +1,4 @@
-$mobile-size: 767px;
+$mobile-size: 887px;
 
 *::before, *::after {
   -webkit-box-sizing: border-box;
@@ -19,6 +19,10 @@ img {
     margin-left: 10vw;
     width: 60%;
 
+    @media (max-width: $mobile-size) {
+      width: 100%;
+      margin-left: 0;
+    }
   }
 
   // sidebar
@@ -27,6 +31,13 @@ img {
       display: flex;
       flex-direction: column ;
     }
+
+    @media (max-width: $mobile-size) {
+      margin-left: 5vw;
+    }
+  }
+  @media (max-width: $mobile-size) {
+    flex-direction: column;
   }
 
 }
