@@ -1,5 +1,5 @@
-$mobile-size: 887px;
-$middle-size-1: 1067px;
+$mobile-size: 990px;
+$middle-size-1: 1138px;
 
 *::before, *::after {
   -webkit-box-sizing: border-box;
@@ -20,6 +20,10 @@ img {
     margin-left: 10vw;
     width: 60%;
 
+    @media (max-width: $middle-size-1) {
+      margin-left: 1vw;
+    }
+
     @media (max-width: $mobile-size) {
       width: 100%;
       margin-left: 0;
@@ -36,11 +40,13 @@ img {
 
     @media (max-width: $middle-size-1) {
       margin-right: 0;
+      width: 35%;
     }
 
     @media (max-width: $mobile-size) {
       margin-right: 0;
       margin-left: 5vw;
+      width: unset;
     }
 
   }

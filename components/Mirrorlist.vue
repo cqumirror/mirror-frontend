@@ -4,6 +4,8 @@
       <el-table
         :data="listData"
         style="width: 100%"
+        :row-style="{height:0+'px'}"
+        :cell-style="{padding:5+'px'}"
         :row-class-name="tableRowClassName">
         <template v-for="item in listCol">
           <template v-if="!item.hidden">
@@ -15,7 +17,7 @@
                 :width="item.width"
               >
                 <template slot-scope="scope">
-                  <el-tag :type="scope.row.tag"
+                  <el-tag :type="scope.row.tag" size="mini"
                   >
                     {{ scope.row.status }}
                   </el-tag>
@@ -30,6 +32,7 @@
             </template>
             <el-table-column
               v-else
+              min-width="170"
               :prop="item.prop"
               :label="item.label"
             ><template slot-scope="scope">
@@ -64,13 +67,13 @@ export default {
         {
           prop: 'lastUpdate',
           label: 'Last Update',
-          width: '220',
+          width: '160',
           hidden: false,
         },
         {
           prop: 'status',
           label: 'Status',
-          width: '100',
+          width: '60',
           hidden: true,
         },
         {
@@ -161,8 +164,18 @@ export default {
   },
 }
 </script>
-
 <style scoped>
+.el-table::before {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0px;
+}
+
+.el-table /deep/ .el-table__cell {
+  border-bottom: 0px solid transparent !important;
+}
+
 .el-table /deep/ tbody tr:hover>td {
   background-color: #00000000;
 }
