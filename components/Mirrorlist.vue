@@ -1,6 +1,7 @@
 <template>
   <el-container id="mirror-list">
     <el-main v-loading="fullscreenLoading">
+      <h3><fa :icon="['fas','layer-group']" style="margin-right: 1vw"/>镜像列表</h3>
       <el-table
         :data="listData"
         style="width: 100%"

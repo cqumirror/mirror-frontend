@@ -32,6 +32,9 @@ img {
 
   // sidebar
   #side-car {
+
+    margin-top: 25px;
+
     .right-bar {
       display: flex;
       flex-direction: column;
@@ -47,6 +50,7 @@ img {
       margin-right: 0;
       margin-left: 5vw;
       width: unset;
+      margin-top: unset;
     }
 
   }
