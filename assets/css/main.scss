@@ -374,3 +374,29 @@ img {
     border-color: #a3c46b;
   }
 }
+
+#status-container-parent {
+  margin-left: 10vw;
+  display: block;
+  box-sizing: border-box;
+
+  @media (max-width: $mobile-size) {
+    margin-left: 2vw;
+  }
+
+  #status-container {
+    display: flex;
+    flex: 1;
+    box-sizing: border-box;
+
+    @media (max-width: $mobile-size) {
+      overscroll-behavior: contain;
+      overflow: auto;
+    }
+
+    .status-list {
+      text-align: left;
+    }
+  }
+
+}

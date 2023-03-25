@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import Api_mirror from "@/components/Api/Api_mirror";
+
 export default {
   name: "SideBar",
   data() {
@@ -64,7 +66,12 @@ export default {
       siteLinks: process.env.siteLinks,
       style: "text-decoration: none;" + "color:" + process.env.baseLinkColor + ";",
       showDialog: false,
+      isoList: []
     }
+  },
+  async fetch() {
+    this.isoList = await this.$axios.$get(Api_mirror.getIsoList())
+    console.log(this.isoList,"=== isolist ===")
   },
 }
 </script>

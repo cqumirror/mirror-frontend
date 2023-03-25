@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <span>status</span>
-    <!-- Add the style and icon you want using the String format -->
-    <fa icon="fa-solid fa-user-secret" />
-    <fa icon="fa-light fa-warehouse" />
+  <div id="status-container-parent">
+    <h2>服务器监控</h2>
+    <h2>同步状态</h2>
+    <Statuslist/>
   </div>
 </template>
 
