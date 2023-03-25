@@ -93,10 +93,19 @@ export default {
       listData: [],
       fullscreenLoading: false,
       mirror_url: process.env.mirrorURL,
+
+      timer: {},
+      onCreated: true,
     }
   },
   created() {
     this.init()
+    this.onCreated = false
+    this.timer = setInterval(this.init,30000)
+    // this.init()
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   },
   methods: {
     tableRowClassName({row, rowIndex}) {
@@ -114,15 +123,22 @@ export default {
     },
     async init() {
       if (typeof window === 'object') {
-        this.fullscreenLoading = true
+        this.ifAddLoading()
         await this.$axios.get(Api_mirror.getMirror()).then(res => {
           this.generateList(res.data)
-          this.fullscreenLoading = false
+          this.ifAddLoading()
         }).catch(err => {
           console.log(err)
-          this.fullscreenLoading = false
+          this.ifAddLoading()
           // TODO add error message
         })
+      }
+    },
+    ifAddLoading() {
+      if (this.onCreated) {
+        this.fullscreenLoading = !this.fullscreenLoading
+      } else {
+        this.fullscreenLoading = false
       }
     },
     generateList(data) {
@@ -135,14 +151,16 @@ export default {
         return 0;
       })
       // generate table data
+      let listData = []
       data.forEach(item => {
-        this.listData.push({
+        listData.push({
           name: item.name,
           lastUpdate: this.timeConvert(item['last_update']),
           status: item.status,
           tag: this.tagList[item.status]
         })
       })
+      this.listData = JSON.parse(JSON.stringify(listData))
     },
     timeConvert(timeStr) {
       const splitStr = timeStr.split(" ")
