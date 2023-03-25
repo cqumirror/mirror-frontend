@@ -1,5 +1,5 @@
 <template>
-  <div id="status-container">
+  <div id="status-container" v-loading="fullscreenLoading">
     <table class="status-table">
       <tbody>
       <tr>
@@ -10,12 +10,12 @@
         <th class="status-list">Size</th>
       </tr>
       <template v-for="item of listData">
-        <tr>
-          <td class="status-list">{{ item.name }}</td>
-          <td class="status-list">{{ item.lastUpdate }}</td>
-          <td class="status-list">{{ item.upStream }}</td>
-          <td class="status-list">{{ item.status }}</td>
-          <td class="status-list">{{ item.size }}</td>
+        <tr :class="item.className">
+          <td class="status-list status-list-data">{{ item.name }}</td>
+          <td class="status-list status-list-data">{{ item.lastUpdate }}</td>
+          <td class="status-list status-list-data">{{ item.upStream }}</td>
+          <td class="status-list status-list-data">{{ item.status }}</td>
+          <td class="status-list status-list-data">{{ item.size }}</td>
         </tr>
       </template>
       </tbody>
@@ -36,31 +36,6 @@ export default {
   },
   data() {
     return {
-      listCol: [
-        {
-          prop: 'name',
-          label: 'Name',
-          hidden: false,
-        },
-        {
-          prop: 'lastUpdate',
-          label: 'Last Update',
-          width: '160',
-          hidden: false,
-        },
-        {
-          prop: 'status',
-          label: 'Status',
-          width: '60',
-          hidden: true,
-        },
-        {
-          prop: 'tag',
-          label: 'Status',
-          width: '100',
-          hidden: false,
-        }
-      ],
       tagList: {
         syncing: '',
         success: 'success',
@@ -69,8 +44,6 @@ export default {
       },
       listData: [],
       fullscreenLoading: false,
-      mirror_url: process.env.mirrorURL,
-
       timer: {},
       onCreated: true,
     }
@@ -79,13 +52,12 @@ export default {
     this.init()
     this.onCreated = false
     this.timer = setInterval(this.init,30000)
-    // this.init()
   },
   beforeDestroy() {
     clearInterval(this.timer)
   },
   methods: {
-    tableRowClassName({row, rowIndex}) {
+    tableRowClassName(row) {
       // change table color
       if (row.status === 'syncing') {
         return 'syncing-row'
@@ -136,7 +108,8 @@ export default {
           lastUpdate: this.timeConvert(item['last_update']),
           upStream: item.upstream,
           size: item.size,
-          status: item.status
+          status: item.status,
+          className: this.tableRowClassName(item)
         })
       })
       this.listData = JSON.parse(JSON.stringify(listData))

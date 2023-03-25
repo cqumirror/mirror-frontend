@@ -379,9 +379,23 @@ img {
   margin-left: 10vw;
   display: block;
   box-sizing: border-box;
+  margin-bottom: 2vh;
+  // text-settings
+  color: #2f2f2f;
 
   @media (max-width: $mobile-size) {
     margin-left: 2vw;
+  }
+  &:first-child {
+    @media (max-width: $mobile-size) {
+      margin-left: 0;
+    }
+  }
+
+  #status-title {
+    @media (max-width: $mobile-size) {
+      margin-left: 10vw;
+    }
   }
 
   #status-container {
@@ -393,9 +407,35 @@ img {
       overscroll-behavior: contain;
       overflow: auto;
     }
+    .status-table {
+      white-space:nowrap;
+      border: 0px solid transparent;
+      border-collapse: collapse;
 
+      // background-highlight
+      .syncing-row {
+        background-color: #E3FFFD;
+      }
+      .error-row {
+        background-color: #ffd9cb;
+      }
+    }
     .status-list {
       text-align: left;
+      white-space:nowrap;
+      padding-left: 2.5vw;
+      padding-right: 2.5vw;
+
+      border: 0px solid transparent;
+      border-collapse: collapse;
+
+      // override font color
+      color: #505050;
+      font-weight: bold;
+    }
+    .status-list-data {
+      color: #5e5e5e;
+      font-weight: lighter;
     }
   }
 
