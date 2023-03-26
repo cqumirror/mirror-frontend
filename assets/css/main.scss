@@ -225,7 +225,7 @@ img {
 #md-content {
   min-height: 75vh;
   @media (max-width: $mobile-size) {
-    width: 100%;
+    width: 90%;
     transition: width .75s;
   } // 响应式
 
@@ -499,6 +499,11 @@ img {
 .news-detail-content {
   margin-left: 18vw;
   width: 60%;
+
+  @media (max-width: $mobile-size) {
+    margin-left: 5vw;
+    width: 80%;
+  }
 
   #news-detail-title {
     font-weight: bolder;
