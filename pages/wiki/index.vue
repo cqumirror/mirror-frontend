@@ -2,8 +2,8 @@
   <el-container class="wiki-container">
     <el-aside style="margin: 0 auto; width: 13rem;" class="wiki-hidden">
     <ul class="wiki-aside">
-      <template v-for="(article,k) in articles">
-        <li :key="article.slug" :class="{active : isActive === k}" @click="toActive(k)" >
+      <template v-for="article in articles">
+        <li :id = "article.slug" :key="article.slug" :class="{active : ChoosedSlug === article.slug}" @click="toActive(article.slug)" >
 
           <NuxtLink :to="{name: 'wiki-index-slug', params: { slug: article.slug } }" class="wiki-content">
                 {{ article.slug }}
@@ -37,7 +37,6 @@ export default {
   data() {
     return {
       articles: [],
-      isActive: 0,
       ChoosedSlug:''
     }
   },
@@ -48,12 +47,13 @@ export default {
       .fetch()
     return {
       articles,
-      ChoosedSlug:articles[0].slug
     }
   },
   methods:{
-    toActive(k){
-      this.isActive = k;
+    toActive(slug){
+      this.isActive = slug;
+      this.ChoosedSlug =slug ;
+      
     }
   },
   watch:{
@@ -62,9 +62,26 @@ export default {
     }
   },
   mounted(){
-    this.$router.push({name: 'wiki-index-slug', params: { slug: this.articles[0].slug} }); //自动重定向到第一个帮助
-  },
+    let p = this.$router.history.current.path;
+    let pathlist=  p.split('/');
+    if(pathlist.length === 3){
+      this.ChoosedSlug = pathlist[2];
+    
+    }else if(pathlist.length ===2) {
+      this.ChoosedSlug = this.articles[0].slug;
+    }
+    this.$router.push({name: 'wiki-index-slug', params: { slug: this.ChoosedSlug} });
 
+  },
+  updated(){
+    let p = this.$router.history.current.path;
+    let pathlist=  p.split('/');
+    if(pathlist.length ===2) {
+      document.getElementById(this.articles[0].slug).click(); //修复了在页面中点击wiki会到 /wiki 空白页面的bug 
+    }
+
+  }
+  
 }
 </script>
 
