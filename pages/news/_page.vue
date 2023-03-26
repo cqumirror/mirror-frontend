@@ -1,5 +1,5 @@
 <template>
-  <article id="md-content" @click="imgProxy">
+  <article id="md-content" class="news-detail-content" @click="imgProxy">
     <div>{{ article.title }}</div>
     <div>
       <div>
@@ -41,7 +41,15 @@ export default {
         console.info("img clicked")
         // TODO imgViewer
       }
-    }
+    },
+    addChild(className) {
+      const blocks = document.getElementsByClassName(className)
+      for (const block of blocks) {
+        const CopyButton = Vue.extend(ClipboardBtn)
+        const component = new CopyButton().$mount()
+        block.appendChild(component.$el)
+      }
+    },
   },
   async asyncData({ $content, params }) {
     console.log("data fetch data",params)
@@ -53,13 +61,8 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      const blocks = document.getElementsByClassName('nuxt-content-highlight')
-      console.log(blocks)
-      for (const block of blocks) {
-        const CopyButton = Vue.extend(ClipboardBtn)
-        const component = new CopyButton().$mount()
-        block.appendChild(component.$el)
-      }
+      this.addChild('nuxt-content-highlight')
+
     }, 100)
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <button ref="copy" class="copy-btn">
-    <IconClipboardCheck v-if="state === 'copied'" class="copy-btn-done" />
-    <IconClipboardCopy v-else class="copy-btn-init" />
+    <IconClipboardCheck v-if="state === 'copied'" class="copy-btn-done"/>
+    <IconClipboardCopy v-else class="copy-btn-init"/>
   </button>
 </template>
 
@@ -33,7 +33,7 @@ export default {
       this.state = 'copied'
       window.setTimeout(() => {
         this.state = 'init'
-      }, 2000)
+      }, 1300)
     })
   }
 }

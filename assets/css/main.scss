@@ -221,9 +221,9 @@ img {
   }
 }
 
-// wiki content
+// md-content 通用样式
 #md-content {
-  width: 80%;
+  min-height: 80vh;
   @media (max-width: $mobile-size) {
     width: 100%;
     transition: width .75s;
@@ -385,10 +385,10 @@ img {
     //// blockquote
     blockquote {
       background-color: #f5f5f5;
-      border-left: 1rem solid #c0c0c0;
-      border-bottom: 0.5px solid #c0c0c0;
-      border-right: 0.5px solid #c0c0c0;
-      border-top: 0.5px solid #c0c0c0;
+      border-left: 1.25rem solid #e5e5e5;
+      border-bottom: 0.5px solid #eeeeee;
+      border-right: 0.5px solid #eeeeee;
+      border-top: 0.5px solid #eeeeee;
       padding-bottom: 5px;
 
       margin-left: 1vw;
@@ -406,10 +406,10 @@ img {
       code {
         font-family: Arial;
         color: #3a3a3a;
-        background-color: #fff7dd;
+        background-color: #e6fdda;
         padding: 1px 3px;
         border-radius: 1px;
-        border: 1px solid #f6edd4;
+        border: 1px solid #e6fdda;
       }
     }
 
@@ -419,14 +419,91 @@ img {
 
       .copy-btn {
         position: absolute;
-        top: 0;
+        top: 2px;
         right: 0;
+        //width: 10px;
+        border: none;
 
+        &:hover {
+          background-color: #b4b4b4;
+        }
+
+        #clipboard-copy {
+          padding: 2px 1px;
+
+          &:after {
+            font-family: "Font Awesome 5 Free";
+            content: '\f0c5';
+            color: #7c7c7c;
+            font-size: 20px;
+          }
+        }
+        #clipboard-check {
+          padding: 2px 1px;
+
+          &:after {
+            font-family: "Font Awesome 5 Free";
+            content: '\f058';
+            color: #7c7c7c;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    //// table
+    table {
+      border-collapse: collapse;
+      thead {
+        tr {
+          th {
+            border: 2px solid #eeeeee;
+            background-color: #eeeeee;
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            border: 2px solid #eeeeee;
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            font-weight: lighter;
+          }
+        }
       }
     }
 
 
+    //// links
+    a {
+      text-decoration: none;
+      color: #4e7717;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
   }
+}
+
+// news content detail
+.news-detail-content {
+  margin-left: 18vw;
+  width: 60%;
+}
+
+// wiki content detail
+.wiki-page-content {
+  width: 80%;
 }
 
 
