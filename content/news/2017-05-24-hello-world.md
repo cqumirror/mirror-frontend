@@ -4,6 +4,7 @@ title: "重庆大学镜像站重新上线啦"
 author: Zhiqiang He
 draft: false
 weight: 2
+date: "2017-05-24"
 ---
 # 正文
 

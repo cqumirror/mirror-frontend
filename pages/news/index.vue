@@ -1,7 +1,7 @@
 <template>
   <div style="margin: 0;padding: 0">
     <div id="news-page-title">NEWS HISTORY</div>
-    <ul id="news-list" v-loading="loading">
+    <ul id="news-page-list" v-loading="loading">
       <template v-for="article in articles">
         <li :key="article.slug">
           <div>
@@ -14,7 +14,7 @@
               </NuxtLink>
               <div class="article-detail-container">
                 <div class="article-time">
-                  {{ formatDate(article.createdAt) }}
+                  {{ article.date }}
                 </div>
                 <div class="article-author">
                   {{ article.author }}
@@ -76,8 +76,8 @@ export default {
       const pageSize = this.pageSize
       const skipSize = (currentPage - 1) * pageSize
       const articles = await this.$content('news')
-        .only(['title', 'description', 'img', 'slug', 'author', 'createdAt'])
-        .sortBy('createdAt', 'desc').skip(skipSize)
+        .only(['title', 'description', 'img', 'slug', 'author', 'date'])
+        .sortBy('date', 'desc').skip(skipSize)
         .limit(pageSize).fetch()
       this.loadingCheck()
       return articles
@@ -89,8 +89,8 @@ export default {
   async fetch() {
     this.loadingCheck()
     const articles = await this.$content('news')
-      .only(['title', 'description', 'img', 'slug', 'author', 'createdAt'])
-      .sortBy('createdAt', 'desc')
+      .only(['title', 'description', 'img', 'slug', 'author', 'date'])
+      .sortBy('date', 'desc')
       .fetch()
     this.total = articles.length
     this.articles = articles.slice(0, this.pageSize)

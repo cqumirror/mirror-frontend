@@ -3,7 +3,9 @@ category: news
 layout: news
 title: "部分镜像故障"
 author: weearc
+date: "2019-02-13"
 ---
+
 部分镜像在同步时发生了不可预制错误，目前主要已知受到影响的镜像如下：
 - archlinux
 - debian

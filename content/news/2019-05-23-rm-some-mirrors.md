@@ -3,6 +3,7 @@ category: news
 layout: news
 title: "部分镜像移除"
 author: weearc
+date: "2019-05-23"
 ---
 由于硬盘空间再次不足，我们将考虑移除部分镜像。因此不得不做出以下决定：
 移除：

@@ -3,6 +3,7 @@ category: news
 layout: news
 title: "重大镜像站停止服务通知"
 author: Zhiqiang He
+date: "2017-05-24"
 ---
 
 重大网络中心将在 2017 年 5 月 28 日 7 时到 5 月 29 日 12 时进行机房整体搬迁，

@@ -1,5 +1,14 @@
 <template>
-  <article id="md1-content" @click="imgProxy">
+  <article id="md-content" @click="imgProxy">
+    <div>{{ article.title }}</div>
+    <div>
+      <div>
+        {{ article.date }}
+      </div>
+      <div>
+        {{ article.author }}
+      </div>
+    </div>
     <nuxt-content :document="article" />
   </article>
 
@@ -8,6 +17,8 @@
 <script>
 import 'assets/css/lib/fontawesome.min.css'
 import 'assets/css/main.scss'
+import Vue from "vue";
+import ClipboardBtn from "@/components/ClipboardBtn.vue";
 
 export default {
   name: "page",
@@ -39,6 +50,17 @@ export default {
     return {
       article
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      const blocks = document.getElementsByClassName('nuxt-content-highlight')
+      console.log(blocks)
+      for (const block of blocks) {
+        const CopyButton = Vue.extend(ClipboardBtn)
+        const component = new CopyButton().$mount()
+        block.appendChild(component.$el)
+      }
+    }, 100)
   }
 }
 </script>

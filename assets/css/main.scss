@@ -228,6 +228,7 @@ img {
     width: 100%;
     transition: width .75s;
   } // 响应式
+
   .nuxt-content {
     // short code
     .notice-note {
@@ -342,6 +343,88 @@ img {
         content: 'Error';
       }
     }
+
+    margin-left: 5vw;
+
+    // content style start
+    //// title
+    #title {
+
+    }
+    //// title-1
+    #title-1 {
+      &:before {
+        content: '#';
+      }
+    }
+    //// title-2
+    #title-2 {
+      &:before {
+        content: '#';
+      }
+    }
+    //// title-3
+    #title-3 {
+      &:before {
+        content: '#';
+      }
+    }
+    //// title-4
+    #title-4 {
+      &:before {
+        content: '#';
+      }
+    }
+    //// title-5
+    #title-5 {
+      &:before {
+        content: '#';
+      }
+    }
+
+    //// blockquote
+    blockquote {
+      background-color: #f5f5f5;
+      border-left: 1rem solid #c0c0c0;
+      border-bottom: 0.5px solid #c0c0c0;
+      border-right: 0.5px solid #c0c0c0;
+      border-top: 0.5px solid #c0c0c0;
+      padding-bottom: 5px;
+
+      margin-left: 1vw;
+
+      p {
+        color: #4b4b4b;
+        padding: 10px 20px;
+        word-wrap: break-word;
+
+      }
+    }
+
+    //// word qoute
+    p {
+      code {
+        font-family: Arial;
+        color: #3a3a3a;
+        background-color: #fff7dd;
+        padding: 1px 3px;
+        border-radius: 1px;
+        border: 1px solid #f6edd4;
+      }
+    }
+
+    //// codeblock
+    .nuxt-content-highlight {
+      position: relative;
+
+      .copy-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+      }
+    }
+
 
   }
 }
@@ -461,7 +544,7 @@ img {
   }
 }
 //// list style
-#news-list {
+#news-page-list {
   list-style: none;
   min-height: 62vh;
 }

@@ -4,7 +4,7 @@
       <li v-for="item in content">
         <NuxtLink :to="{name: 'news-page', params: { page: item.slug }}">
           <div :style="styleNews" id="news-list">
-            {{ item.title }}
+            {{ item.date + " " }}{{ item.title }}
           </div>
         </NuxtLink>
       </li>
@@ -23,8 +23,8 @@ import '@/assets/css/main.scss'
 export default {
   name: "SideBarNewsPreview",
   async fetch() {
-    this.content = await this.$content('news').only(['title','slug'])
-      .sortBy('createdAt', 'desc').limit(3).fetch()
+    this.content = await this.$content('news').only(['title','slug','date'])
+      .sortBy('date', 'desc').limit(3).fetch()
   },
   props: {
     styleNews: { type: String }
