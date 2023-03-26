@@ -114,6 +114,9 @@ export default {
         {url:'/news',desc: ' 新闻公告 '},
         {url:'http://lanunion.cqu.edu.cn/',desc:' 重大蓝盟 '}
       ]
+    },
+    newsPage: {
+      pageSize: 10
     }
   },
 

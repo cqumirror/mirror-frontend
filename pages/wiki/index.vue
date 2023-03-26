@@ -1,5 +1,5 @@
 <template>
-  <el-container class="wiki-container"> 
+  <el-container class="wiki-container">
     <el-aside style="margin: 0 auto; width: 13rem;" class="wiki-hidden">
     <ul class="wiki-aside">
       <template v-for="(article,k) in articles">
@@ -19,8 +19,8 @@
       <select class = "wiki-mobile-nav" v-model="ChoosedSlug">
         <template v-for="article in articles">
           <option :value="article.slug">
-            <div>{{article.slug}}</div> 
-            
+            <div>{{article.slug}}</div>
+
             </option>
         </template>
       </select>
@@ -44,7 +44,7 @@ export default {
   async asyncData({ $content, params }) {
     const articles = await $content('wiki')
       .only(['title', 'description', 'img', 'slug', 'author'])
-      .sortBy('createdAt', 'asc')
+      .sortBy('title', 'asc')
       .fetch()
     return {
       articles,
@@ -64,7 +64,7 @@ export default {
   mounted(){
     this.$router.push({name: 'wiki-index-slug', params: { slug: this.articles[0].slug} }); //自动重定向到第一个帮助
   },
-  
+
 }
 </script>
 
@@ -107,8 +107,8 @@ li:hover {
 }
 
 .active {
-background-color: #1ccb4c !important; 
-  
+background-color: #1ccb4c !important;
+
 }
 .active {
   .wiki-content {

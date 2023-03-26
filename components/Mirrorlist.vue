@@ -184,6 +184,13 @@ export default {
 }
 </script>
 <style scoped>
+
+.el-tag--mini /deep/ {
+  height: 23px !important;
+  width: 55px;
+  text-align: center;
+}
+
 .el-table::before {
   left: 0;
   bottom: 0;

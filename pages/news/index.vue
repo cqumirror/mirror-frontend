@@ -1,38 +1,104 @@
 <template>
   <div style="margin: 0;padding: 0">
-    <h1>Wiki Content</h1>
-    <ul>
+    <div id="news-page-title">NEWS HISTORY</div>
+    <ul id="news-list" v-loading="loading">
       <template v-for="article in articles">
         <li :key="article.slug">
-          <NuxtLink :to="{name: 'news-page', params: { page: article.slug }}">
-            <div>
-              <h2>
-                {{ article.title }}
-              </h2>
+          <div>
+            <!--title-->
+            <div class="article-block">
+              <NuxtLink :to="{name: 'news-page', params: { page: article.slug }}">
+                <div class="article-title">
+                  {{ article.title }}
+                </div>
+              </NuxtLink>
+              <div class="article-detail-container">
+                <div class="article-time">
+                  {{ formatDate(article.createdAt) }}
+                </div>
+                <div class="article-author">
+                  {{ article.author }}
+                </div>
+              </div>
             </div>
-          </NuxtLink>
+          </div>
         </li>
       </template>
     </ul>
+    <div id="news-page-pagination">
+      <el-pagination
+        background
+        hide-on-single-page
+        layout="prev, pager, next"
+        :total="total"
+        :current-page="currentPage"
+        :page-size="pageSize"
+        @current-change="handleCurrentChange"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import '@/assets/css/main.scss'
+
 export default {
   name: "news",
   data() {
     return {
       articles: [],
+      currentPage: 0,
+      pageSize: process.env.newsPage.pageSize,
+      total: 1000,
+      loading: false,
     }
   },
-  async asyncData({ $content, params }) {
-    const articles = await $content('news')
-      .only(['title', 'description', 'img', 'slug', 'author'])
+  methods: {
+    formatDate(date) {
+      const y = this.formatByIntl(date, {year: 'numeric'})
+      const m = this.formatByIntl(date, {month: '2-digit'})
+      const d = this.formatByIntl(date, {day: '2-digit'})
+      return (y + "-" + m + "-" + d) // TODO: use navigator to get locale
+      // return date
+    },
+    formatByIntl(date, option) {
+      const dateStr = new Date(date)
+      return new Intl.DateTimeFormat('en', option).format(dateStr)
+    },
+    async handleCurrentChange(currentPage) {
+      this.currentPage = currentPage
+      const articles = await this.queryContent(this.currentPage)
+      this.articles = JSON.parse(JSON.stringify(articles))
+
+    },
+    async queryContent(currentPage) {
+      this.loadingCheck()
+      const pageSize = this.pageSize
+      const skipSize = (currentPage - 1) * pageSize
+      const articles = await this.$content('news')
+        .only(['title', 'description', 'img', 'slug', 'author', 'createdAt'])
+        .sortBy('createdAt', 'desc').skip(skipSize)
+        .limit(pageSize).fetch()
+      this.loadingCheck()
+      return articles
+    },
+    loadingCheck() {
+      this.loading = !this.loading
+    }
+  },
+  async fetch() {
+    this.loadingCheck()
+    const articles = await this.$content('news')
+      .only(['title', 'description', 'img', 'slug', 'author', 'createdAt'])
       .sortBy('createdAt', 'desc')
       .fetch()
-    return {
-      articles
-    }
+    this.total = articles.length
+    this.articles = articles.slice(0, this.pageSize)
+    console.log(articles)
+
+    // initialize with start pageSize
+    this.currentPage = 1
+    this.loadingCheck()
   }
 }
 </script>
