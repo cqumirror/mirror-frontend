@@ -223,7 +223,7 @@ img {
 
 // md-content 通用样式
 #md-content {
-  min-height: 80vh;
+  min-height: 75vh;
   @media (max-width: $mobile-size) {
     width: 100%;
     transition: width .75s;
@@ -499,6 +499,48 @@ img {
 .news-detail-content {
   margin-left: 18vw;
   width: 60%;
+
+  #news-detail-title {
+    font-weight: bolder;
+    font-size: 2rem;
+    margin-left: 2vw;
+    &:before {
+      content: '# '
+    }
+  }
+
+  .news-detail-container {
+    margin-top: 2vh;
+    margin-left: 3vw;
+    margin-bottom: 4vh;
+    display: flex;
+    flex-direction: row;
+    vertical-align: center;
+
+    #news-detail-date {
+      font-size: 5px;
+      text-align: center;
+
+      &:before {
+        font-family: "Font Awesome 5 Free";
+        content: '\f073';
+        font-size: 5px;
+      }
+    }
+
+    #news-detail-author {
+      margin-left: 2vw;
+      font-size: 5px;
+      text-align: center;
+
+      &:before {
+        font-family: "Font Awesome 5 Free";
+        content: '\f007';
+        font-size: 5px;
+      }
+    }
+  }
+
 }
 
 // wiki content detail

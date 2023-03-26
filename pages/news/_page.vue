@@ -1,11 +1,11 @@
 <template>
   <article id="md-content" class="news-detail-content" @click="imgProxy">
-    <div>{{ article.title }}</div>
-    <div>
-      <div>
+    <div id="news-detail-title">{{ article.title }}</div>
+    <div class="news-detail-container">
+      <div id="news-detail-date">
         {{ article.date }}
       </div>
-      <div>
+      <div id="news-detail-author">
         {{ article.author }}
       </div>
     </div>
