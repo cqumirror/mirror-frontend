@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import _slug from "@/pages/wiki/index/_slug.vue";
+
 export default {
   name: "wiki",
   data() {
@@ -53,12 +55,14 @@ export default {
     toActive(slug){
       this.isActive = slug;
       this.ChoosedSlug =slug ;
-      
+
     }
   },
   watch:{
     ChoosedSlug(){
       this.$router.push({name: 'wiki-index-slug', params: { slug: this.ChoosedSlug} });
+      // _slug.Method.fetchData()
+      console.log('父组件路由变化')
     }
   },
   mounted(){
@@ -66,7 +70,7 @@ export default {
     let pathlist=  p.split('/');
     if(pathlist.length === 3){
       this.ChoosedSlug = pathlist[2];
-    
+
     }else if(pathlist.length ===2) {
       this.ChoosedSlug = this.articles[0].slug;
     }
@@ -77,11 +81,11 @@ export default {
     let p = this.$router.history.current.path;
     let pathlist=  p.split('/');
     if(pathlist.length ===2) {
-      document.getElementById(this.articles[0].slug).click(); //修复了在页面中点击wiki会到 /wiki 空白页面的bug 
+      document.getElementById(this.articles[0].slug).click(); //修复了在页面中点击wiki会到 /wiki 空白页面的bug
     }
 
   }
-  
+
 }
 </script>
 

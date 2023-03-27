@@ -3,14 +3,18 @@ title: "PyPI 镜像使用帮助"
 draft: false
 weight: 2
 ---
+
 {{% notice note %}}
 本镜像站 PyPI 仓库已经移除并重定向到 TUNA
 {{% /notice %}}
 
+
 ## 地址
+
 https://mirrors.cqu.edu.cn/pypi/web/simple
 
 ## 说明
+
 PyPI 仓库（pip 软件源）
 
 ## 使用说明
@@ -28,6 +32,7 @@ pip install -i https://mirrors.cqu.edu.cn/pypi/web/simple {package name}
 - Linux & Mac OS
 
 创建`~/.pip/pip.conf`并写入以下内容：
+
 ```
 [global]
 index-url = https://mirrors.cqu.edu.cn/pypi/web/simple
@@ -52,11 +57,13 @@ trusted-host = mirrors.cqu.edu.cn
 
 
 执行指令完成镜像变更：
+
 ```
 pip config set global.index-url https://mirrors.cqu.edu.cn/pypi/web/simple
 ```
 
 如`pip`版本需要升级请执行以下指令使用镜像对`pip`进行升级操作：
+
 ```
 #保存在用户目录，Linux下请确保已经加入到PATH
 pip install -i https://mirrors.cqu.edu.cn/pypi/web/simple pip -U
@@ -65,6 +72,7 @@ sudo pip install -i https://mirrors.cqu.edu.cn/pypi/web/simple pip
 ```
 
 ## 相关链接
+
 
 {{% notice %}}
 官方主页： https://www.pypi.org/

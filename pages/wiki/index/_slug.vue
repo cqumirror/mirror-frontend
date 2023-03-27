@@ -14,7 +14,9 @@ export default {
   name: "slug",
   data() {
     return {
-      article: {}
+      article: {},
+      loaded: false,
+      rendered: false
     }
   },
   methods: {
@@ -31,26 +33,41 @@ export default {
     },
     addChild(className) {
       const blocks = document.getElementsByClassName(className)
+      console.log(blocks)
+      console.log(" blocks ")
       for (const block of blocks) {
         const CopyButton = Vue.extend(ClipboardBtn)
         const component = new CopyButton().$mount()
         block.appendChild(component.$el)
       }
     },
+    async fetchData() {
+      const params = this.$router.currentRoute.params
+      const article = await this.$content('wiki',
+        params.slug).fetch()
+      this.article = JSON.parse(JSON.stringify(article))
+      console.log("fetch ended")
+    },
   },
-  async asyncData({ $content, params }) {
-
-    const article = await $content('wiki', params.slug).fetch()
-    console.log(article)
-    return {
-      article
+  updated() {
+    if (!this.rendered) {
+      console.log("view update")
+      setTimeout(() => {
+        this.addChild('nuxt-content-highlight')
+        this.rendered = true
+      }, 100)
     }
   },
-  mounted() {
-    setTimeout(() => {
-      this.addChild('nuxt-content-highlight')
-
-    }, 500)
+  watch: {
+    '$route': {
+      handler: function() {
+        console.log("route changed")
+        console.log(this.$router.currentRoute.params)
+        this.fetchData()
+        this.loaded = false
+      },
+      immediate: true,
+    },
   }
 }
 </script>

@@ -59,20 +59,21 @@ export default {
       }
     },
   },
-  async asyncData({$content, params}) {
-    console.log("data fetch data", params)
-    const article = await $content('news', params.page).fetch()
-    console.log(article)
-    return {
-      article
-    }
-  },
-  mounted() {
-    setTimeout(() => {
-      this.addChild('nuxt-content-highlight')
+  async fetch() {
+    const params = this.$router.currentRoute.params
+    // console.log("data fetch data", this.$router.currentRoute)
+    const article = await this.$content('news', params.page).fetch()
+    // console.log(article)
+    this.article = JSON.parse(JSON.stringify(article))
+    this.addChild('nuxt-content-highlight')
 
-    }, 100)
-  }
+  },
+
+  // mounted() {
+  //   setTimeout(() => {
+  //     this.addChild('nuxt-content-highlight')
+  //   }, 100)
+  // }
 }
 </script>
 
