@@ -53,19 +53,31 @@ export default {
     addChild(className) {
       const blocks = document.getElementsByClassName(className)
       for (const block of blocks) {
-        const CopyButton = Vue.extend(ClipboardBtn)
-        const component = new CopyButton().$mount()
-        block.appendChild(component.$el)
+        const codeEl = block.querySelector('code')
+        if (!codeEl) continue
+        const copyBtn = block.querySelector('.copy-btn')
+        if (!copyBtn) {
+          const CopyButton = Vue.extend(ClipboardBtn)
+          const component = new CopyButton().$mount()
+          block.appendChild(component.$el)
+        }
+
       }
+    },
+    async fetchData() {
+      const params = this.$router.currentRoute.params
+      console.log(params)
+      const article = await this.$content('news',
+        params.page).fetch()
+      this.article = JSON.parse(JSON.stringify(article))
+      this.$nextTick(() => {
+        this.addChild('nuxt-content-highlight')
+      })
     },
   },
   async fetch() {
-    const params = this.$router.currentRoute.params
-    // console.log("data fetch data", this.$router.currentRoute)
-    const article = await this.$content('news', params.page).fetch()
-    // console.log(article)
-    this.article = JSON.parse(JSON.stringify(article))
-    this.addChild('nuxt-content-highlight')
+    await this.fetchData()
+
 
   },
 
