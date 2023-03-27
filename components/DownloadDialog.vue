@@ -1,24 +1,23 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask">
+    <div id="download-dialog" class="modal-mask" @click="handleClickMask">
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
             <slot name="header">
-              header
+
             </slot>
           </div>
           <div class="modal-body">
             <slot name="body">
-              body
+
             </slot>
           </div>
           <div class="modal-footer">
             <slot name="footer">
-              footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
+<!--              <button class="modal-default-button" @click="$emit('close')">-->
+<!--                OK-->
+<!--              </button>-->
             </slot>
           </div>
         </div>
@@ -29,7 +28,21 @@
 
 <script>
 export default {
-  name: "DownloadDialog"
+  name: "DownloadDialog",
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+    // close dialog when click mask
+    handleClickMask(e) {
+      const ele = e.target.className
+      if (ele === 'modal-wrapper') {
+        this.$emit('close')
+      }
+    }
+  }
 }
 </script>
 
@@ -52,16 +65,7 @@ export default {
   vertical-align: middle;
 }
 
-.modal-container {
-  width: 300px;
-  margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
-  font-family: Helvetica, Arial, sans-serif;
-}
+
 
 .modal-header h3 {
   margin-top: 0;

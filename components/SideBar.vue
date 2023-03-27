@@ -50,7 +50,52 @@
         </li>
       </ul>
     </div>
-    <DownloadDialog v-if="showDialog" @close="showDialog = false"/>
+    <!-- Download dialog -->
+    <DownloadDialog v-if="showDialog" @close="showDialog = false">
+      <div class="download-dialog-header" slot="header">
+        <div class="download-dialog-header-title">
+          获取安装镜像
+        </div>
+      </div>
+      <div class="download-dialog-body" slot="body">
+        <div class="distro-dialog-container">
+          <!--category tab-->
+          <ul class="category-group">
+            <template v-for="item in isoCategory">
+              <li>
+                <div @click="handleGroupClick" :class="item.key === 0 ? 'category-tabs tab__checked':'category-tabs'">
+                  {{ item.label }}
+                </div>
+              </li>
+            </template>
+          </ul>
+          <div class="distro-container">
+            <div>
+              <ul class="distro-group">
+                <template v-for="item in isoCategory[defaultCheck].column">
+                  <li>
+                    <div @click="handleDistroTabClicked" :class="item.key === 0 ? 'distro-tabs tab__checked':'distro-tabs'">
+                      {{ item.distro }}
+                    </div>
+                  </li>
+                </template>
+              </ul>
+            </div>
+            <div class="distro-download-group">
+              <ul>
+                <template v-for="item in isoCategory[defaultCheck].column[defaultDistroTab].urls">
+                  <li>
+                    <div class="download-url-list">
+                      <a :href="mirror_url.slice(0,mirror_url.length-1) + item.url">{{ item.name }}</a>
+                    </div>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </DownloadDialog>
   </div>
 </template>
 
@@ -64,13 +109,97 @@ export default {
       exportUrls: process.env.exportUrls,
       contactUrls: process.env.contactUrls,
       siteLinks: process.env.siteLinks,
+      mirror_url: process.env.mirrorURL,
       style: "text-decoration: none;" + "color:" + process.env.baseLinkColor + ";",
       showDialog: false,
-      isoList: []
+      isoList: [],
+
+      isoCategory: [
+        { prop: 'os', label: '系统镜像' , column: [], key:0 },
+        { prop: 'app', label: '常用软件', column: [], key:1 },
+      ],
+      defaultCheck: 0,
+      defaultDistroTab: 0
+    }
+  },
+  watch: {
+    'defaultCheck': {
+      handler: function () {
+        this.defaultDistroTab = 0
+      }
+    }
+  },
+  methods: {
+    handleGroupClick(e) {
+      const target = e.target.innerText
+      let index = this.isoCategory.findIndex(item => {
+        return item.label === target
+      })
+      console.log(target)
+      this.defaultCheck = index
+
+      // change button style
+      const blocks = document.getElementsByClassName('category-tabs')
+      for (let block of blocks) {
+        let content = block.innerText
+        if (content === target) {
+          block.className = 'category-tabs ' + 'tab__checked'
+        } else {
+          block.className = 'category-tabs'
+        }
+      }
+    },
+    handleDistroTabClicked(e) {
+      // console.log(e)
+      const target = e.target.innerText
+      let index = this.isoCategory[this.defaultCheck].column.findIndex(item => {
+        return item.distro === target
+      })
+      this.defaultDistroTab = index
+
+      // change button style
+      const blocks = document.getElementsByClassName('distro-tabs')
+      for (let block of blocks) {
+        let content = block.innerText
+        if (content === target) {
+          block.className = 'distro-tabs ' + 'tab__checked'
+        } else {
+          block.className = 'distro-tabs'
+        }
+      }
+    },
+    generateIsoBase() {
+      if (this.isoList.length !== 0) {
+        this.isoList.forEach(item => {
+          let index = this.isoCategory.findIndex(co => {
+            return co.prop === item.category
+          })
+          if (index !== -1) {
+            let param = {
+              distro: item.distro,
+              urls: item.urls
+            }
+            this.isoCategory[index].column.push(param)
+
+          }
+        })
+      }
+      for (let item of this.isoCategory) {
+        let count = 0
+        for (let child of item.column) {
+          child.key = count
+          count++
+        }
+      }
+
+      console.log(this.isoCategory)
     }
   },
   async fetch() {
     this.isoList = await this.$axios.$get(Api_mirror.getIsoList())
+    this.$nextTick(() => {
+      this.generateIsoBase()
+    })
     console.log(this.isoList,"=== isolist ===")
   },
 }
