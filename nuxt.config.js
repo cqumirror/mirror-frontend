@@ -112,6 +112,7 @@ export default {
         {url:'/wiki',desc:' 使用帮助 '},
         {url:'/status',desc:' 服务器状态 '},
         {url:'/news',desc: ' 新闻公告 '},
+        {url:'https://net.cqu.edu.cn',desc: ' 重庆大学信息化办公室 '},
         {url:'http://lanunion.cqu.edu.cn/',desc:' 重大蓝盟 '}
       ]
     },

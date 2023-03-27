@@ -50,7 +50,7 @@ export default {
     setTimeout(() => {
       this.addChild('nuxt-content-highlight')
 
-    }, 100)
+    }, 500)
   }
 }
 </script>

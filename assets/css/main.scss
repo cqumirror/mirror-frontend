@@ -390,8 +390,11 @@ img {
       border-right: 0.5px solid #eeeeee;
       border-top: 0.5px solid #eeeeee;
       padding-bottom: 5px;
+      margin-right: 0;
 
       margin-left: 1vw;
+      min-width: 40vw;
+      max-width: 90vw;
 
       p {
         color: #4b4b4b;
@@ -423,14 +426,14 @@ img {
         right: 0;
         //width: 10px;
         border: none;
+        background-color: transparent;
 
         &:hover {
-          background-color: #b4b4b4;
+          background-color: rgba(180, 180, 180, 0.37);
         }
 
         #clipboard-copy {
           padding: 2px 1px;
-
           &:after {
             font-family: "Font Awesome 5 Free";
             content: '\f0c5';
@@ -448,6 +451,10 @@ img {
             font-size: 20px;
           }
         }
+      }
+
+      pre[class*="language-"] {
+        padding-top: 1.5em;
       }
     }
 
@@ -485,7 +492,7 @@ img {
     //// links
     a {
       text-decoration: none;
-      color: #4e7717;
+      color: #1ccb4c;
 
       &:hover {
         text-decoration: underline;
@@ -501,7 +508,7 @@ img {
   width: 60%;
 
   @media (max-width: $mobile-size) {
-    margin-left: 5vw;
+    margin-left: 3vw;
     width: 80%;
   }
 
@@ -523,34 +530,48 @@ img {
     vertical-align: center;
 
     #news-detail-date {
-      font-size: 5px;
+      font-size: 0.9em;
       text-align: center;
 
       &:before {
         font-family: "Font Awesome 5 Free";
         content: '\f073';
-        font-size: 5px;
       }
     }
 
     #news-detail-author {
       margin-left: 2vw;
-      font-size: 5px;
+      font-size: 0.9em;
       text-align: center;
 
       &:before {
         font-family: "Font Awesome 5 Free";
         content: '\f007';
-        font-size: 5px;
       }
     }
   }
 
 }
 
+// news page breadcrumb
+.news-page-breadcrumb {
+  margin-left: 20vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+
+  @media (max-width: $mobile-size) {
+    margin-left: 5vw;
+  }
+}
+
 // wiki content detail
 .wiki-page-content {
   width: 80%;
+  @media (max-width: $mobile-size) {
+    margin-left: 1vw;
+    width: 80%;
+    margin-top: 2vh;
+  }
 }
 
 
@@ -612,7 +633,7 @@ img {
     box-sizing: border-box;
 
     @media (max-width: $mobile-size) {
-      overscroll-behavior: contain;
+      //overscroll-behavior: contain;
       overflow: auto;
     }
     .status-table {
@@ -733,24 +754,22 @@ img {
 
     .article-author {
       margin-left: 2vw;
-      font-size: 1px;
+      font-size: 0.7em;
       text-align: center;
 
       &:before {
         font-family: "Font Awesome 5 Free";
         content: '\f007';
-        font-size: 1px;
       }
     }
 
     .article-time {
-      font-size: 1px;
+      font-size: 0.7em;
       text-align: center;
 
       &:before {
         font-family: "Font Awesome 5 Free";
         content: '\f073';
-        font-size: 1px;
       }
     }
   }

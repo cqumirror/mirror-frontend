@@ -1,16 +1,24 @@
 <template>
-  <article id="md-content" class="news-detail-content" @click="imgProxy">
-    <div id="news-detail-title">{{ article.title }}</div>
-    <div class="news-detail-container">
-      <div id="news-detail-date">
-        {{ article.date }}
+  <div style="margin:0;padding:0;">
+    <el-breadcrumb separator-class="el-icon-arrow-right" class="news-page-breadcrumb">
+      <el-breadcrumb-item :to="{ path: '/' }">HOME</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/news/' }">NEWS</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ article.title }}</el-breadcrumb-item>
+    </el-breadcrumb>
+    <article id="md-content" class="news-detail-content" @click="imgProxy">
+      <div id="news-detail-title">{{ article.title }}</div>
+      <div class="news-detail-container">
+        <div id="news-detail-date">
+          {{ article.date }}
+        </div>
+        <div id="news-detail-author">
+          {{ article.author }}
+        </div>
       </div>
-      <div id="news-detail-author">
-        {{ article.author }}
-      </div>
-    </div>
-    <nuxt-content :document="article" />
-  </article>
+      <nuxt-content :document="article"/>
+    </article>
+  </div>
+
 
 </template>
 
@@ -51,8 +59,8 @@ export default {
       }
     },
   },
-  async asyncData({ $content, params }) {
-    console.log("data fetch data",params)
+  async asyncData({$content, params}) {
+    console.log("data fetch data", params)
     const article = await $content('news', params.page).fetch()
     console.log(article)
     return {
