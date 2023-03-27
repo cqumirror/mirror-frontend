@@ -61,8 +61,6 @@ export default {
   watch:{
     ChoosedSlug(){
       this.$router.push({name: 'wiki-index-slug', params: { slug: this.ChoosedSlug} });
-      // _slug.Method.fetchData()
-      console.log('父组件路由变化')
     }
   },
   mounted(){

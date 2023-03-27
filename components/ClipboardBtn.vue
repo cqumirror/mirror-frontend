@@ -1,5 +1,5 @@
 <template>
-  <button ref="copy" class="copy-btn">
+  <button ref="copy" class="copy-btn" @click="handleCopyClicked">
     <IconClipboardCheck v-if="state === 'copied'" class="copy-btn-done"/>
     <IconClipboardCopy v-else class="copy-btn-init"/>
   </button>
@@ -18,24 +18,43 @@ export default {
   components: {IconClipboardCopy, IconClipboardCheck},
   data () {
     return {
-      state: 'init'
+      state: 'init',
+      copyCode: null // 添加 copyCode 属性并初始化为 null
     }
   },
+  methods: {
+    handleCopyClicked() {
+      console.log("clicked")
+      this.copyCode.on('success', (event) => {
+        console.log("success",event)
+        event.clearSelection()
+        this.state = 'copied'
+        window.setTimeout(() => {
+          this.state = 'init'
+        }, 1300)
+      })
+      this.copyCode.on('error', (event) => {
+        console.log("error: ",event)
+      })
+    }
+  },
+  beforeMount() {
+    console.log(this.copyCode,"是否存在实例")
+  },
   mounted () {
-    const copyCode = new clipboard(this.$refs.copy, {
-      target (trigger) {
-        return trigger.previousElementSibling
-      }
-    })
-
-    copyCode.on('success', (event) => {
-      event.clearSelection()
-      this.state = 'copied'
-      window.setTimeout(() => {
-        this.state = 'init'
-      }, 1300)
-    })
-  }
+    console.log("mounted")
+    this.copyCode = new clipboard(
+      this.$refs.copy,{
+        target(elem) {
+          console.log("element",elem)
+          return elem.previousElementSibling
+        }
+      })
+  },
+  beforeDestroy() {
+    // 清理 Clipboard 实例
+    this.copyCode.destroy()
+  },
 }
 </script>
 

@@ -8,7 +8,7 @@
 import '@/assets/css/lib/fontawesome.min.css'
 import '@/assets/css/main.scss'
 import Vue from "vue";
-import ClipboardBtn from "~/components/ClipboardBtn.vue";
+import ClipboardBtn from "@/components/ClipboardBtn.vue";
 
 export default {
   name: "slug",
@@ -33,12 +33,16 @@ export default {
     },
     addChild(className) {
       const blocks = document.getElementsByClassName(className)
-      console.log(blocks)
-      console.log(" blocks ")
       for (const block of blocks) {
-        const CopyButton = Vue.extend(ClipboardBtn)
-        const component = new CopyButton().$mount()
-        block.appendChild(component.$el)
+        const codeEl = block.querySelector('code')
+        if (!codeEl) continue
+        const copyBtn = block.querySelector('.copy-btn')
+        if (!copyBtn) {
+          const CopyButton = Vue.extend(ClipboardBtn)
+          const component = new CopyButton().$mount()
+          block.appendChild(component.$el)
+        }
+
       }
     },
     async fetchData() {
@@ -46,23 +50,20 @@ export default {
       const article = await this.$content('wiki',
         params.slug).fetch()
       this.article = JSON.parse(JSON.stringify(article))
-      console.log("fetch ended")
+
     },
   },
   updated() {
-    if (!this.rendered) {
-      console.log("view update")
+    if (!this.loaded) {
       setTimeout(() => {
         this.addChild('nuxt-content-highlight')
-        this.rendered = true
+        this.loaded = true
       }, 100)
     }
   },
   watch: {
     '$route': {
       handler: function() {
-        console.log("route changed")
-        console.log(this.$router.currentRoute.params)
         this.fetchData()
         this.loaded = false
       },
