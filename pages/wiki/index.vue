@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import _slug from "@/pages/wiki/index/_slug.vue";
 
 export default {
   name: "wiki",
