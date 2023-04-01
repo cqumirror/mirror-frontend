@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const prefix = 'https://mirrors.cqu.edu.cn'
+const prefix = process.env.baseURL
 
 export default {
   getMirror: params => {
