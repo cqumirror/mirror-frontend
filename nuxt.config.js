@@ -1,3 +1,21 @@
+const fs = require('fs')
+const path = require('path')
+
+function traverseDirectories(dirPath) {
+  const filesAndDirs = fs.readdirSync(dirPath)
+  let filePath = []
+  filesAndDirs.forEach((fileOrDir) => {
+    const fullPath = path.join(dirPath, fileOrDir)
+    if (fs.statSync(fullPath).isDirectory()) {
+      traverseDirectories(fullPath)
+    } else {
+      filePath.push(fullPath.replace('content','').replace('.md',''))
+    }
+  })
+  return filePath
+
+}
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   // target: 'static',
@@ -7,7 +25,14 @@ export default {
     port: 3010, //线上端口
     host: '0.0.0.0'
   },
-
+  generate: {
+    routes(callback) {
+      const routeWiki = traverseDirectories('content/wiki')
+      const routeNews = traverseDirectories('content/news')
+      const routes = [...routeWiki,...routeNews]
+      callback(null,routes)
+    }
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'nuxt-frontend',
