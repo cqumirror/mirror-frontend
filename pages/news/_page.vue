@@ -65,27 +65,28 @@ export default {
       }
     },
     async fetchData() {
+
       const params = this.$router.currentRoute.params
-      console.log(params)
-      const article = await this.$content('news',
-        params.page).fetch()
-      this.article = JSON.parse(JSON.stringify(article))
-      this.$nextTick(() => {
-        this.addChild('nuxt-content-highlight')
-      })
+      console.log(params,"params")
+      let article = {}
+      try {
+        article = await this.$content('news',
+          params.page).fetch()
+        this.article = JSON.parse(JSON.stringify(article))
+        this.$nextTick(() => {
+          this.addChild('nuxt-content-highlight')
+        })
+      } catch (e) {
+        this.$nuxt.error({
+          statusCode: 404,
+          message: 'Page not found'
+        })
+      }
     },
   },
   async fetch() {
     await this.fetchData()
-
-
   },
-
-  // mounted() {
-  //   setTimeout(() => {
-  //     this.addChild('nuxt-content-highlight')
-  //   }, 100)
-  // }
 }
 </script>
 

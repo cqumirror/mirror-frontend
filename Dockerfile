@@ -1,17 +1,9 @@
-FROM node:fermium-buster-slim
+FROM nginx:latest
 
-RUN echo 'registry=https://registry.npm.taobao.org/ \
-ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/ \
-ELECTRON_BUILDER_BINARIES_MIRROR=https://pan.yasking.org/electron-builder/ \
-strict-ssl=false' > ~/.npmrc && mkdir /app
-
-
+RUN mkdir -p /app
 WORKDIR /app
 
-COPY . .
+COPY dist /usr/share/nginx/html
 
-RUN yarn && yarn build
+EXPOSE 80
 
-EXPOSE 3010
-
-CMD ./start.sh

@@ -47,9 +47,18 @@ export default {
     },
     async fetchData() {
       const params = this.$router.currentRoute.params
-      const article = await this.$content('wiki',
-        params.slug).fetch()
-      this.article = JSON.parse(JSON.stringify(article))
+      try {
+        const article = await this.$content('wiki',
+          params.slug).fetch()
+        this.article = JSON.parse(JSON.stringify(article))
+      }
+      catch (e) {
+        this.$nuxt.error({
+          statusCode: 404,
+          message: 'Page not found'
+        })
+      }
+
 
     },
   },

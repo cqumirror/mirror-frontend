@@ -25,13 +25,34 @@ export default {
     port: 3010, //线上端口
     host: '0.0.0.0'
   },
+  // generate: {
+  //   routes(callback) {
+  //     const routeWiki = traverseDirectories('content/wiki')
+  //     const routeNews = traverseDirectories('content/news')
+  //     const routes = [...routeWiki,...routeNews]
+  //     callback(null,routes)
+  //   }
+  // },
   generate: {
-    routes(callback) {
-      const routeWiki = traverseDirectories('content/wiki')
-      const routeNews = traverseDirectories('content/news')
-      const routes = [...routeWiki,...routeNews]
-      callback(null,routes)
+    async routes() {
+      const { $content } = require('@nuxt/content')
+
+      const blogRoutes = await $content('wiki').only(['slug']).fetch()
+        .then(files => {
+          return files.map(file => `/wiki/${file.slug}`)
+        })
+
+      const newsRoutes = await $content('news').only(['slug']).fetch()
+        .then(files => {
+          return files.map(file => `/news/${file.slug}`)
+        })
+
+      return [...blogRoutes, ...newsRoutes]
     }
+  },
+  router: {
+    trailingSlash: false,
+    mode: 'hash'
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
