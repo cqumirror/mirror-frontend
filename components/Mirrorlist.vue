@@ -124,13 +124,10 @@ export default {
     async init() {
       if (typeof window === 'object') {
         this.ifAddLoading()
-        await this.$axios.get(Api_mirror.getMirror()).then(res => {
-          this.generateList(res.data)
+        await fetch(Api_mirror.getMirror()).then(res => res.json()).
+        then(data => {
+          this.generateList(data)
           this.ifAddLoading()
-        }).catch(err => {
-          console.log(err)
-          this.ifAddLoading()
-          // TODO add error message
         })
       }
     },
