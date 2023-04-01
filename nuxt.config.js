@@ -49,22 +49,12 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
     '@nuxt/content',
     '@nuxtjs/google-fonts'
   ],
   // module configs
-  proxy: {
-    '/api': {
-      target: 'https://mirrors.cqu.edu.cn',
-      changeOrigin: true,
-      pathRewrite: {
-        '^/api': ''
-      }
-    }
-  },
   axios: {
-    proxy: true,
+    proxy: false,
     baseURL: process.env.baseURL,
     proxyHeaders: false,
     credentials: false

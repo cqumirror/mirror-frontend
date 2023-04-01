@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const prefix = '/api'
+const prefix = 'https://mirrors.cqu.edu.cn'
 
 export default {
   getMirror: params => {
