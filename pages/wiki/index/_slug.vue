@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import '@/assets/css/lib/fontawesome.min.css'
+// import '@/assets/css/lib/fontawesome.min.css'
 import '@/assets/css/main.scss'
 import Vue from "vue";
 import ClipboardBtn from "@/components/ClipboardBtn.vue";

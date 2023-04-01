@@ -21,13 +21,14 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
+      { rel: 'icon', type: 'image/x-icon', href: '/static/favicon.png' }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
+    '@/assets/css/lib/fontawesome.min.css',
     'element-ui/lib/theme-chalk/index.css',
     '@/assets/css/lib/fontawesome.min.css',
     '@/assets/css/fonts.css',
