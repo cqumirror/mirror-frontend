@@ -70,12 +70,14 @@ export default {
 
       ],
       height: '',
+      mobileSize: 990 // 需要和main.scss中保持一致，否则功能出现问题
     }
   },
   methods: {
 
     handleToggle(e) {
-      if (window.innerWidth < 767) {
+
+      if (window.innerWidth < this.mobileSize) {
         // TODO 非常迷惑的处理方式，没想到其他的方法，我菜
         const child = document.getElementsByClassName('nav-right')
         if (this.isOpened) {
@@ -90,14 +92,14 @@ export default {
     },
     handleResize(e) {
       const child = document.getElementsByClassName('nav-right')
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= this.mobileSize) {
         child[0].style.height = '0'
-        console.log(this.isOpened);
         this.isOpened = false
       }
     },
     computeHeight() {
-      this.height = (this.menu.length * 57).toString() + 'px'
+      this.height = (this.menu.length * 45).toString() + 'px'
+      // 增加导航项目后应当更改对应的高度，以防过窄或过宽，应当比 .nav-right 的 line-height多5px
     },
   },
   created() {

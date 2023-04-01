@@ -14,8 +14,10 @@
 
 <script>
 import '@/assets/css/main.scss'
+
 export default {
-  name: "default"
+  name: "default",
+
 }
 </script>
 

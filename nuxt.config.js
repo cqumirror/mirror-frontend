@@ -2,6 +2,7 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   // target: 'static',
   target: 'server',
+  ssr: true,
   server: {
     port: 3010, //线上端口
     host: '0.0.0.0'
@@ -11,7 +12,7 @@ export default {
   head: {
     title: 'nuxt-frontend',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'zh-CN'
     },
     meta: [
       { charset: 'utf-8' },
@@ -44,6 +45,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/pwa'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -93,6 +95,20 @@ export default {
     outputDir: '@/assets',
     stylePath: 'css/fonts.css',
     fontsPath: '@/assets/fonts'
+  },
+  pwa: {
+    meta: {
+      theme_color: '#1ccb4c',
+    },
+    manifest: {
+      name: '重庆大学开源软件镜像站',
+      lang: 'zh-CN',
+      short_name: '重大镜像站',
+      start_url: 'https://mirrors.cqu.edu.cn',
+      theme_color: '#1ccb4c',
+      description: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。',
+      useWebmanifestExtension: false
+    }
   },
   env: {
     baseURL: (process.env.NODE_ENV === 'production' ? 'https://mirrors.cqu.edu.cn/' : 'http://localhost:3000'),

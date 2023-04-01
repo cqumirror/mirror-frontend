@@ -187,7 +187,7 @@ export default {
 
 .el-tag--mini /deep/ {
   height: 23px !important;
-  width: 55px;
+  width: 60px;
   text-align: center;
 }
 

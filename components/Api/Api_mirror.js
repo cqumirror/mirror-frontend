@@ -9,4 +9,7 @@ export default {
   getIsoList: params => {
     return (prefix + "/static/isoinfo.json")
   },
+  getNotices: params => {
+    return (prefix + "/static/notice.json")
+  }
 }

@@ -107,7 +107,7 @@ img {
 
     .nav-right {
       display: block;
-      line-height: 50px;
+      line-height: 40px;
 
       .nav {
         display: block;
@@ -898,5 +898,10 @@ img {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.1s ease;
   font-family: Helvetica, Arial, sans-serif;
+}
+
+
+.site-notice {
+  padding-top: 0.8vh;
 }
 

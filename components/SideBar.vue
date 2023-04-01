@@ -1,5 +1,18 @@
 <template>
   <div style="display: flex;" class="right-bar">
+    <!--NOTICE-->
+    <template v-for="item in notices.notice" v-if="notices.enabled">
+      <warp-notice
+        :title="item.title"
+        :type="item.type"
+        :description="item.description"
+        :closable="item.closable"
+        :center="item.center"
+        :show-icon="item.showIcon"
+        :theme="item.theme"
+        class="site-notice"
+      />
+    </template>
     <!--news-->
     <div>
       <h4><fa :icon="['fas','newspaper']" style="margin-right: 1vw"/>新闻公告</h4>
@@ -101,9 +114,11 @@
 
 <script>
 import Api_mirror from "@/components/Api/Api_mirror";
+import WarpNotice from "@/components/scroll-notice/warpNotice.vue";
 
 export default {
   name: "SideBar",
+  components: {WarpNotice},
   data() {
     return {
       exportUrls: process.env.exportUrls,
@@ -119,7 +134,9 @@ export default {
         { prop: 'app', label: '常用软件', column: [], key:1 },
       ],
       defaultCheck: 0,
-      defaultDistroTab: 0
+      defaultDistroTab: 0,
+
+      notices: {}
     }
   },
   watch: {
@@ -135,7 +152,6 @@ export default {
       let index = this.isoCategory.findIndex(item => {
         return item.label === target
       })
-      console.log(target)
       this.defaultCheck = index
 
       // change button style
@@ -150,7 +166,6 @@ export default {
       }
     },
     handleDistroTabClicked(e) {
-      // console.log(e)
       const target = e.target.innerText
       let index = this.isoCategory[this.defaultCheck].column.findIndex(item => {
         return item.distro === target
@@ -196,6 +211,7 @@ export default {
     }
   },
   async fetch() {
+    this.notices = await this.$axios.$get(Api_mirror.getNotices())
     this.isoList = await this.$axios.$get(Api_mirror.getIsoList())
     this.$nextTick(() => {
       this.generateIsoBase()
