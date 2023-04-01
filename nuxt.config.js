@@ -1,8 +1,8 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   // target: 'static',
-  target: 'server',
-  ssr: true,
+  target: 'static',
+  ssr: false,
   server: {
     port: 3010, //线上端口
     host: '0.0.0.0'
