@@ -171,6 +171,31 @@ export default {
     },
     newsPage: {
       pageSize: 10
+    },
+    indexFloatBox: {
+      enabled: true,
+      data: [
+        {
+          label: '回到\n旧版',
+          tooltip: '回到旧版首页',
+          goto: '/old-frontend'
+        },
+        { // 这段是一个示例的自定义工具条
+          label: '回到\n首页',
+          tooltip: '访问百度',
+          goto: 'https://www.baidu.com'
+        }
+      ]
+    },
+    wikiFloatBox: {
+      enabled: true,
+      data: [
+        {
+          label: '回到\n旧版',
+          tooltip: '回到旧版WIKI页面',
+          goto: '/hugo-wiki'
+        }
+      ]
     }
   },
 

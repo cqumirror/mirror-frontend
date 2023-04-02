@@ -27,7 +27,14 @@
     </div>
     <nuxt-child/>
   </el-main>
-
+  <FloatToolsBtn
+    v-if="wikiFloatBox.enabled"
+    :data="wikiFloatBox.data"
+  >
+    <template slot="back-to-top">
+      <el-backtop/>
+    </template>
+  </FloatToolsBtn>
   </el-container>
 </template>
 
@@ -37,6 +44,7 @@ export default {
   name: "wiki",
   data() {
     return {
+      wikiFloatBox: process.env.wikiFloatBox,
       articles: [],
       ChoosedSlug:''
     }

@@ -59,6 +59,7 @@ img {
     }
 
   }
+
   @media (max-width: $mobile-size) {
     flex-direction: column;
   }
@@ -70,6 +71,7 @@ img {
   a {
     text-decoration: none;
   }
+
   #news-list {
     text-decoration: none;
   }
@@ -79,6 +81,7 @@ img {
     text-align: end;
     padding-right: 0vw;
   }
+
   #more-news:first-child:after {
     font-family: "Font Awesome 5 Free";
     content: "\f101";
@@ -182,9 +185,11 @@ img {
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
+
         &:hover {
           background-color: #70ca73;
         }
+
         cursor: pointer;
         @media (max-width: $mobile-size) {
           margin-left: auto;
@@ -232,7 +237,8 @@ img {
   @media (max-width: $mobile-size) {
     width: 90%;
     transition: width .75s;
-  } // 响应式
+  }
+  // 响应式
 
   .nuxt-content {
     // short code
@@ -256,6 +262,7 @@ img {
         content: "\f06a";
         left: 10px;
       }
+
       p:first-child:after {
         position: absolute;
         top: -28px;
@@ -264,6 +271,7 @@ img {
         content: 'Note';
       }
     }
+
     .notice-warn {
       border-top: 30px solid #ffcc71;
       background: #fff2e6;
@@ -284,6 +292,7 @@ img {
         content: "\f06a";
         left: 10px;
       }
+
       p:first-child:after {
         position: absolute;
         top: -28px;
@@ -292,6 +301,7 @@ img {
         content: 'Warn';
       }
     }
+
     .notice-info {
       border-top: 30px solid #9cd275;
       background: #edfce7;
@@ -312,6 +322,7 @@ img {
         content: "\f06a";
         left: 10px;
       }
+
       p:first-child:after {
         position: absolute;
         top: -28px;
@@ -320,6 +331,7 @@ img {
         content: 'Info';
       }
     }
+
     .notice-error {
       border-top: 30px solid #f07373;
       background: #ffe1e1;
@@ -340,6 +352,7 @@ img {
         content: "\f06a";
         left: 10px;
       }
+
       p:first-child:after {
         position: absolute;
         top: -28px;
@@ -356,30 +369,35 @@ img {
     #title {
 
     }
+
     //// title-1
     #title-1 {
       &:before {
         content: '#';
       }
     }
+
     //// title-2
     #title-2 {
       &:before {
         content: '#';
       }
     }
+
     //// title-3
     #title-3 {
       &:before {
         content: '#';
       }
     }
+
     //// title-4
     #title-4 {
       &:before {
         content: '#';
       }
     }
+
     //// title-5
     #title-5 {
       &:before {
@@ -439,6 +457,7 @@ img {
 
         #clipboard-copy {
           padding: 2px 1px;
+
           &:after {
             font-family: "Font Awesome 5 Free";
             content: '\f0c5';
@@ -446,6 +465,7 @@ img {
             font-size: 20px;
           }
         }
+
         #clipboard-check {
           padding: 2px 1px;
 
@@ -466,6 +486,7 @@ img {
     //// table
     table {
       border-collapse: collapse;
+
       thead {
         tr {
           th {
@@ -479,6 +500,7 @@ img {
           }
         }
       }
+
       tbody {
         tr {
           td {
@@ -521,6 +543,7 @@ img {
     font-weight: bolder;
     font-size: 2rem;
     margin-left: 2vw;
+
     &:before {
       content: '# '
     }
@@ -620,6 +643,7 @@ img {
   @media (max-width: $mobile-size) {
     margin-left: 2vw;
   }
+
   &:first-child {
     @media (max-width: $mobile-size) {
       margin-left: 0;
@@ -641,8 +665,9 @@ img {
       //overscroll-behavior: contain;
       overflow: auto;
     }
+
     .status-table {
-      white-space:nowrap;
+      white-space: nowrap;
       border: 0px solid transparent;
       border-collapse: collapse;
 
@@ -650,13 +675,15 @@ img {
       .syncing-row {
         background-color: #E3FFFD;
       }
+
       .error-row {
         background-color: #ffd9cb;
       }
     }
+
     .status-list {
       text-align: left;
-      white-space:nowrap;
+      white-space: nowrap;
       padding-left: 2.5vw;
       padding-right: 2.5vw;
 
@@ -667,6 +694,7 @@ img {
       color: #505050;
       font-weight: bold;
     }
+
     .status-list-data {
       color: #5e5e5e;
       font-weight: lighter;
@@ -682,6 +710,7 @@ img {
   font-weight: bold;
   font-size: 2rem;
   color: #424242;
+
   &:before {
     font-family: "Font Awesome 5 Free";
     content: '\f1ea';
@@ -693,11 +722,13 @@ img {
     font-size: 1rem;
   }
 }
+
 //// list style
 #news-page-list {
   list-style: none;
   min-height: 62vh;
 }
+
 //// pagination
 #news-page-pagination {
   margin-left: 30vw;
@@ -706,13 +737,16 @@ img {
   .el-pagination.is-background .el-pager li:hover {
     color: #1ccb4c;
   }
+
   .el-pagination.is-background .el-pager li:not(.disabled):hover {
     color: #1ccb4c;
   }
+
   .el-pagination.is-background .el-pager li:not(.disabled).active:hover {
     background-color: #1ccb4c;
     color: #ffffff;
   }
+
   .el-pagination.is-background .el-pager li:not(.disabled).active {
     background-color: #1ccb4c;
   }
@@ -724,6 +758,7 @@ img {
     text-decoration: none;
     color: #2f2f2f;
   }
+
   border-bottom: 1.5px solid rgb(236, 236, 236);
   padding-bottom: 10px;
   display: flex;
@@ -753,6 +788,7 @@ img {
       content: '#';
     }
   }
+
   .article-detail-container {
     display: flex;
     flex-direction: row;
@@ -818,13 +854,14 @@ img {
           padding: 10px 12px;
           margin: 0;
           font-weight: bold;
-
+          cursor: pointer;
 
           &:hover {
             background-color: #e5e5e5;
             border-bottom: 3px solid #e5e5e5;
           }
         }
+
         .category-tabs.tab__checked {
           //background-color: #6AB0DE;
           border-bottom: 3px solid #b8ff8a;
@@ -846,6 +883,7 @@ img {
             padding: 2vh 5vw;
             margin: 0;
             font-weight: bold;
+            cursor: pointer;
 
             @media (max-width: $mobile-size) {
               padding: 10px 12px;
@@ -861,18 +899,21 @@ img {
               background-color: #e5e5e5;
             }
           }
+
           .distro-tabs.tab__checked {
             background-color: #edffe6;
 
           }
         }
+
         .distro-download-group {
           overflow: auto;
 
           .download-url-list {
             margin-top: 1vh;
             margin-bottom: 1vh;
-            a{
+
+            a {
               text-decoration: none;
               color: #1ccb4c;
             }
@@ -903,5 +944,49 @@ img {
 
 .site-notice {
   padding-top: 0.8vh;
+}
+
+// float button
+.float-tools-parent {
+  // element bottom 原始值为40px, tools新增一项向上浮动距离为
+  // 40(原始) + 5(与自定义组件 margin-top 距离) + (40(单个组件高度)+5(单个组件外上边距))
+  bottom: 90px;
+  right: 40px;
+
+  position: fixed;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  // el-backtop
+  .el-backtop {
+    color: #1ccb4c;
+    &:hover {
+      background-color: #e5eee4;
+    }
+  }
+
+  .float-tools-item {
+
+    margin-top: 10px;
+    background-color: #ffffff;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .12);
+    cursor: pointer;
+    z-index: 5;
+
+    &:hover {
+      background-color: #e5eee4;
+    }
+  }
 }
 

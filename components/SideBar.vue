@@ -110,6 +110,14 @@
         </div>
       </div>
     </DownloadDialog>
+    <FloatToolsBtn
+      v-if="indexToolBox.enabled"
+      :data="indexToolBox.data"
+    >
+      <template slot="back-to-top">
+        <el-backtop/>
+      </template>
+    </FloatToolsBtn>
   </div>
 </template>
 
@@ -122,6 +130,7 @@ export default {
   components: {WarpNotice},
   data() {
     return {
+      indexToolBox: process.env.indexFloatBox,
       exportUrls: process.env.exportUrls,
       contactUrls: process.env.contactUrls,
       siteLinks: process.env.siteLinks,
