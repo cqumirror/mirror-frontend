@@ -73,9 +73,8 @@ export default {
     async init() {
       if (typeof window === 'object') {
         this.ifAddLoading()
-        await this.$axios.get(Api_mirror.getMirror()).then(res => {
-          // console.log(res)
-          this.generateList(res.data)
+        await fetch(Api_mirror.getMirror()).then(data => data.json()).then(res => {
+          this.generateList(res)
           this.ifAddLoading()
         }).catch(err => {
           console.log(err)

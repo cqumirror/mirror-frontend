@@ -10,6 +10,7 @@
         :center="item.center"
         :show-icon="item.showIcon"
         :theme="item.theme"
+        :callback="item.callback"
         class="site-notice"
       />
     </template>
@@ -208,15 +209,23 @@ export default {
       }
 
       console.log(this.isoCategory)
-    }
+    },
+    async init() {
+      await fetch(Api_mirror.getNotices()).then(data => data.json())
+        .then(res => {
+          this.notices = JSON.parse(JSON.stringify(res))
+        })
+      await fetch(Api_mirror.getIsoList()).then(data => data.json())
+        .then(res => {
+          this.isoList = JSON.parse(JSON.stringify(res))
+          this.$nextTick(() => {
+            this.generateIsoBase()
+          })
+        })
+    },
   },
-  async fetch() {
-    this.notices = await this.$axios.$get(Api_mirror.getNotices())
-    this.isoList = await this.$axios.$get(Api_mirror.getIsoList())
-    this.$nextTick(() => {
-      this.generateIsoBase()
-    })
-    console.log(this.isoList,"=== isolist ===")
+  async created() {
+    await this.init()
   },
 }
 </script>

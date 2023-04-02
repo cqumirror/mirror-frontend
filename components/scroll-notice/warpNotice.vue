@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="notice-container" @click="handleCallback" :style="callback ? 'cursor: pointer;':''">
     <el-alert
       :title="title"
       :type="type"
@@ -25,8 +25,17 @@ export default {
     closable: { type: Boolean, default: true },
     center: { type: Boolean, default: false },
     showIcon: { type: Boolean, default: true },
-    effect: { type: String, default: 'light' }
-  }
+    effect: { type: String, default: 'light' },
+    callback: { type: String, default: undefined }
+  },
+  methods: {
+    handleCallback() {
+      if (this.$props.callback) {
+        console.log(this.$props.callback)
+        this.$router.push({name: 'news-page', params: { page: this.$props.callback }});
+      }
+    }
+  },
 }
 </script>
 
