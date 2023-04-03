@@ -8,5 +8,5 @@ https://mirrors.cqu.edu.cn/opensuse
 ## 描述
 openSUSE 软件仓库
 ## 详见
-- [openSUSE Leap 镜像使用帮助](leap)
-- [openSUSE Tumbleweed 镜像使用帮助](tumbleweed)
+- [openSUSE Leap 镜像使用帮助](/wiki/mirror-wiki/opensuse/leap)
+- [openSUSE Tumbleweed 镜像使用帮助](/wiki/mirror-wiki/opensuse/tumbleweed)

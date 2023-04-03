@@ -1,12 +1,24 @@
 <template>
-  <div>
-    test
-    <el-tree
-      :data="data"
-      :props="defaultProps"
-      @node-click="handleNodeClick"
-    ></el-tree>
-    <NuxtChild/>
+  <div class="wiki-container">
+    <div class="wiki-nav-container">
+      <div class="wiki-nav">
+        <el-tree
+          ref="navTree"
+          :data="data"
+          :props="defaultProps"
+          node-key="id"
+          @node-click="handleNodeClick"
+          :default-expanded-keys="expandedKeys"
+        >
+          <template slot-scope="{node,data}">
+            <nuxt-link :to="data.path">{{ data.title }}</nuxt-link>
+          </template>
+        </el-tree>
+      </div>
+    </div>
+    <div class="wiki-content-parent">
+      <NuxtChild/>
+    </div>
   </div>
 
 </template>
@@ -19,13 +31,16 @@ export default {
       data: [],
       defaultProps: {
         children: 'children',
-        label: 'title'
-      }
+        label: 'title',
+        id: 'id'
+      },
+      expandedKeys: []
     }
   },
   methods: {
     handleNodeClick(node) {
       console.log(node)
+      // this.$router.push({name: 'wiki-index-all', params: { slug: node.path + '_index' } });
     },
     buildTree(items) {
       const result = [];
@@ -67,9 +82,6 @@ export default {
         const slugArr = item.path.split("/")
         item.id = slugArr[slugArr.length-1]
         item.pid = slugArr.length === 2 ? 0:slugArr[slugArr.length-2]
-        if (item.title) {
-          console.log(item.title)
-        }
       })
     },
   },
@@ -85,6 +97,12 @@ export default {
     this.preProcess(articles)
 
     this.data = this.buildTree(articles)[0].children
+
+  },
+  mounted() {
+    const pathArr = this.$route.fullPath.split("/")
+    const id = pathArr[pathArr.length-1]
+    this.expandedKeys.push(id)
 
   }
 }
