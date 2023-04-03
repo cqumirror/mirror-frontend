@@ -1,21 +1,3 @@
-const fs = require('fs')
-const path = require('path')
-
-function traverseDirectories(dirPath) {
-  const filesAndDirs = fs.readdirSync(dirPath)
-  let filePath = []
-  filesAndDirs.forEach((fileOrDir) => {
-    const fullPath = path.join(dirPath, fileOrDir)
-    if (fs.statSync(fullPath).isDirectory()) {
-      traverseDirectories(fullPath)
-    } else {
-      filePath.push(fullPath.replace('content','').replace('.md',''))
-    }
-  })
-  return filePath
-
-}
-
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   // target: 'static',
@@ -25,14 +7,6 @@ export default {
     port: 3010, //线上端口
     host: '0.0.0.0'
   },
-  // generate: {
-  //   routes(callback) {
-  //     const routeWiki = traverseDirectories('content/wiki')
-  //     const routeNews = traverseDirectories('content/news')
-  //     const routes = [...routeWiki,...routeNews]
-  //     callback(null,routes)
-  //   }
-  // },
   generate: {
     async routes() {
       const { $content } = require('@nuxt/content')
@@ -42,9 +16,9 @@ export default {
           return files.map(file => `/wiki/${file.slug}`)
         })
 
-      const newsRoutes = await $content('news').only(['slug']).fetch()
+      const newsRoutes = await $content('news',{deep: true}).only(['slug']).fetch()
         .then(files => {
-          return files.map(file => `/news/${file.slug}`)
+          return files.map(file => file.path.replace('/_index',''))
         })
 
       return [...blogRoutes, ...newsRoutes]

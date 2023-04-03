@@ -4,7 +4,7 @@
      <template v-for="item of data">
        <el-tooltip class="item" effect="dark" :content="item.tooltip" placement="left">
          <div class="float-tools-item" @click="handleClick(item.goto)">
-           {{ item.label }}
+           <pre>{{ item.label }}</pre>
          </div>
        </el-tooltip>
      </template>

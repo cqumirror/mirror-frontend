@@ -35,11 +35,11 @@ Release
 1. 点击`左侧dock`的菜单，进入`Gnome menu`</br>
 2. 搜索`software`，打开`Software & Updates`应用
 
-![img1](mirror-wiki/ubuntu/images/00.jpg)
+![img1](images/00.jpg)
 
 3. 在打开的对话框中，**第一个标签页** 的下拉选单中（`下载自`）选择`其他站点`。在新打开的对话框选择中国选单，并选择 `mirrors.cqu.edu.cn`，点击 `选择服务器`
 
-![img2](mirror-wiki/ubuntu/images/01.jpg)
+![img2](images/01.jpg)
 
 4. 点击关闭，此时会询问是否刷新 apt 缓存，选择 **是** 进行apt缓存刷新，即可使用
 
