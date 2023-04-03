@@ -992,3 +992,12 @@ img {
   flex-direction: row;
 }
 
+// wiki content (_.vue)
+.wiki-content-container-parent {
+
+  .wiki-content-container {
+    display: flex;
+    flex-direction: row;
+  }
+}
+

@@ -1,10 +1,36 @@
 <template>
-  <div>
+  <div class="wiki-content-container-parent">
     <h1>{{ article.title }}</h1>
-    <!-- other page content -->
-    <article id="md-content" class="wiki-page-content" @click="imgProxy">
-      <nuxt-content :document="article" />
-    </article>
+    <div class="wiki-content-container">
+      <article id="md-content" class="wiki-page-content" @click="imgProxy">
+        <nuxt-content ref="nuxtContent" :document="article" />
+      </article>
+      <aside class="wiki-content-toc">
+        <div class="" v-if="article.toc && article.toc.length > 0">
+          <h2
+            class=""
+          >
+            Table of contents
+          </h2>
+          <nav class="">
+            <ul>
+              <li
+                class="toc-list"
+                v-for="link of article.toc"
+                :key="link.id"
+              >
+                <a
+                  role="button"
+                  class=""
+                  :href="`#${$route.fullPath}/#${link.id}`"
+                >{{ link.text }}</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+    </div>
   </div>
 </template>
 
@@ -19,7 +45,16 @@ export default {
     return {
       article: {},
       loaded: false,
-      rendered: false
+      rendered: false,
+
+
+      currentlyActiveToc: "",
+      observer: null,
+      observerOptions: {
+        root: this.$refs.nuxtContent,
+        threshold: 0
+      }
+
     }
   },
   methods: {
@@ -69,6 +104,7 @@ export default {
           })
         }
       }
+      console.log(this.article)
 
 
     },
@@ -89,6 +125,26 @@ export default {
       },
       immediate: true,
     },
+  },
+  mounted() {
+    this.observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute("id");
+        if (entry.isIntersecting) {
+          this.currentlyActiveToc = id;
+        }
+      });
+    }, this.observerOptions);
+
+    // Track all sections that have an `id` applied
+    document
+      .querySelectorAll(".nuxt-content h2[id], .nuxt-content h3[id]")
+      .forEach(section => {
+        this.observer.observe(section);
+      });
+  },
+  beforeDestroy() {
+    this.observer.disconnect();
   }
 }
 </script>
