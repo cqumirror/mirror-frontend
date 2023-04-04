@@ -2,6 +2,7 @@
 title: "Ubuntu Linux 镜像使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/ubuntu/_index'
 ---
 
 ## 地址

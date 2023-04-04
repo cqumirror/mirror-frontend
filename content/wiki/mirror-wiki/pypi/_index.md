@@ -2,6 +2,7 @@
 title: "PyPI 镜像使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/pypi/_index'
 ---
 {{% notice note %}}
 本镜像站 PyPI 仓库已经移除，请求将被重定向（若从校外访问）/反向代理（若从校内访问）到 [北京外国语大学开源软件镜像站](https://mirrors.bfsu.edu.cn)。

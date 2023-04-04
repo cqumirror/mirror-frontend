@@ -2,6 +2,7 @@
 title: "CentOS 镜像使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/centos/_index'
 ---
 ## 地址
 http://mirrors.cqu.edu.cn/CentOS

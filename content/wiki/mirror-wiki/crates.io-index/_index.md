@@ -2,6 +2,7 @@
 title: "Crates.io-index 镜像使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/crates.io-index/_index'
 ---
 
 ## 地址

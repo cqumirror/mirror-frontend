@@ -1,6 +1,7 @@
 ---
 title: "镜像站使用帮助"
 weight: 5
+filepath: '/wiki/_index'
 ---
 
 {{% notice note %}}

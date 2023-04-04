@@ -2,6 +2,7 @@
 title: "OpenSUSE 镜像使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/opensuse/_index'
 ---
 ## 地址
 https://mirrors.cqu.edu.cn/opensuse

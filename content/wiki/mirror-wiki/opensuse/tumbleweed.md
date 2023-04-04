@@ -2,6 +2,7 @@
 title: "openSUSE Tumbleweed 镜像使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/opensuse/tumbleweed'
 ---
 ## 地址
 http://mirrors.cqu.edu.cn/opensuse/tumbleweed/

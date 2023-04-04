@@ -2,7 +2,7 @@
   <div style="margin:0;padding:0;">
     <el-breadcrumb separator-class="el-icon-arrow-right" class="news-page-breadcrumb">
       <el-breadcrumb-item :to="{ path: '/' }" class="breadcrumb-item">HOME</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/news/' }" class="breadcrumb-item">NEWS</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/news' }" class="breadcrumb-item">NEWS</el-breadcrumb-item>
       <el-breadcrumb-item>{{ article.title }}</el-breadcrumb-item>
     </el-breadcrumb>
     <article id="md-content" class="news-detail-content" @click="imgProxy">

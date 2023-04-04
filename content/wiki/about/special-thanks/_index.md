@@ -2,6 +2,7 @@
 title: "特别致谢 Special Thanks"
 date:  2019-02-07T16:28:15+08:00
 weight: 1
+filepath: '/wiki/about/special-thanks/_index'
 ---
 感谢所有为重大开源镜像站建设贡献力量的个人以及团体,没有你们的帮助我们无法将镜像站建设成为今天的模样。
 High tribute shall be paid to the individuals and communities listed below.

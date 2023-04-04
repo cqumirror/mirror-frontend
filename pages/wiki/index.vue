@@ -11,7 +11,7 @@
           :default-expanded-keys="expandedKeys"
         >
           <template slot-scope="{node,data}">
-            <nuxt-link :to="data.path">{{ data.title }}</nuxt-link>
+            <nuxt-link :to="`${data.filepath}`">{{ data.title }}</nuxt-link>
           </template>
         </el-tree>
       </div>
@@ -40,7 +40,6 @@ export default {
   methods: {
     handleNodeClick(node) {
       console.log(node)
-      // this.$router.push({name: 'wiki-index-all', params: { slug: node.path + '_index' } });
     },
     buildTree(items) {
       const result = [];
@@ -78,31 +77,38 @@ export default {
     },
     preProcess(articles) {
       articles.forEach(item => {
-        item.path = item.path.replace('/_index', '')
-        const slugArr = item.path.split("/")
+        item.filepath = item.filepath.replace('/_index', '')
+        const slugArr = item.filepath.split("/")
         item.id = slugArr[slugArr.length-1]
         item.pid = slugArr.length === 2 ? 0:slugArr[slugArr.length-2]
       })
     },
   },
   async fetch() {
+    console.log("start fetching")
+    debugger
     const options = {
       deep: true
     }
     const articles = await this.$content('wiki', options)
-      .only(['title', 'description', 'img', 'slug', 'author'])
+      .only(['title', 'description', 'slug', 'author','filepath'])
       .sortBy('title', 'asc')
       .fetch()
-
+    console.log("fetch end")
+    console.log(articles)
     this.preProcess(articles)
 
     this.data = this.buildTree(articles)[0].children
 
+
   },
   mounted() {
-    const pathArr = this.$route.fullPath.split("/")
+
+    const path = this.$route.params.pathMatch
+    const pathArr = path.split("/")
     const id = pathArr[pathArr.length-1]
     this.expandedKeys.push(id)
+
 
   }
 }

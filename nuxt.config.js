@@ -9,9 +9,10 @@ export default {
   },
   generate: {
     async routes() {
+      console.warn("generating routes")
       const { $content } = require('@nuxt/content')
 
-      const blogRoutes = await $content('wiki').only(['slug']).fetch()
+      const blogRoutes = await $content('wiki',{ deep: true }).only(['slug','path']).fetch()
         .then(files => {
           return files.map(file => `/wiki/${file.slug}`)
         })
@@ -58,7 +59,9 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/element-ui',
-    '@/plugins/font-awesome'
+    '@/plugins/font-awesome',
+    '@/plugins/vue-scrollto',
+    '@/plugins/clipboard-js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -176,5 +179,22 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
+    extend(config, { isDev, isClient }) {
+      if (isDev && isClient) {
+        // 在开发模式下运行自定义代码
+        console.log('运行自定义代码')
+      }
+
+      // 在构建前运行自定义代码
+      config.plugins.push({
+        apply: (compiler) => {
+          compiler.hooks.beforeCompile.tap('MyPlugin', () => {
+            console.log('在构建前运行自定义代码')
+          })
+        }
+      })
+    }
   }
 }
+
+

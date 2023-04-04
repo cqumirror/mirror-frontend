@@ -2,6 +2,7 @@
 title: "如何配置 sudo - Debian 软件仓库使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/debian/sudo'
 ---
 默认情况下，Debian 如果安装过程中设置了 root 密码，那么创建的普通用户将没有使用`sudo`的权限。
 

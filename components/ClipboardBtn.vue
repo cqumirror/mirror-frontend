@@ -8,10 +8,8 @@
 <script>
 
 import '@/assets/css/main.scss'
-
-import clipboard from "clipboard";
-import IconClipboardCheck from "~/components/btnComponent/IconClipboardCheck.vue";
-import IconClipboardCopy from "~/components/btnComponent/IconClipboardCopy.vue";
+import IconClipboardCheck from "@/components/btnComponent/IconClipboardCheck.vue";
+import IconClipboardCopy from "@/components/btnComponent/IconClipboardCopy.vue";
 
 export default {
   name: "ClipboardBtn",
@@ -24,7 +22,6 @@ export default {
   },
   methods: {
     handleCopyClicked() {
-      console.log("clicked")
       this.copyCode.on('success', (event) => {
         console.log("success",event)
         event.clearSelection()
@@ -38,12 +35,8 @@ export default {
       })
     }
   },
-  beforeMount() {
-    console.log(this.copyCode,"是否存在实例")
-  },
   mounted () {
-    console.log("mounted")
-    this.copyCode = new clipboard(
+    this.copyCode = new this.clipboard(
       this.$refs.copy,{
         target(elem) {
           console.log("element",elem)

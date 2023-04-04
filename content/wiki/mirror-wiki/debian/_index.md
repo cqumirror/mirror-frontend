@@ -2,6 +2,7 @@
 title: "Debian 软件仓库使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/debian/_index'
 ---
 ## 地址
 <https://mirrors.cqu.edu.cn/debian>

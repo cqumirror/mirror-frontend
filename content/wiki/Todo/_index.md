@@ -1,6 +1,7 @@
 ---
 title: "TODO"
 weight: 5
+filepath: '/wiki/Todo/_index'
 ---
 
 - [x] sync openwrt / pandorabox repo

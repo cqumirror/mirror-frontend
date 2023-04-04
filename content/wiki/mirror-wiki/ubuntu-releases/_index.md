@@ -2,6 +2,7 @@
 title: "Ubuntu 发行镜像使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/ubuntu-releases/_index'
 ---
 ## 地址
 http://mirrors.cqu.edu.cn/ubuntu-releases/

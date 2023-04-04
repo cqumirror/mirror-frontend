@@ -2,6 +2,7 @@
 title: "OpenWrt / LEDE 镜像使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/openwrt/_index'
 ---
 ## 地址
 http://mirrors.cqu.edu.cn/openwrt/

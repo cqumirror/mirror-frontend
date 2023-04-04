@@ -2,6 +2,7 @@
 title: "Arch Linux 源使用帮助"
 draft: false
 weight: 2
+filepath: '/wiki/mirror-wiki/archlinux/_index'
 ---
 
 ## 地址
