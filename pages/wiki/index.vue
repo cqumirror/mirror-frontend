@@ -18,7 +18,10 @@
       </div>
     </div>
     <div class="wiki-content-parent">
-      <NuxtChild/>
+      <article v-if="$route.name === 'wiki'" id="md-content" class="wiki-page-content">
+        <nuxt-content ref="nuxtContent" :document="article" />
+      </article>
+      <NuxtChild v-else/>
     </div>
   </div>
 
@@ -35,7 +38,8 @@ export default {
         label: 'title',
         id: 'id'
       },
-      expandedKeys: []
+      expandedKeys: [],
+      article: {}
     }
   },
   methods: {
@@ -50,7 +54,7 @@ export default {
       }
     },
     handleNodeClick(node) {
-      console.log(node)
+
     },
     buildTree(items) {
       const result = [];
@@ -103,10 +107,11 @@ export default {
       })
 
     },
+    async fetchIndex() {
+      this.article = await this.$content('wiki/_index').fetch()
+    }
   },
   async fetch() {
-    console.log("start fetching")
-    debugger
     const options = {
       deep: true
     }
@@ -114,8 +119,6 @@ export default {
       .only(['title', 'description', 'slug', 'author','filepath'])
       .sortBy('title', 'asc')
       .fetch()
-    console.log("fetch end")
-    console.log(articles)
     this.preProcess(articles)
 
     this.data = this.buildTree(articles)[0].children
@@ -133,19 +136,11 @@ export default {
       this.expandedKeys = [id]
     }
   },
-  // updated() {
-  //   console.log(this.$route.name,"=== route name ===")
-  //   if (this.$route.name === 'wiki') {
-  //     console.log({name: 'homepage'})
-  //     // this.expandedKeys = []
-  //   }
-  // },
   watch: {
     '$route': {
       handler: function() {
-        console.log(this.$route.name,"=== index.vue watch ===")
         if (this.$route.name === 'wiki') {
-          console.log({name:'homepage'})
+          this.fetchIndex()
           this.expandedKeys = []
           this.handleCollapseAll()
         }
