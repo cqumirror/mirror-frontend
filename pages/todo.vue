@@ -1,46 +1,69 @@
 <template>
-  <div>
-  <ul>
-    <li v-for="todo in todos" :key="todo.text">
-      <input :checked="todo.done" @change="toggle(todo)" type="checkbox">
-      <span :class="{ done: todo.done }">{{ todo.text }}</span>
-    </li>
-    <li><input @keyup.enter="addTodo" placeholder="What needs to be done?"></li>
-  </ul>
-  <button @click="addplus">test</button>
-    <button @click="addplus1">test1</button>
-  </div>
+  <div><el-tree :data="treeData" ref="tree" :default-expand-all="false"></el-tree>
+    <el-button @click="handleExpandAll">展开全部</el-button>
+    <el-button @click="handleCollapseAll">折叠全部</el-button></div>
+
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
-  computed: {
-    todos () {
-      return this.$store.state.todos.list
-    }
+  data() {
+    return {
+      treeData: [
+        {
+          id: 1,
+          label: '一级节点 1',
+          children: [
+            {
+              id: 2,
+              label: '二级节点 1-1'
+            },
+            {
+              id: 3,
+              label: '二级节点 1-2'
+            }
+          ]
+        },
+        {
+          id: 4,
+          label: '一级节点 2',
+          children: [
+            {
+              id: 5,
+              label: '二级节点 2-1'
+            },
+            {
+              id: 6,
+              label: '二级节点 2-2'
+            }
+          ]
+        }
+      ]
+    };
   },
   methods: {
-    addTodo (e) {
-      this.$store.commit('todos/add', e.target.value)
-      e.target.value = ''
+    handleExpandAll() {
+      const tree = this.$refs.tree;
+      this.traverseTree(tree.store.root, (node) => {
+        node.expanded = true;
+      });
     },
-    addplus() {
-      this.$store.commit('news-pagination/currentChangeNext')
+    handleCollapseAll() {
+      const tree = this.$refs.tree;
+      this.traverseTree(tree.store.root, (node) => {
+        node.expanded = false;
+      });
     },
-    addplus1() {
-      this.$store.commit('news-pagination/currentChangePre')
-    },
-    ...mapMutations({
-      toggle: 'todos/toggle'
-    })
+    traverseTree(node, callback) {
+      if (!node) return;
+      callback(node);
+      const children = node.root ? node.root.childNodes : node.childNodes;
+      if (children) {
+        children.forEach((child) => {
+          this.traverseTree(child, callback);
+        });
+      }
+    }
   }
-}
+};
 </script>
-
-<style>
-.done {
-  text-decoration: line-through;
-}
-</style>

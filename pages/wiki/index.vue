@@ -9,6 +9,7 @@
           node-key="id"
           @node-click="handleNodeClick"
           :default-expanded-keys="expandedKeys"
+          accordion
         >
           <template slot-scope="{node,data}">
             <nuxt-link :to="`${data.filepath}`">{{ data.title }}</nuxt-link>
@@ -38,6 +39,16 @@ export default {
     }
   },
   methods: {
+    traverseTree(node, callback) {
+      if (!node) return;
+      callback(node);
+      const children = node.root ? node.root.childNodes : node.childNodes;
+      if (children) {
+        children.forEach((child) => {
+          this.traverseTree(child, callback);
+        });
+      }
+    },
     handleNodeClick(node) {
       console.log(node)
     },
@@ -83,6 +94,15 @@ export default {
         item.pid = slugArr.length === 2 ? 0:slugArr[slugArr.length-2]
       })
     },
+    handleCollapseAll() {
+      this.$nextTick(() => {
+        const tree = this.$refs.navTree;
+        this.traverseTree(tree.store.root, (node) => {
+          node.expanded = false;
+        })
+      })
+
+    },
   },
   async fetch() {
     console.log("start fetching")
@@ -103,14 +123,38 @@ export default {
 
   },
   mounted() {
+    if (this.$route.name === 'wiki') {
+      this.expandedKeys = []
+      return
+    } else {
+      const path = this.$route.params.pathMatch
+      const pathArr = path.split("/")
+      const id = pathArr[pathArr.length-1]
+      this.expandedKeys = [id]
+    }
+  },
+  // updated() {
+  //   console.log(this.$route.name,"=== route name ===")
+  //   if (this.$route.name === 'wiki') {
+  //     console.log({name: 'homepage'})
+  //     // this.expandedKeys = []
+  //   }
+  // },
+  watch: {
+    '$route': {
+      handler: function() {
+        console.log(this.$route.name,"=== index.vue watch ===")
+        if (this.$route.name === 'wiki') {
+          console.log({name:'homepage'})
+          this.expandedKeys = []
+          this.handleCollapseAll()
+        }
+      },
+      immediate: true,
+    },
+  },
 
-    const path = this.$route.params.pathMatch
-    const pathArr = path.split("/")
-    const id = pathArr[pathArr.length-1]
-    this.expandedKeys.push(id)
 
-
-  }
 }
 </script>
 
