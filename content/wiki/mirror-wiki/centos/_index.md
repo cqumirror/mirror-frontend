@@ -50,23 +50,29 @@ wget   -O   /etc/yum.repos.d/CentOS-AppStream.repo  http://mirrors.cqu.edu.cn/re
 {{% notice note %}}
 有些情况下系统没有预装`wget`程序，请提前进行安装。
 {{% /notice %}}
+
 然后刷新 yum 缓存：
 ```bash
 yum makecache
 ```
 ## 相关链接
+
 {{% notice %}}
 官方主页：https://www.centos.org/
 {{% /notice %}}
+
 {{% notice %}}
 邮件列表：https://www.centos.org/modules/tinycontent/index.php?id=16
 {{% /notice %}}
+
 {{% notice %}}
 论坛：https://www.centos.org/modules/newbb/
 {{% /notice %}}
+
 {{% notice %}}
 文档：https://www.centos.org/docs/
 {{% /notice %}}
+
 {{% notice %}}
 Wiki：https://wiki.centos.org/
 {{% /notice %}}

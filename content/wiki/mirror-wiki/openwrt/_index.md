@@ -7,7 +7,7 @@ filepath: '/wiki/mirror-wiki/openwrt/_index'
 ## 地址
 http://mirrors.cqu.edu.cn/openwrt/
 ## 说明
-OpenWrt / LDED 软件源
+OpenWrt / LEDE 软件源
 ## 收录框架
 官方支持的全部架构
 ## 使用说明
@@ -20,6 +20,7 @@ OpenWrt / LDED 软件源
 {{% notice note %}}
 请确保在此次登陆后及时修改 root 密码
 {{% /notice %}}
+
 使用如 putty 等支持 openssh 的工具，Linux 以及 MacOS 可以直接在终端中执行：
 ```bash
 ssh root@IP -p PORT
@@ -36,9 +37,11 @@ sed -i 's/downloads.openwrt.org/mirrors.cqu.edu.cn\/openwrt/g' /etc/opkg/distfee
 opkg update
 ```
 更改软件源并刷新缓存。
-{{% notice warning %}}
+
+{{% notice warn %}}
 刷新缓存时请注意网络连接，重庆大学校内请注意要有有效的校园网连接（不需要登录认证）
 {{% /notice %}}
+
 ## 相关链接
 官网：
 https://openwrt.org

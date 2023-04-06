@@ -3,6 +3,7 @@ const startRegex = /{{%\s+(notice).+%}}/;
 const endRegex = /{{%\s+(\/notice).+%}}/;
 
 const classMap = {
+  "tip": "notice-tip",
   "note": "notice-note",
   "warn": "notice-warn",
   "info": "notice-info",

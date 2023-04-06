@@ -42,22 +42,27 @@ sudo dnf makecache
 {{%attachments title="repo 文件直接下载" pattern=".*(repo)"/%}}
 
 ## 相关链接
+
 {{% notice %}}
 官方主页
 https://getfedora.org/
 {{% /notice %}}
+
 {{% notice %}}
 邮件列表
 https://fedoraproject.org/wiki/Communicating_and_getting_help
 {{% /notice %}}
+
 {{% notice %}}
 论坛
 https://forums.fedoraforum.org/
 {{% /notice %}}
+
 {{% notice %}}
 文档
 https://docs.fedoraproject.org/
 {{% /notice %}}
+
 {{% notice %}}
 Wiki
 https://fedoraproject.org/wiki/

@@ -11,7 +11,7 @@ https://mirrors.cqu.edu.cn/git/linux-stable.git
 
 ## 说明
 
-Linux内核源代码仓库。目前我``们同步了master分支与stable分支。
+Linux内核源代码仓库。目前我们同步了master分支与stable分支。
 
 ## 使用说明
 
