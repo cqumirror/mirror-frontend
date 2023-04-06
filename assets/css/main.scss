@@ -518,9 +518,22 @@ img {
     a {
       text-decoration: none;
       color: #1ccb4c;
+      position: relative;
 
-      &:hover {
-        text-decoration: underline;
+      &:after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 1px;
+        background-color: #1ccb4c;
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        transition: width 0.3s ease-in-out; /* 过渡效果 */
+      }
+
+      &:hover:after {
+        width: 100%;
       }
     }
 
@@ -984,17 +997,31 @@ img {
 // wiki nav open
 #nav-open {
   display: none;
+  margin-top: 15px;
+  margin-left: 5px;
   @media (max-width: $mobile-size) {
     display: block;
-    position: fixed;
-    width: 50px;
-    height: 50px;
+    //position: fixed;
+    width: 150px;
+    //height: 20px;
     top:0;
+    border: none;
+    background-color: transparent;
+    &:hover {
+      background-color: #e8e8e8;
+    }
   }
-
+  font-size: 20px;
+  line-height: 30px;
   .nav-open-icon:before {
     font-family: "Font Awesome 5 Free";
     content: '\f550';
+  }
+  .nav-open-icon:after {
+    font-family: "Noto Sans SC", monospace;
+    font-style: normal;
+    margin-left: 5px;
+    content: ' 全部文档';
   }
 }
 
@@ -1007,6 +1034,10 @@ img {
   display: flex;
   flex-direction: row;
   width: 100%;
+
+  @media (max-width: $mobile-size) {
+    flex-direction: column;
+  }
 
   #nav-close {
     display: none;
@@ -1145,6 +1176,14 @@ img {
     width: 65%;
   }
 
+  @media (max-width: $mobile-size) {
+    width: auto;
+    padding-top: 2vh;
+    padding-left: 5vw;
+    padding-bottom: 2vh;
+    padding-right: 2vh;
+  }
+
   .wiki-content-container-parent {
 
     width: 100%;
@@ -1156,6 +1195,10 @@ img {
       display: flex;
       flex-direction: row;
 
+      @media (max-width: $mobile-size) {
+        flex-direction: column-reverse;
+      }
+
       .wiki-page-content {
         width: 60%;
 
@@ -1166,12 +1209,27 @@ img {
           width: 72%;
         }
 
+        @media (max-width: $mobile-size) {
+          word-break: break-all;
+        }
+
+      }
+
+      .wiki-page-content#md-content {
+
+        @media (max-width: $mobile-size) {
+          width: 100%;
+        }
       }
 
       .wiki-content-toc {
         position: fixed;
         width: 40%;
         right: -20%;
+        background-color: rgba(255, 255, 255, 0.87);
+        color: #4b4b4b;
+
+
         @media (max-width: 1460px) {
           width: 32%;
           right: -15%;
@@ -1179,6 +1237,15 @@ img {
         }
         @media (max-width: 1300px) {
           width: 28%;
+        }
+
+        @media (max-width: $mobile-size) {
+          position: inherit;
+          background-color: #fcfcfc;
+          width: 90%;
+          padding: 5px;
+          border-top: 5px solid #efefef;
+          border-bottom: 5px solid #efefef;
         }
 
         .wiki-toc-nav {
@@ -1192,7 +1259,32 @@ img {
             margin-left: 5px;
 
             .toc-list {
+              a {
+                position: relative;
+                color: #4b4b4b;
+              }
+              a:before {
+                content: '# ';
+                font-weight: bold;
+                color: #4b4b4b;
+              }
+              a:hover {
 
+              }
+              a:after {
+                content: '';
+                display: block;
+                width: 0;
+                height: 2px;
+                background-color: #bdbdbd;
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                transition: width 0.3s ease-in-out; /* 过渡效果 */
+              }
+              a:hover:after {
+                width: 100%;
+              }
             }
           }
         }

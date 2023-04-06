@@ -79,6 +79,13 @@ export default {
       }
       this.showNav=false
     },
+    handleResize() {
+      this.showNav=true
+      const blocks = document.getElementsByClassName('wiki-content-parent')
+      for(let block of blocks) {
+        block.style.display = 'inherit';
+      }
+    },
     traverseTree(node, callback) {
       if (!node) return;
       callback(node);
@@ -136,10 +143,12 @@ export default {
     },
     handleCollapseAll() {
       this.$nextTick(() => {
-        const tree = this.$refs.navTree;
-        this.traverseTree(tree.store.root, (node) => {
-          node.expanded = false;
-        })
+        if (this.showNav) {
+          const tree = this.$refs.navTree;
+          this.traverseTree(tree.store.root, (node) => {
+            node.expanded = false;
+          })
+        }
       })
 
     },
@@ -164,8 +173,14 @@ export default {
   mounted() {
     window.onresize = () => {
       setTimeout(() => {
-        if (window.innerWidth >= this.mobileSize) {
-          this.showNav = true
+        if (window.innerWidth > this.mobileSize) {
+          this.handleResize()
+        } else {
+          if (this.showNav) {
+            scrollTo(0,0)
+            this.handleShowNav()
+          }
+
         }
       }, 400)
     }
