@@ -13,10 +13,9 @@ https://mirrors.cqu.edu.cn/homebrew/
 
 Homebrew 的镜像分为两部分，一个是 formula 索引源，另一个已经打包好的二进制文件的 bottle 源。本镜像为 Homebrew formula 的镜像，对应于 `brew update`，而非 `brew upgrade` 与 `brew install`。
 
+
 {{% notice note %}}
-
 配置了本源只会提高 `brew update` 的速度，如想提高 `brew upgrade` 和 `brew install` 的速度，请另配置 bottle 源。
-
 {{% /notice %}}
 
 ## 使用说明

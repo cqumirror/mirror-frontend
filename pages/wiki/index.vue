@@ -186,12 +186,15 @@ export default {
     }
     if (this.$route.name === 'wiki') {
       this.expandedKeys = []
-      return
     } else {
       const path = this.$route.params.pathMatch
       const pathArr = path.split("/")
       const id = pathArr[pathArr.length-1]
       this.expandedKeys = [id]
+    }
+
+    if (window.innerWidth > this.mobileSize) {
+      this.handleResize()
     }
   },
   updated() {

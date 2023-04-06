@@ -5,9 +5,13 @@ weight: 2
 filepath: '/wiki/mirror-wiki/opensuse/leap'
 ---
 ## 地址
+
 http://mirrors.cqu.edu.cn/opensuse/distribution/leap/
+
 ## 说明
+
 openSUSE Leap 软件仓库
+
 ## 收录架构
 - i586
 - x86_64
@@ -20,9 +24,9 @@ openSUSE Leap 软件仓库
 {{% /notice %}}
 
 首先从启动器打开`YAST2`
-![img1](/static/mirror-wiki/images/01.png)
+![img1](/static/mirror-wiki/opensuse/images/01.png)
 然后打开`软件源配置`，等待加载完成(图中全部软件源已经禁用)
-![img2](/static/mirror-wiki/images/02.png)
+![img2](/static/mirror-wiki/opensuse/images/02.png)
 此时我们只需要 4 个仓库即可完成配置：
 
 - OSS

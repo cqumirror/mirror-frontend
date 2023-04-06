@@ -10,7 +10,7 @@ filepath: '/wiki/Todo/_index'
 - [ ] mirror web template rework
 - [X] wiki/Debian
 - [x] wiki/opensuse-tunbleweed
-- <s>[ ] dart/pub.dev</s>
+- <s><input disabled="disabled" type="checkbox"/> dart/pub.dev</s>
 - [x] mirror/dart
 - [x] mirror/flutter
 - [x] wiki/opensuse
