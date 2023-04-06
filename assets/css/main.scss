@@ -362,8 +362,6 @@ img {
       }
     }
 
-    margin-left: 5vw;
-
     // content style start
     //// title
     #title {
@@ -975,14 +973,32 @@ img {
     box-shadow: 0 0 6px rgba(0, 0, 0, .12);
     cursor: pointer;
     z-index: 5;
+    color: #6e6e6e;
 
     &:hover {
-      background-color: #e5eee4;
+      background-color: #ececec;
     }
   }
 }
 
-// wiki page
+// wiki nav open
+#nav-open {
+  display: none;
+  @media (max-width: $mobile-size) {
+    display: block;
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    top:0;
+  }
+
+  .nav-open-icon:before {
+    font-family: "Font Awesome 5 Free";
+    content: '\f550';
+  }
+}
+
+// wiki page (wiki/index.vue)
 .wiki-container {
   a {
     text-decoration: none;
@@ -990,14 +1006,200 @@ img {
   }
   display: flex;
   flex-direction: row;
-}
+  width: 100%;
 
-// wiki content (_.vue)
-.wiki-content-container-parent {
+  #nav-close {
+    display: none;
+    background-color: transparent;
+    @media (max-width: $mobile-size) {
+      display: block;
+      position: fixed;
+      top: 60px;
+      right: 50px;
+      width: 50px;
+      height: 50px;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      background-color: transparent;
+    }
+    i {
+      @media (max-width: $mobile-size) {
+        font-size: 50px;
+        text-align: center;
+        vertical-align: center;
+        color: #c5c5c5;
+        background-color: transparent;
+      }
+      &:hover {
+        @media (max-width: $mobile-size) {
+          color: #dadada;
+          background-color: transparent;
+        }
+      }
+    }
+  }
 
-  .wiki-content-container {
-    display: flex;
-    flex-direction: row;
+  .wiki-nav-container {
+
+    width: 22%;
+    @media (max-width: 1700px) {
+      width: 27%;
+    }
+    @media (max-width: 1460px) {
+      width: 29%;
+    }
+    @media (max-width: 1380px) {
+      width: 31%;
+    }
+    @media (max-width: 1300px) {
+      width: 33%;
+    }
+    @media (max-width: 1210px) {
+      width: 35%;
+    }
+
+    padding-left: 2vw;
+    padding-top: 5vh;
+    padding-right: 2vw;
+
+    @media (max-width: $mobile-size) {
+      position: absolute;
+      z-index: 9000;
+      width: 100%;
+      //height: 100vh;
+      background-color: #ffffff;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: auto;
+      padding-left: 0;
+      padding-top: 10vh;
+      padding-right: 0;
+      overflow: auto;
+      // TODO
+      //display: none;
+    }
+
+    .wiki-nav {
+
+      border-right: 1px solid #efefef;
+
+      @media (max-width: $mobile-size) {
+        display: flex;
+        margin-left: 10vw;
+        width: 60%;
+        border-left: 1px solid #eeeeee;
+        border-right: none;
+      }
+
+
+      .leaf-parent .leaf-end.nuxt-link-exact-active {
+        background-color: #deffd0;
+        border-left: 5px solid #1ccb4c;
+        border-right: 5px solid #deffd0;
+        border-radius: 5px;
+      }
+
+      .leaf-parent {
+
+        .leaf-end {
+          margin-left: 5px;
+
+        }
+        .nuxt-link-exact-active {
+          background-color: #deffd0;
+        }
+      }
+
+      .el-tree-node__content {
+        &:hover {
+          background-color: transparent !important;
+          cursor: initial !important;
+        }
+      }
+      .is-current {
+        background-color: transparent !important;
+      }
+    }
   }
 }
+
+// wiki content (wiki/index/_.vue)
+.wiki-content-parent {
+  width: 78%;
+  @media (max-width: 1700px) {
+    width: 73%;
+  }
+  @media (max-width: 1460px) {
+    width: 71%;
+  }
+  @media (max-width: 1380px) {
+    width: 69%;
+  }
+  @media (max-width: 1300px) {
+    width: 67%;
+  }
+  @media (max-width: 1210px) {
+    width: 65%;
+  }
+
+  .wiki-content-container-parent {
+
+    width: 100%;
+
+    .wiki-content-container {
+
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+
+      .wiki-page-content {
+        width: 60%;
+
+        @media (max-width: 1460px) {
+          width: 68%;
+        }
+        @media (max-width: 1300px) {
+          width: 72%;
+        }
+
+      }
+
+      .wiki-content-toc {
+        position: fixed;
+        width: 40%;
+        right: -20%;
+        @media (max-width: 1460px) {
+          width: 32%;
+          right: -15%;
+          top: 10%;
+        }
+        @media (max-width: 1300px) {
+          width: 28%;
+        }
+
+        .wiki-toc-nav {
+
+          ul {
+            list-style: none;
+            margin-block-start: 0 !important;
+            margin-block-end: 0 !important;
+            padding-left: 0;
+
+            margin-left: 5px;
+
+            .toc-list {
+
+            }
+          }
+        }
+
+      }
+    }
+  }
+}
+
 

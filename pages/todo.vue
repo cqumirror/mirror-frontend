@@ -1,69 +1,55 @@
 <template>
-  <div><el-tree :data="treeData" ref="tree" :default-expand-all="false"></el-tree>
-    <el-button @click="handleExpandAll">展开全部</el-button>
-    <el-button @click="handleCollapseAll">折叠全部</el-button></div>
-
+  <div class="nav-menu-container">
+    <button @click="showNav = true">打开导航</button>
+    <transition name="slide">
+      <div class="nav-menu" v-if="showNav">
+        <button @click="showNav = false">关闭导航</button>
+        <ul>
+          <li>菜单项1</li>
+          <li>菜单项2</li>
+          <li>菜单项3</li>
+        </ul>
+      </div>
+    </transition>
+  </div>
 </template>
-
 <script>
 export default {
   data() {
     return {
-      treeData: [
-        {
-          id: 1,
-          label: '一级节点 1',
-          children: [
-            {
-              id: 2,
-              label: '二级节点 1-1'
-            },
-            {
-              id: 3,
-              label: '二级节点 1-2'
-            }
-          ]
-        },
-        {
-          id: 4,
-          label: '一级节点 2',
-          children: [
-            {
-              id: 5,
-              label: '二级节点 2-1'
-            },
-            {
-              id: 6,
-              label: '二级节点 2-2'
-            }
-          ]
-        }
-      ]
+      showNav: false
     };
-  },
-  methods: {
-    handleExpandAll() {
-      const tree = this.$refs.tree;
-      this.traverseTree(tree.store.root, (node) => {
-        node.expanded = true;
-      });
-    },
-    handleCollapseAll() {
-      const tree = this.$refs.tree;
-      this.traverseTree(tree.store.root, (node) => {
-        node.expanded = false;
-      });
-    },
-    traverseTree(node, callback) {
-      if (!node) return;
-      callback(node);
-      const children = node.root ? node.root.childNodes : node.childNodes;
-      if (children) {
-        children.forEach((child) => {
-          this.traverseTree(child, callback);
-        });
-      }
-    }
   }
 };
+
 </script>
+<style scoped>
+.nav-menu-container {
+  position: relative;
+}
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+.slide-enter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.slide-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+</style>

@@ -6,13 +6,9 @@
         <nuxt-content ref="nuxtContent" :document="article" />
       </article>
       <aside class="wiki-content-toc">
-        <div class="" v-if="article.toc && article.toc.length > 0">
-          <h2
-            class=""
-          >
-            Table of contents
-          </h2>
-          <nav class="">
+        <div class="wiki-toc" v-if="article.toc && article.toc.length > 0">
+          <h2 class="wiki-toc-title">目录</h2>
+          <nav class="wiki-toc-nav">
             <ul>
               <li
                 class="toc-list"
@@ -53,7 +49,6 @@ export default {
   },
   methods: {
     handleScrollTo(id) {
-      console.log(id)
       this.$scrollTo('#'+id)
     },
     imgProxy(e) {
@@ -85,21 +80,16 @@ export default {
       return decodeURIComponent(encodedString.replace(/\+/g, ' '));
     },
     async fetchData() {
-      // debugger
-      console.log(this.$route,"hash")
       const path = this.$route.params.pathMatch
       try {
         const article = await this.$content(`wiki/${path}`).fetch()
         if (Array.isArray(article)) {
           let index = article.findIndex(item => item.slug === '_index')
           const result = article[index]
-          console.log(result,"result")
           this.article = JSON.parse(JSON.stringify(result))
-          console.log(document.readyState)
         } else {
           this.article = JSON.parse(JSON.stringify(article))
         }
-        console.log(article,'article')
       } catch (e) {
         console.error(e)
       }
@@ -117,13 +107,9 @@ export default {
       }, 100)
     }
   },
-  mounted() {
-    console.log('mounted')
-  },
   watch: {
     '$route': {
       handler: function() {
-        console.log(this.$route.fullPath,"=== _.vue watch ===")
         this.fetchData()
         this.loaded = false
       },

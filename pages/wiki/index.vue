@@ -1,6 +1,10 @@
 <template>
   <div class="wiki-container">
-    <div class="wiki-nav-container">
+    <button id="nav-open" @click="handleShowNav">
+      <i class="nav-open-icon"/>
+    </button>
+    <transition name="slide">
+    <div class="wiki-nav-container" v-if="showNav">
       <div class="wiki-nav">
         <el-tree
           ref="navTree"
@@ -12,17 +16,31 @@
           accordion
         >
           <template slot-scope="{node,data}">
-            <nuxt-link :to="`${data.filepath}`">{{ data.title }}</nuxt-link>
+            <div class="leaf-parent">
+              <nuxt-link :to="`${data.filepath}`" class="leaf-end">{{ data.title }}</nuxt-link>
+            </div>
           </template>
         </el-tree>
+        <button id="nav-close" @click="handleCloseNav">
+          <i class="el-icon-close"/>
+        </button>
       </div>
     </div>
+    </transition>
     <div class="wiki-content-parent">
       <article v-if="$route.name === 'wiki'" id="md-content" class="wiki-page-content">
         <nuxt-content ref="nuxtContent" :document="article" />
       </article>
       <NuxtChild v-else/>
     </div>
+    <FloatToolsBtn
+      v-if="wikiFloatBox.enabled"
+      :data="wikiFloatBox.data"
+    >
+      <template slot="back-to-top">
+        <el-backtop/>
+      </template>
+    </FloatToolsBtn>
   </div>
 
 </template>
@@ -32,6 +50,7 @@ export default {
   name: "wiki",
   data() {
     return {
+      wikiFloatBox: process.env.wikiFloatBox,
       data: [],
       defaultProps: {
         children: 'children',
@@ -39,10 +58,27 @@ export default {
         id: 'id'
       },
       expandedKeys: [],
-      article: {}
+      article: {},
+
+      showNav: false,
+      mobileSize: 990
     }
   },
   methods: {
+    handleShowNav() {
+      this.showNav=true
+      const blocks = document.getElementsByClassName('wiki-content-parent')
+      for(let block of blocks) {
+        block.style.display = 'none';
+      }
+    },
+    handleCloseNav() {
+      const blocks = document.getElementsByClassName('wiki-content-parent')
+      for(let block of blocks) {
+        block.style.display = 'inherit';
+      }
+      this.showNav=false
+    },
     traverseTree(node, callback) {
       if (!node) return;
       callback(node);
@@ -126,6 +162,13 @@ export default {
 
   },
   mounted() {
+    window.onresize = () => {
+      setTimeout(() => {
+        if (window.innerWidth >= this.mobileSize) {
+          this.showNav = true
+        }
+      }, 400)
+    }
     if (this.$route.name === 'wiki') {
       this.expandedKeys = []
       return
@@ -135,6 +178,9 @@ export default {
       const id = pathArr[pathArr.length-1]
       this.expandedKeys = [id]
     }
+  },
+  updated() {
+
   },
   watch: {
     '$route': {
@@ -147,6 +193,13 @@ export default {
       },
       immediate: true,
     },
+    'showNav': {
+      handler: function () {
+        if (this.showNav) {
+
+        }
+      }
+    }
   },
 
 
@@ -154,5 +207,48 @@ export default {
 </script>
 
 <style scoped>
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+}
 
+.slide-enter {
+  transform: translateX(100%);
+  opacity: 100%;
+}
+
+.slide-leave-to {
+  transform: translateX(-100%);
+  opacity: 100%;
+}
+
+.slide-enter-active {
+  animation: slide-in 0.2s ease-out;
+}
+
+.slide-leave-active {
+  animation: slide-out 0.25s ease-out;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0.95;
+  }
+}
 </style>
