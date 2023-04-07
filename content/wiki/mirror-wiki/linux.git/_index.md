@@ -1,5 +1,5 @@
 ---
-title: "linux.git 使用帮助"
+title: "Linux.git 使用帮助"
 draft: false
 weight: 2
 filepath: '/wiki/mirror-wiki/linux.git/_index'

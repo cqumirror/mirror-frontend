@@ -15,11 +15,6 @@ module.exports = shortcodes;
 
 function shortcodes(options) {
 
-  // const startBlock = (options || {}).startBlock || "[[";
-  // const endBlock = (options || {}).endBlock || "]]";
-  // const inlineMode = (options || {}).inlineMode || false;
-
-
   return (node) => {
     // console.log(node)
     const nodeCopy = node

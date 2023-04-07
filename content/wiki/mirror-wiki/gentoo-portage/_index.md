@@ -42,3 +42,5 @@ emerge --sync
 {{% notice note %}}
 初次同步将花费较多时间
 {{% /notice %}}
+
+

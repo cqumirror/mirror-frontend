@@ -37,6 +37,7 @@ for i in {AppStream,BaseOS,Devel,Extras,HighAvailability,PowerTools,Sources}; do
 yum makecache
 ```
 ## 相关链接
+
 {{% notice %}}
 官方主页：https://www.rockylinux.org/
 {{% /notice %}}

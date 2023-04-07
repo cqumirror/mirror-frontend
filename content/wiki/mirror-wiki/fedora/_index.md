@@ -4,15 +4,25 @@ draft: false
 weight: 2
 filepath: '/wiki/mirror-wiki/fedora/_index'
 ---
+
 ## 地址
+
 https://mirrors.cqu.edu.cn/fedora
+
 ## 描述
+
 Fedora Linux 软件仓库
+
 ## 收录架构
+
 x86_64
+
 ## 收录版本
+
 仅`release`
+
 ## 使用说明
+
 首先做好备份操作：
 ```bash
 # fedora
@@ -39,7 +49,6 @@ wget   -O   /etc/yum.repos.d/fedora-updates-modular.repo   http://mirrors.cqu.ed
 sudo dnf makecache
 ```
 生成缓存。
-{{%attachments title="repo 文件直接下载" pattern=".*(repo)"/%}}
 
 ## 相关链接
 

@@ -89,7 +89,8 @@ export default {
     markdown: {
       remarkPlugins: [
         ['remark-gfm'],
-        ['@/utils/shortcode', {startBlock: "[[",endBlock: "]]"}]
+        ['@/utils/shortcode', {startBlock: "[[",endBlock: "]]"}],
+        ['@/utils/expand']
       ]
     },
     liveEdit: false,

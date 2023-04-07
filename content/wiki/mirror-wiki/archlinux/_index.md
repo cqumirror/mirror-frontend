@@ -6,13 +6,35 @@ filepath: '/wiki/mirror-wiki/archlinux/_index'
 ---
 
 ## 地址
+
 https://mirrors.cqu.edu.cn/archlinux/
+
 ## 说明
+
 Arch Linux 软件源
-## 收录框架
+
+## 收录架构
+
 x86_64
+
 ## 使用说明
+
 以 root 身份手动编辑文件`/etc/pacman.d/mirrorlist`，在文件顶端加入
+
 ```bash
 Server = https://mirrors.cqu.edu.cn/archlinux/$repo/os/$arch
 ```
+
+## 相关链接
+
+{{% notice %}}
+官方网站 https://archlinux.org
+{{% /notice %}}
+
+{{% notice %}}
+官方文档 https://wiki.archlinux.org
+{{% /notice %}}
+
+{{% notice %}}
+AUR https://aur.archlinux.org
+{{% /notice %}}

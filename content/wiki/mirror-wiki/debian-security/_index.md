@@ -4,11 +4,17 @@ draft: false
 weight: 2
 filepath: '/wiki/mirror-wiki/debian-security/_index'
 ---
+
 ## 地址
-<https://mirrors.cqu.edu.cn/debian-security>
+
+https://mirrors.cqu.edu.cn/debian-security
+
 ## 说明
+
 Debian 安全更新
+
 ## 收录架构
+
 - x86
 - x86_64
 - armel
@@ -17,6 +23,7 @@ Debian 安全更新
 - source code
 
 ## 收录版本
+
 - old stable (Debian 8 jessie)
 - old stable (Deibian 9 stretch)
 - stable (Debian 10 buster)
@@ -36,7 +43,7 @@ Debian 的[安全更新源](security.debian.org)是为了使安全更新**尽快
 sudo sed -i 's|#*deb http://security.debian.org|deb https://mirrors.cqu.edu.cn|' /etc/apt/sources.list
 ```
 
-{{% expand "如果出现“USERNAME 不在 sudoers 文件中。此事将被报告”或“USERNAME is not in the sudoers file.  This incident will be reported.”" %}}
+如果出现“USERNAME 不在 sudoers 文件中。此事将被报告”或“USERNAME is not in the sudoers file.  This incident will be reported.”
 可以使用
 
 ```shell
@@ -46,6 +53,6 @@ su -c "sed -i 's|#*deb http://security.debian.org|deb https://mirrors.cqu.edu.cn
 来完成这一操作。
 
 但我们更推荐更安全的做法——`sudo`。[如何配置`sudo`](/wiki/mirror-wiki/debian/sudo)。
-{{% /expand %}}
 
-另外，您亦可手动编辑`/etc/apt/sources.list`（TODO）。
+
+另外，您亦可手动编辑`/etc/apt/sources.list`。

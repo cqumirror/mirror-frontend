@@ -238,6 +238,7 @@ img {
     width: 90%;
     transition: width .75s;
   }
+  margin-bottom: 5vh;
   // 响应式
 
   .nuxt-content {
@@ -456,7 +457,7 @@ img {
     }
 
     //// word qoute
-    p {
+    p,ol,ul,li,td,table,th {
       code {
         font-family: Arial;
         color: #3a3a3a;
@@ -467,9 +468,22 @@ img {
       }
     }
 
+
     //// codeblock
     .nuxt-content-highlight {
       position: relative;
+
+      .filename {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        color: #708090;
+        border-radius: 5px;
+        &:before {
+          content: '# ';
+          margin-left: 5px;
+        }
+      }
 
       .copy-btn {
         position: absolute;
