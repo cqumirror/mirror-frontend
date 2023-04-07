@@ -17,12 +17,15 @@ Monjoro Linux 软件源
 Server = https://mirrors.cqu.edu.cn/manjaro/stable/$repo/$arch
 ```
 ## 相关链接
+
 {{% notice %}}
 官方网址：https://www.manjaro.org/
 {{% /notice %}}
+
 {{% notice %}}
 官方论坛：https://forum.manjaro.org/
 {{% /notice %}}
+
 {{% notice %}}
 Wiki: https://wiki.manjaro.org/
 {{% /notice %}}

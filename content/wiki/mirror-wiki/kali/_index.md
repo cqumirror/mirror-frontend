@@ -74,9 +74,11 @@ $ sudo apt-get update
 ```bash
 sudo sed -i s/http.kali.org/mirrors.cqu.edu.cn/ /etc/apt/sources.list
 ```
+
 {{% notice tip %}}
 详细有关`sed`指令的内容请参考`sed`man page 或者 参阅 [Arch Linux WIKI](https://wiki.archlinux.org/index.php/Core_utilities#Essentials)
 {{% /notice %}}
+
 ## 相关链接
 Kali Linux 主页
 https://www.kali.org/

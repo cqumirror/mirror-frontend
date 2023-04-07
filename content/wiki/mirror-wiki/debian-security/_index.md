@@ -24,7 +24,7 @@ Debian 安全更新
 
 ## 使用说明
 
-{{% notice warning %}}
+{{% notice warn %}}
 **一般情况下，用户获取安全更新应该直接使用`http://security.debian.org/debian-security`而非指定别的镜像站。**<br />
 Debian 的[安全更新源](security.debian.org)是为了使安全更新**尽快可用**。<br />
 使用非官方镜像站会让此增加不必要的麻烦，尤其是这些镜像站没有及时更新时。

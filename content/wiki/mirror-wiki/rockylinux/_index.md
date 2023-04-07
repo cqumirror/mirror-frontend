@@ -10,7 +10,7 @@ http://mirrors.cqu.edu.cn/rockylinux
 Rocky Linux 软件源
 ## 收录框架
 - x86_64
-- aarm64
+- aarch64
 
 ## 收录版本
 - Rocky Linux 8
