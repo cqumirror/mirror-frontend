@@ -1,6 +1,6 @@
 # CQU mirror frontend
 
-Document: ENG | [CHS](https://github.com/cqumirror/mirror-frontend/README.zh.md)
+Document: ENG | [CHS](https://github.com/cqumirror/mirror-frontend/blob/master/README.zh.md)
 
 ## Build Setup
 **!!!IMPORTANT!!!**</br>
