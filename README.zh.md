@@ -24,6 +24,7 @@
 下载[NVM from Windows](https://github.com/coreybutler/nvm-windows),并安装 Nodejs `v14.20.0`。
 
 ### Mac OS （via brew）
+
 ```bash
 brew update
 
@@ -84,6 +85,7 @@ yarn generate
 将丰富文档内容，凸显重要部分。对文档梳理很有裨益，因此保留了对部分 Hugo shortcode 的支持，将在下文阐述。
 
 ### Markdown 扩展部分
+
 如果熟悉了 Github 风格 markdown 的写作，可能对于 markdown 的限制会有初步的了解，根据安全规范，项目中渲染器并没有 jsx 模板的渲染支持，另外由于
 解析器问题，仅仅对 vue template 有少量支持，对于原生 html 标签为全量支持，具体渲染情况请参考浏览器中实际渲染情况，目前扩展部分主要如下：
 
@@ -139,7 +141,114 @@ this is a notice
 
 </code></pre>
 
+以上都是一些比较常见的渲染错误，目前认为是可预期的，如果你认为能够修复，请更改`@/utils/shortcode.js` 来自定义 `remark-js` 插件。
 
+
+
+#### remark-gfm
+
+remark 插件提供了较为强大的扩展能力，针对代码框可使用如下写法：
+
+<pre>
+<code>
+```CODE-LANGUAGE
+YOUR CODE
+```
+</code>
+</pre>
+
+其中 `CODE-LANGUAGE` 应当为所使用的编程语言，另外也支持了文件名的输出，请使用如下格式，文件名会渲染在代码框左上角：
+
+<pre>
+<code>
+```CODE-LANGUAGE[filename]
+YOUR CODE
+```
+</code>
+</pre>
+
+### 写作规范
+
+#### 新闻写作规范
+
+1. 文件名应当为 `长日期` + `英文文件名`
+2. 文件解析使用了 yaml 文件头协商，因此务必确认包含以上内容的文件头：
+```yaml
+---
+title: "标题"
+author: "作者"
+date: "日期，长日期格式，如：2023-03-27"
+---
+```
+3. 标题命名应当简明扼要，能够点出公告主题，不应过长
+4. 正文应当使用书面语言书写，避免使用口语，避免使用任何带有感情色彩倾向性的语言。应当点明：
+  - 事情的情况
+  - 发生原因或目的
+  - 预计时间或发生时间
+  - 发生时长或预计持续时间
+  - 处理结果或预期的结果
+  - 处理措施或预期的处理措施
+5. 正文对于真实个人或团体信息（如 IP，金额，硬件设施）应当做脱敏处理，敏感信息（如可成为安全隐患的信息）不得擅自发布
+6. 不得以个人名义发布信息
+
+#### wiki 写作及贡献规范
+
+1. 文件需要遵循以下固定格式：
+<pre>
+<code>
+---
+title: "CentOS 镜像使用帮助"
+draft: false
+weight: 2
+filepath: '/wiki/mirror-wiki/centos/_index'
+---
+
+## 地址
+
+## 说明
+
+## 收录架构
+
+## 收录版本
+
+## 使用说明
+
+## 相关链接
+
+{{% notice %}}
+链接内容
+{{% /notice %}}
+
+</code>
+</pre>
+2. 根据 Hugo 解析器协商，应当保证文件命名具有如下规范：
+  - 文档采用树形结构
+  - 新发行版应当在 `@/content/wiki/mirror-wiki` 中进行写作，需要以英文正式名称建立文件夹，其中直接文档命名必须为 `_index.md` 
+  - 次要文档，如多版本文档或其他补充文档可使用适当的英文名称进行文件名命名，并以适当的形式在主文档中 `_index.md` 中链接
+3. 根据 Hugo 兼容性和 `nuxt-content` 静态部署协商，文件应当具备如下文件头
+```yaml
+---
+title: "文档名称"
+draft: false
+weight: 2
+filepath: ' 文档相对于 content 文件夹路径，必须，如：/wiki/mirror-wiki/centos/_index'
+---
+```
+4. 根据写作规范，中英文间应当具备一个半角空格或全角空格
+5. 任何 Markdown 块标签应当在前后具备一个换行，主要为标题、代码块、列表、表格
+6. hugo-shortcode 前后应当具备一个换行，但是其中不可包含换行
+7. 文档主语应当为第三人称，不应包含任何称谓，但可以使用指代
+8. 内容应当真实且可靠，任何来自互联网的不可信方法不可以进入文档内容
+9. 社区内容不进入文档，只记录官方链接以及官方推荐的做法，但当官方不作为时可不遵守
+10. 无比确保渲染无误再进行 pr （pull request）拉取请求
+11. 根据写作规范，任何首次出现的缩写应当进行解释，比如：
+```txt
+pr (pull request) 
+```
+12. 尽量使用中性词汇
+13. 任何变更应当使用 pr 方式进行更新，主分支在保护后不应当直接操作
+
+## 功能配置
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
