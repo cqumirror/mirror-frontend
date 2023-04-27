@@ -37,6 +37,9 @@ import '@/assets/css/main.scss'
 import Vue from "vue"
 import ClipboardBtn from "@/components/ClipboardBtn.vue"
 
+import { Fancybox } from '@fancyapps/ui';
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
+
 export default {
   name: "slug",
   data() {
@@ -45,6 +48,7 @@ export default {
       loaded: false,
       rendered: false,
 
+      gallery: []
     }
   },
   methods: {
@@ -58,8 +62,7 @@ export default {
         tag: e.target.tagName.toLowerCase()
       }
       if (element.tag === 'img') {
-        console.info("img clicked")
-        // TODO imgViewer
+        Fancybox.show([{src:element.url}],{})
       }
     },
     addChild(className) {
