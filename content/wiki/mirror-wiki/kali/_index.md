@@ -21,7 +21,7 @@ kali Linux 的官方软件包仓库
 
 #### 1. 定位并且备份 `sources.list`
 
-```
+```bash
 $ cd /etc/apt/
 $ sudo cp sources.list sources.list.bak
 ```
@@ -29,7 +29,7 @@ $ sudo cp sources.list sources.list.bak
 #### 2. 编辑 `sources.list` 文件
 一般未编辑的`sources.list`文件如下所示。
 
-```
+```bash
 $ sudo vim sources.list
 
 ---------------------
@@ -56,15 +56,17 @@ deb http://http.kali.org/kali kali-rolling main non-free contrib
 
 1. 在键盘按下 <kbd>i</kbd> 键 进入编辑模式
 2. 添加下方所示内容或者将`http.kali.org`替换为 `mirrors.cqu.edu.cn`
-```
+
+```txt
 deb https://mirrors.cqu.edu.cn/kali kali-rolling main non-free contrib
 # deb-src https://mirrors.cqu.edu.cn/kali kali-rolling main non-free contrib
 ```
+
 3. 按下 <kbd>Esc</kbd> 退出编辑模式，同时按下 <kbd>shift</kbd>+<kbd>;</kbd> 键，在输入 <kbd>w</kbd>+<kbd>q</kbd>，回车保存
 
 #### 4. 刷新缓存
 
-```
+```bash
 $ sudo apt-get update
 ```
 

@@ -5,8 +5,8 @@
       <article id="md-content" class="wiki-page-content" @click="imgProxy">
         <nuxt-content ref="nuxtContent" :document="article" />
       </article>
-      <aside class="wiki-content-toc">
-        <div class="wiki-toc" v-if="article.toc && article.toc.length > 0">
+      <aside class="wiki-content-toc" v-if="article.toc && article.toc.length > 0">
+        <div class="wiki-toc" >
           <h2 class="wiki-toc-title">目录</h2>
           <nav class="wiki-toc-nav">
             <ul>

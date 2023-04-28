@@ -1,3 +1,4 @@
+import shiki from 'shiki';
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   // target: 'static',
@@ -31,9 +32,9 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxt-frontend',
+    title: '重庆大学开源软件镜像站',
     htmlAttrs: {
-      lang: 'zh-CN'
+      lang: ['zh-CN','en-US']
     },
     meta: [
       { charset: 'utf-8' },
@@ -91,7 +92,16 @@ export default {
         ['remark-gfm'],
         ['@/utils/shortcode', {startBlock: "[[",endBlock: "]]"}],
         ['@/utils/expand']
-      ]
+      ],
+      async highlighter() {
+        const highlighter = await shiki.getHighlighter({
+          // Complete themes: https://github.com/shikijs/shiki/tree/master/packages/themes
+          theme: 'nord'
+        })
+        return (rawCode, lang) => {
+          return highlighter.codeToHtml(rawCode, lang)
+        }
+      }
     },
     liveEdit: false,
   },
@@ -140,9 +150,9 @@ export default {
     siteLinks: {
       enabled: true,
       links: [
-        {url:'/wiki',desc:' 使用帮助 '},
-        {url:'/status',desc:' 服务器状态 '},
-        {url:'/news',desc: ' 新闻公告 '},
+        {url:'/#/wiki',desc:' 使用帮助 '},
+        {url:'/#/status',desc:' 服务器状态 '},
+        {url:'/#/news',desc: ' 新闻公告 '},
         {url:'https://net.cqu.edu.cn',desc: ' 重庆大学信息化办公室 '},
         {url:'http://lanunion.cqu.edu.cn/',desc:' 重大蓝盟 '}
       ]

@@ -208,6 +208,7 @@ export default {
           this.expandedKeys = []
           this.handleCollapseAll()
         }
+        
       },
       immediate: true,
     },

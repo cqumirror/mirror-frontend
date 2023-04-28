@@ -17,7 +17,7 @@ Rust crates.io 索引
 
 在 cargo 的配置文件（Windows 系统下的 `%HOMEPATH%\.cargo\config` 和类 Unix 系统下的 `~/.cargo/config`）中加入如下内容：
 
-```
+```ini
 [source.crates-io]
 replace-with = 'cqu'
 

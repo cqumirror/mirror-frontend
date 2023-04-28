@@ -39,14 +39,14 @@ Debian 的[安全更新源](security.debian.org)是为了使安全更新**尽快
 {{% /notice %}}
 
 默认情况下，以下命令可以将默认软件源（`security.debian.org/debian-security`）替换为重庆大学镜像站（`mirrors.cqu.edu.cn/debian-security`）并启用安全更新：
-```shell
+```bash
 sudo sed -i 's|#*deb http://security.debian.org|deb https://mirrors.cqu.edu.cn|' /etc/apt/sources.list
 ```
 
 如果出现“USERNAME 不在 sudoers 文件中。此事将被报告”或“USERNAME is not in the sudoers file.  This incident will be reported.”
 可以使用
 
-```shell
+```bash
 su -c "sed -i 's|#*deb http://security.debian.org|deb https://mirrors.cqu.edu.cn|' /etc/apt/sources.list"
 ```
 

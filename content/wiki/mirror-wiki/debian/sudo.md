@@ -9,7 +9,7 @@ filepath: '/wiki/mirror-wiki/debian/sudo'
 此处说明如何在这种情况下配置`sudo`。
 
 在普通用户下使用命令：
-```shell
+```bash
 su - -c "usermod -a -G sudo `whoami`"
 ```
 

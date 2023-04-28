@@ -25,11 +25,11 @@ rm -rf /var/db/repos/gentoo
 ```
 
 并修改`/etc/portage/repos.conf/gentoo.conf`，修改项目：
-```gentoo.conf
+```ini
 # change sync-type to git
 sync-type=git
 ```
-```gentoo.conf
+```ini
 # change sync-uri
 sync-uri=https://mirrors.cqu.edu.cn/git/gentoo-portage.git
 ```

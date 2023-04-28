@@ -38,14 +38,14 @@ Debian 软件仓库
 
 默认情况下，以下命令可以将默认软件源（`deb.debian.org/debian`）替换为重庆大学镜像站（`mirrors.cqu.edu.cn/debian`）。
 
-```shell
+```bash
 sudo sed -i s/deb.debian.org/mirrors.cqu.edu.cn/ /etc/apt/sources.list
 ```
 
 如果出现“USERNAME 不在 sudoers 文件中。此事将被报告”或“USERNAME is not in the sudoers file.  This incident will be reported.”,
 可以使用
 
-```shell
+```bash
 su -c 'sed -i s/deb.debian.org/mirrors.cqu.edu.cn/ /etc/apt/sources.list'
 ```
 
@@ -55,7 +55,7 @@ su -c 'sed -i s/deb.debian.org/mirrors.cqu.edu.cn/ /etc/apt/sources.list'
 
 除此之外，您亦可手动编辑`/etc/apt/sources.list`。以下是 Debian Stable 参考配置内容：
 
-```
+```txt
 deb http://mirrors.cqu.edu.cn/debian stable main contrib non-free
 # deb-src http://mirrors.cqu.edu.cn/debian stable main contrib non-free
 deb http://mirrors.cqu.edu.cn/debian stable-updates main contrib non-free
