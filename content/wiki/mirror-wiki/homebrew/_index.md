@@ -18,6 +18,7 @@ Homebrew 的镜像分为两部分，一个是 formula 索引源，另一个已�
 配置了本源只会提高 `brew update` 的速度，如想提高 `brew upgrade` 和 `brew install` 的速度，请另配置 bottle 源。
 {{% /notice %}}
 
+
 ## 使用说明
 
  将以下内容添加到 shell 的配置文件中，如 `.zshrc` 或 `.bash_profile` 中，
@@ -33,49 +34,50 @@ Homebrew 的镜像分为两部分，一个是 formula 索引源，另一个已�
 
  ## 相关链接
 
-{{% notice %}}
+
+{{% notice link %}}
 官方主页
 https://brew.sh/
 {{% /notice %}}
 
 
-{{% notice %}}
+{{% notice link %}}
 `brew` 命令文档
 https://docs.brew.sh/Manpage
 {{% /notice %}}
 
 
-{{% notice %}}
+{{% notice link %}}
 文档
 https://docs.brew.sh/
 {{% /notice %}}
 
 
-{{% notice %}}
+{{% notice link %}}
 社区讨论
 https://github.com/Homebrew/discussions/discussions
 {{% /notice %}}
 
 
-{{% notice %}}
+{{% notice link %}}
 Blog
 https://brew.sh/blog/
 {{% /notice %}}
 
 
-{{% notice %}}
+{{% notice link %}}
 软件包
 https://formulae.brew.sh/
 {{% /notice %}}
 
 
-{{% notice %}}
+{{% notice link %}}
 分析数据
 https://formulae.brew.sh/analytics/
 {{% /notice %}}
 
 
-{{% notice %}}
+{{% notice link %}}
 捐助
 https://github.com/homebrew/brew#donations
 {{% /notice %}}

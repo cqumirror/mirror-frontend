@@ -17,6 +17,7 @@ OpenWrt / LEDE 软件源
 单击 `Submit` 提交修改。
 切换到`Package`页面并单击 `refresh` 刷新包管理器缓存。
 ### Shell
+
 {{% notice note %}}
 请确保在此次登陆后及时修改 root 密码
 {{% /notice %}}

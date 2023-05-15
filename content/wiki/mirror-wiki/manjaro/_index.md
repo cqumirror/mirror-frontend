@@ -18,14 +18,17 @@ Server = https://mirrors.cqu.edu.cn/manjaro/stable/$repo/$arch
 ```
 ## 相关链接
 
-{{% notice %}}
+
+{{% notice link %}}
 官方网址：https://www.manjaro.org/
 {{% /notice %}}
 
-{{% notice %}}
+
+{{% notice link %}}
 官方论坛：https://forum.manjaro.org/
 {{% /notice %}}
 
-{{% notice %}}
+
+{{% notice link %}}
 Wiki: https://wiki.manjaro.org/
 {{% /notice %}}

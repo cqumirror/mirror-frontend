@@ -26,28 +26,36 @@ Arch Linux 中文社区仓库是由 Arch Linux 中文社区驱动的非官方用
 
 以 root 身份手动编辑文件`/etc/pacman.conf`，在文件末尾加入
 
+
 ```bash
 [archlinuxcn]
 Server = https://mirrors.cqu.edu.cn/archlinuxcn/$arch
 ```
 
+
 执行：
+
 
 ```bash
 pacman -Syy
 ```
 
+
 强制刷新软件源。再执行：
+
 
 ```bash
 pacman -S archlinuxcn-keyring
 ```
 
+
 添加 archlinuxCN 的 GPG key
+
 
 {{% notice note %}}
 SigLevel 建议为 TrustedOnly
 {{% /notice %}}
+
 
 ## 相关链接
 Arch Linux 中文社区主页:</br>

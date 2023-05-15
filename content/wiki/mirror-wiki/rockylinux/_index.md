@@ -23,6 +23,7 @@ cd /etc/yum.repos.d/ && mkdir -p backup && mv Rocky-* backup/.
 
 根据版本号下载相应文件到指定目录：
 </br>
+
 **Rocky Linux 8**:
 ```bash
 for i in {AppStream,BaseOS,Devel,Extras,HighAvailability,PowerTools,Sources}; do wget https://mirrors.cqu.edu.cn/repo/rockylinux/Rocky-${i}.repo; done
@@ -38,7 +39,7 @@ yum makecache
 ```
 ## 相关链接
 
-{{% notice %}}
+{{% notice link %}}
 官方主页：https://www.rockylinux.org/
 {{% /notice %}}
 

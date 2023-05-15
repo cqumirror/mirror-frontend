@@ -132,37 +132,37 @@ sudo apt upgrade
 
 ## 相关链接
 
-{{% notice %}}
+{{% notice link %}}
 官方主页
 https://www.ubuntu.com/
 {{% /notice %}}
 
-{{% notice %}}
+{{% notice link %}}
 文档
 https://help.ubuntu.com/
 {{% /notice %}}
 
-{{% notice %}}
+{{% notice link %}}
 Wiki
 https://wiki.ubuntu.com/
 {{% /notice %}}
 
-{{% notice %}}
+{{% notice link %}}
 邮件列表
 https://community.ubuntu.com/contribute/support/mailinglists/
 {{% /notice %}}
 
-{{% notice %}}
+{{% notice link %}}
 提问
 https://askubuntu.com/
 {{% /notice %}}
 
-{{% notice %}}
+{{% notice link %}}
 论坛
 https://ubuntuforums.org/
 {{% /notice %}}
 
-{{% notice %}}
+{{% notice link %}}
 中文论坛
 https://forum.ubuntu.org.cn/
 {{% /notice %}}

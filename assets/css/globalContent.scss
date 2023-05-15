@@ -11,6 +11,10 @@
   .nuxt-content {
     // short code
     .notice-tip {
+      button {
+        display: none;
+      }
+
       border-top: 30px solid #5cb85c;
       background: #E6F9E6;
       position: relative;
@@ -41,6 +45,11 @@
     }
 
     .notice-note {
+
+      button {
+        display: none;
+      }
+
       border-top: 30px solid #6AB0DE;
       background: #E7F2FA;
       position: relative;
@@ -71,6 +80,11 @@
     }
 
     .notice-warn {
+
+      button {
+        display: none;
+      }
+
       border-top: 30px solid #ffcc71;
       background: #fff2e6;
       position: relative;
@@ -101,6 +115,11 @@
     }
 
     .notice-info {
+
+      button {
+        display: none;
+      }
+
       border-top: 30px solid #9cd275;
       background: #edfce7;
       position: relative;
@@ -131,6 +150,11 @@
     }
 
     .notice-error {
+
+      button {
+        display: none;
+      }
+
       border-top: 30px solid #f07373;
       background: #ffe1e1;
       position: relative;
@@ -157,6 +181,12 @@
         color: #fff;
         left: 2rem;
         content: 'Error';
+      }
+    }
+
+    .notice-link {
+      button {
+        display: none;
       }
     }
 

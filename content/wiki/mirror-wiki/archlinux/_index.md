@@ -27,14 +27,17 @@ Server = https://mirrors.cqu.edu.cn/archlinux/$repo/os/$arch
 
 ## 相关链接
 
-{{% notice %}}
+
+{{% notice link %}}
 官方网站 https://archlinux.org
 {{% /notice %}}
 
-{{% notice %}}
+
+{{% notice link %}}
 官方文档 https://wiki.archlinux.org
 {{% /notice %}}
 
-{{% notice %}}
+
+{{% notice link %}}
 AUR https://aur.archlinux.org
 {{% /notice %}}

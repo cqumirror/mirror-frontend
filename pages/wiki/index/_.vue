@@ -66,17 +66,19 @@ export default {
       }
     },
     addChild(className) {
+      // 这段肯定是有bug的。会向shortcode block 插入复制按钮，未知原因，原生vue无法复现，可能是框架bug
       const blocks = document.getElementsByClassName(className)
       for (const block of blocks) {
-        const codeEl = block.querySelector('code')
-        if (!codeEl) continue
-        const copyBtn = block.querySelector('.copy-btn')
-        if (!copyBtn) {
-          const CopyButton = Vue.extend(ClipboardBtn)
-          const component = new CopyButton().$mount()
-          block.appendChild(component.$el)
+        const codeEl = block.querySelector('.shiki')
+        if (codeEl){
+          debugger
+          const copyBtn = block.querySelector('.copy-btn')
+          if (!copyBtn) {
+            const CopyButton = Vue.extend(ClipboardBtn)
+            const component = new CopyButton().$mount()
+            block.appendChild(component.$el)
+          }
         }
-
       }
     },
     decodeUrlString(encodedString) {
@@ -99,6 +101,7 @@ export default {
     },
   },
   updated() {
+
     if (!this.loaded) {
       setTimeout(() => {
         this.addChild('nuxt-content-highlight')
@@ -107,7 +110,8 @@ export default {
           const id = this.decodeUrlString(this.$route.hash)
           this.handleScrollTo(id.replace("#",''))
         }
-      }, 100)
+      }, 450)
+
     }
   },
   watch: {

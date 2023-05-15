@@ -58,7 +58,7 @@ export default {
           key: 'lanunion',
           index: "/lanunion",
           type: "url",
-          url: "https://lanunion.cqu.edu.cn"
+          url: "http://lanunion.cqu.edu.cn"
         },
         {
           label: 'MIRRORZ.ORG',

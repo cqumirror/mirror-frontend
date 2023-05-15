@@ -38,8 +38,14 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
+      { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。' },
+      { name: 'description', content: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。' },
+      { name: 'keywords', content: '镜像站,镜像源,Linux,软件源,开源'},
+      { hid: 'keywords', name: 'keywords', content: '镜像站,镜像源,Linux,软件源,开源'},
+      { name: 'author', content: 'Lanunion' },
+      { hid: 'author', name: 'author', content: 'Lanunion' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -123,26 +129,28 @@ export default {
   },
   pwa: {
     meta: {
-      theme_color: '#1ccb4c',
+      theme_color: '#ffffff',
     },
     manifest: {
       name: '重庆大学开源软件镜像站',
       lang: 'zh-CN',
       short_name: '重大镜像站',
       start_url: 'https://mirrors.cqu.edu.cn',
-      theme_color: '#1ccb4c',
+      theme_color: '#ffffff',
       description: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。',
       useWebmanifestExtension: false
     }
   },
   env: {
     baseURL: (process.env.NODE_ENV === 'production' ? '' : 'https://mirrors.cqu.edu.cn/'),
+    // baseURL: 'https://mirrors.cqu.edu.cn/',
     mirrorURL: (process.env.NODE_ENV === 'production' ? '/' : 'https://mirrors.cqu.edu.cn/'),
+    // mirrorURL: 'https://mirrors.cqu.edu.cn/',
     baseLinkColor: '#1ccb4c',
     siteTitle: "重庆大学开源软件镜像站",
     exportUrls: [
-      {url:'https://mirrors.cqu.edu.cn/',desc:' 只解析ipv4 '},
-      {url:'http://mirrors.cqu.edu.cn/',desc:' 只解析ipv4 '}
+      {url:'https://mirrors.cqu.edu.cn/',desc:' 解析ipv4和ipv6 '},
+      {url:'http://mirrors.cqu.edu.cn/',desc:' 解析ipv4和ipv6 '}
     ],
     contactUrls: [
       {url:'https://github.com/cqumirror/feedback',desc:''}
@@ -167,11 +175,6 @@ export default {
           label: '回到\n旧版',
           tooltip: '回到旧版首页',
           goto: '/old-frontend'
-        },
-        { // 这段是一个示例的自定义工具条
-          label: '回到\n首页',
-          tooltip: '访问百度',
-          goto: 'https://www.baidu.com'
         }
       ]
     },

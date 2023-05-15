@@ -7,7 +7,8 @@ const classMap = {
   "note": "notice-note",
   "warn": "notice-warn",
   "info": "notice-info",
-  "error": "notice-error"
+  "error": "notice-error",
+  "link": "notice-link"
 }
 // TODO expend collapse support
 

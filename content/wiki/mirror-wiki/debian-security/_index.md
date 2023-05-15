@@ -38,6 +38,7 @@ Debian 的[安全更新源](security.debian.org)是为了使安全更新**尽快
 详见 <https://www.debian.org/security/>。
 {{% /notice %}}
 
+
 默认情况下，以下命令可以将默认软件源（`security.debian.org/debian-security`）替换为重庆大学镜像站（`mirrors.cqu.edu.cn/debian-security`）并启用安全更新：
 ```bash
 sudo sed -i 's|#*deb http://security.debian.org|deb https://mirrors.cqu.edu.cn|' /etc/apt/sources.list
