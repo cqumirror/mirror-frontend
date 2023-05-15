@@ -40,17 +40,21 @@ export default {
       { charset: 'utf-8' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。' },
       { name: 'description', content: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。' },
       { name: 'keywords', content: '镜像站,镜像源,Linux,软件源,开源'},
-      { hid: 'keywords', name: 'keywords', content: '镜像站,镜像源,Linux,软件源,开源'},
       { name: 'author', content: 'Lanunion' },
-      { hid: 'author', name: 'author', content: 'Lanunion' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/static/favicon.png' }
     ]
+  },
+  hooks: {
+    'generate:page': page => {
+      // 解决 nuxt 不尊重 metadata 的问题
+      page.html = page.html.replace(/ data-n-head=".*?"/gi, '').replace(/ data-hid=".*?"/gi, '')
+
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -81,6 +85,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    'nuxt-compress',
     '@nuxtjs/axios',
     '@nuxt/content',
     '@nuxtjs/google-fonts'

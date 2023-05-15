@@ -25,6 +25,7 @@
     "element-ui": "^2.15.10",
     "moment": "^2.29.4",
     "nuxt": "^2.15.8",
+    "nuxt-compress": "^5.0.0",
     "remark-gfm": "1.0.0",
     "remark-shortcodes": "^0.3.1",
     "sass": "^1.58.0",
