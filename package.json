@@ -33,6 +33,7 @@
     "shiki": "^0.14.1",
     "unist-util-visit": "2.0.3",
     "vue": "^2.7.10",
+    "vue-js-modal": "^2.0.1",
     "vue-scrollto": "^2.20.0",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",

@@ -72,7 +72,8 @@ export default {
     '@/plugins/element-ui',
     '@/plugins/font-awesome',
     '@/plugins/vue-scrollto',
-    '@/plugins/clipboard-js'
+    '@/plugins/clipboard-js',
+    '@/plugins/vue-modal'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
