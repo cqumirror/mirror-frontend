@@ -4,6 +4,7 @@ $middle-size-1: 1138px;
 @import 'globalContent.scss';
 @import 'lib/an-old-hope.min.scss';
 @import 'highlight.scss';
+@import 'downloadDialog.scss';
 
 *::before, *::after {
   -webkit-box-sizing: border-box;
@@ -303,7 +304,7 @@ img {
 
 
 
-// download button
+// download button on index page
 #download-pkg {
   display: inline-block;
   padding: 6px 12px;
@@ -516,131 +517,6 @@ img {
     }
   }
 }
-
-// download dialog
-#download-dialog {
-  .download-dialog-header {
-    padding-top: 3vh;
-    padding-left: 5vw;
-
-    .download-dialog-header-title {
-      font-size: 1.4em;
-      font-weight: bold;
-      @media (max-width: $mobile-size) {
-        font-size: 1em;
-      }
-
-
-    }
-  }
-
-  .download-dialog-body {
-
-    .distro-dialog-container {
-      display: flex;
-      flex-direction: column;
-
-      .category-group {
-        display: flex;
-        flex-direction: row;
-        list-style-type: none;
-        margin-top: 0;
-        margin-bottom: 0;
-        margin-left: 20px;
-        width: 80%;
-        border-bottom: 1px solid #eaeaea;
-
-        .category-tabs {
-          padding: 10px 12px;
-          margin: 0;
-          font-weight: bold;
-          cursor: pointer;
-
-          &:hover {
-            background-color: #e5e5e5;
-            border-bottom: 3px solid #e5e5e5;
-          }
-        }
-
-        .category-tabs.tab__checked {
-          //background-color: #6AB0DE;
-          border-bottom: 3px solid #b8ff8a;
-        }
-      }
-
-      .distro-container {
-        display: flex;
-        flex-direction: row;
-
-        @media (max-width: $mobile-size) {
-          flex-direction: column;
-        }
-
-        .distro-group {
-          list-style-type: none;
-
-          .distro-tabs {
-            padding: 2vh 5vw;
-            margin: 0;
-            font-weight: bold;
-            cursor: pointer;
-
-            @media (max-width: $mobile-size) {
-              padding: 10px 12px;
-              margin-top: 0;
-              margin-bottom: 0;
-              margin-left: 0;
-              margin-right: 5vw;
-              font-weight: bold;
-            }
-
-
-            &:hover {
-              background-color: #e5e5e5;
-            }
-          }
-
-          .distro-tabs.tab__checked {
-            background-color: #edffe6;
-
-          }
-        }
-
-        .distro-download-group {
-          overflow: auto;
-
-          .download-url-list {
-            margin-top: 1vh;
-            margin-bottom: 1vh;
-
-            a {
-              text-decoration: none;
-              color: #1ccb4c;
-            }
-          }
-        }
-
-      }
-    }
-  }
-}
-
-// dialog component itself
-.modal-container {
-  width: 60%;
-
-  @media (max-width: $mobile-size) {
-    width: 90%;
-  }
-
-  margin: 0px auto;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.1s ease;
-  font-family: Helvetica, Arial, sans-serif;
-}
-
 
 .site-notice {
   padding-top: 0.8vh;
