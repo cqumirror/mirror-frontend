@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@nuxt/types": "~2.15.0",
-    "@nuxtjs/pwa": "^3.3.5"
+    "@nuxtjs/pwa": "^3.3.5",
+    "babel-plugin-component": "^1.1.1"
   }
 }

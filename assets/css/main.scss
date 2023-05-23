@@ -518,8 +518,43 @@ img {
   }
 }
 
+// warp notice
+
 .site-notice {
   padding-top: 0.8vh;
+
+  // take place of element ui icon
+  .el-icon-success {
+    &:before {
+      font-family: "Font Awesome 5 Free";
+      content: '\f058';
+      font-style: normal; // required
+    }
+  }
+
+  .el-icon-info {
+    &:before {
+      font-family: "Font Awesome 5 Free";
+      content: '\f05a';
+      font-style: normal; // required
+    }
+  }
+
+  .el-icon-warning {
+    &:before {
+      font-family: "Font Awesome 5 Free";
+      content: '\f06a';
+      font-style: normal; // required
+    }
+  }
+
+  .el-icon-error {
+    &:before {
+      font-family: "Font Awesome 5 Free";
+      content: '\f057';
+      font-style: normal; // required
+    }
+  }
 }
 
 // float button
@@ -540,6 +575,11 @@ img {
     color: #1ccb4c;
     &:hover {
       background-color: #e5eee4;
+    }
+
+    &:before {
+      font-family: "Font Awesome 5 Free";
+      content: '\f062';
     }
   }
 
