@@ -37,12 +37,14 @@
       <h4><fa :icon="['far','file-archive']" style="margin-right: 1vw"/>下载链接</h4>
       <div style="display: flex;flex-direction: column; margin-left: 2vw;">
         <span>常用发行版 iso 和应用工具安装包下载</span>
-        <button id="download-pkg" @click="$modal.show('my-first-modal')">获取下载链接</button>
+        <button id="download-pkg" @click="handleDialogRaise">获取下载链接</button>
       </div>
     </div>
-    <modal name="my-first-modal">
-      This is my first modal
-    </modal>
+    <!--download dialog-->
+    <DownloadModal
+      :iso-category="isoCategory"
+      @before-close="handleDialogClose"
+    />
 
     <!--contact-->
     <div>
@@ -67,52 +69,7 @@
         </li>
       </ul>
     </div>
-    <!-- Download dialog -->
-<!--    <DownloadDialog v-if="showDialog" @close="showDialog = false">-->
-<!--      <div class="download-dialog-header" slot="header">-->
-<!--        <div class="download-dialog-header-title">-->
-<!--          获取安装镜像-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="download-dialog-body" slot="body">-->
-<!--        <div class="distro-dialog-container">-->
-<!--          &lt;!&ndash;category tab&ndash;&gt;-->
-<!--          <ul class="category-group">-->
-<!--            <template v-for="item in isoCategory">-->
-<!--              <li>-->
-<!--                <div @click="handleGroupClick" :class="item.key === 0 ? 'category-tabs tab__checked':'category-tabs'">-->
-<!--                  {{ item.label }}-->
-<!--                </div>-->
-<!--              </li>-->
-<!--            </template>-->
-<!--          </ul>-->
-<!--          <div class="distro-container">-->
-<!--            <div>-->
-<!--              <ul class="distro-group">-->
-<!--                <template v-for="item in isoCategory[defaultCheck].column">-->
-<!--                  <li>-->
-<!--                    <div @click="handleDistroTabClicked" :class="item.key === 0 ? 'distro-tabs tab__checked':'distro-tabs'">-->
-<!--                      {{ item.distro }}-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                </template>-->
-<!--              </ul>-->
-<!--            </div>-->
-<!--            <div class="distro-download-group">-->
-<!--              <ul>-->
-<!--                <template v-for="item in isoCategory[defaultCheck].column[defaultDistroTab].urls">-->
-<!--                  <li>-->
-<!--                    <div class="download-url-list">-->
-<!--                      <a :href="mirror_url.slice(0,mirror_url.length-1) + item.url">{{ item.name }}</a>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                </template>-->
-<!--              </ul>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </DownloadDialog>-->
+
     <FloatToolsBtn
       v-if="indexToolBox.enabled"
       :data="indexToolBox.data"
@@ -127,7 +84,6 @@
 <script>
 import Api_mirror from "@/components/Api/Api_mirror";
 import WarpNotice from "@/components/scroll-notice/warpNotice.vue";
-import { mapMutations } from 'vuex'
 
 
 export default {
@@ -141,73 +97,26 @@ export default {
       siteLinks: process.env.siteLinks,
       mirror_url: process.env.mirrorURL,
       style: "text-decoration: none;" + "color:" + process.env.baseLinkColor + ";",
-      showDialog: false,
       isoList: [],
 
       isoCategory: [
         { prop: 'os', label: '系统镜像' , column: [], key:0 },
         { prop: 'app', label: '常用软件', column: [], key:1 },
       ],
-      defaultCheck: 0,
-      defaultDistroTab: 0,
 
       notices: {}
     }
   },
-  computed: {
-    currentCategoryKey() {
-      return this.$store.state.downloadDialogChosen.currentCategory
-    },
-    currentDistroKey() {
-      return this.$store.state.downloadDialogChosen.currentDistro
-    },
-    currentSoftwareKey() {
-      return this.$store.state.downloadDialogChosen.currentSoftware
-    }
-  },
-  watch: {
-    'defaultCheck': {
-      handler: function () {
-        this.defaultDistroTab = 0
-      }
-    }
-  },
   methods: {
-    handleGroupClick(e) {
-      const target = e.target.innerText
-      let index = this.isoCategory.findIndex(item => {
-        return item.label === target
-      })
-      this.defaultCheck = index
-
-      // change button style
-      const blocks = document.getElementsByClassName('category-tabs')
-      for (let block of blocks) {
-        let content = block.innerText
-        if (content === target) {
-          block.className = 'category-tabs ' + 'tab__checked'
-        } else {
-          block.className = 'category-tabs'
-        }
-      }
+    handleDialogClose() {
+      document.removeEventListener('mousewheel', this.eventHandler, { passive: true })
     },
-    handleDistroTabClicked(e) {
-      const target = e.target.innerText
-      let index = this.isoCategory[this.defaultCheck].column.findIndex(item => {
-        return item.distro === target
-      })
-      this.defaultDistroTab = index
-
-      // change button style
-      const blocks = document.getElementsByClassName('distro-tabs')
-      for (let block of blocks) {
-        let content = block.innerText
-        if (content === target) {
-          block.className = 'distro-tabs ' + 'tab__checked'
-        } else {
-          block.className = 'distro-tabs'
-        }
-      }
+    handleDialogRaise() {
+      document.addEventListener('mousewheel', this.eventHandler, { passive: false })
+      this.$modal.show('download-dialog')
+    },
+    eventHandler(e) {
+      e.preventDefault()
     },
     generateIsoBase() {
       if (this.isoList.length !== 0) {
@@ -233,7 +142,7 @@ export default {
         }
       }
 
-      console.log(this.isoCategory)
+      // console.log(this.isoCategory)
     },
     async init() {
       await fetch(Api_mirror.getNotices()).then(data => data.json())
@@ -243,9 +152,7 @@ export default {
       await fetch(Api_mirror.getIsoList()).then(data => data.json())
         .then(res => {
           this.isoList = JSON.parse(JSON.stringify(res))
-          this.$nextTick(() => {
-            this.generateIsoBase()
-          })
+          this.generateIsoBase()
         })
     },
   },

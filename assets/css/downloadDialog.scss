@@ -1,0 +1,64 @@
+#download-modal {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  margin: 20px;
+
+  #radio-button-group {
+    margin: 5px;
+    padding-left: 10%;
+  }
+
+  #select-group {
+    display: flex;
+    flex-direction: column;
+
+    select {
+      margin-left: 10px;
+      max-width: 13rem;
+      min-width: 10rem;
+    }
+
+    div {
+      display: flex;
+      flex-direction: row;
+      margin: 5px;
+      padding-left: 10%;
+
+      @screen (max-with: $mobile-size) {
+        padding-left: 5%;
+        flex-direction: column;
+      }
+    }
+
+  }
+
+  #check-button {
+    display: flex;
+    flex-direction: row;
+    margin-left: 40%;
+
+    button {
+      margin: 5px;
+
+      border: transparent;
+      background-color: transparent;
+      color: #5e5e5e;
+
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ececec;
+      }
+
+      width: 220px;
+      height: 40px;
+    }
+
+    #button-confirm {
+      color: #1ccb4c;
+    }
+
+  }
+}
