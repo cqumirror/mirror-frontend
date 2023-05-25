@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import '@/assets/css/main.scss'
+// import '@/assets/css/main.scss'
 
 export default {
   name: "SideBarNewsPreview",
