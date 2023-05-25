@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import '@/assets/css/main.scss'
+// import '@/assets/css/main.scss'
 import Vue from "vue"
 import ClipboardBtn from "@/components/ClipboardBtn.vue"
 

@@ -61,10 +61,11 @@ export default {
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
     '@/assets/css/lib/fontawesome.min.css',
-    'element-ui/lib/theme-chalk/index.css',
+    // 'element-ui/lib/theme-chalk/index.css',
     '@/assets/css/lib/fontawesome.min.css',
     '@/assets/css/fonts.css',
-    '@/assets/css/global.scss'
+    '@/assets/css/global.scss',
+    '@/assets/css/main.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -199,6 +200,8 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
+    // enable babelrc
+    babelrc: true,
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         // 在开发模式下运行自定义代码

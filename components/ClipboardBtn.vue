@@ -7,7 +7,7 @@
 
 <script>
 
-import '@/assets/css/main.scss'
+// import '@/assets/css/main.scss'
 import IconClipboardCheck from "@/components/btnComponent/IconClipboardCheck.vue";
 import IconClipboardCopy from "@/components/btnComponent/IconClipboardCopy.vue";
 

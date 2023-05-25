@@ -25,7 +25,7 @@
 
 <script>
 import Api_mirror from "@/components/Api/Api_mirror";
-import "@/assets/css/main.scss"
+// import "@/assets/css/main.scss"
 
 export default {
   name: "Statuslist",
