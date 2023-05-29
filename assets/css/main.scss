@@ -668,6 +668,13 @@ img {
       background-color: transparent;
     }
     i {
+      &:before {
+        content: '\f35a';
+        font-family: "Font Awesome 5 Free";
+        font-style: normal;
+        font-size: 2rem;
+
+      }
       @media (max-width: $mobile-size) {
         font-size: 50px;
         text-align: center;
@@ -729,6 +736,17 @@ img {
     .wiki-nav {
 
       border-right: 1px solid #efefef;
+
+      .el-tree-node__expand-icon:before {
+        content: '\f0da';
+        font-family: "Font Awesome 5 Free";
+        color: #8e8f9a !important;
+      }
+      .el-tree-node__expand-icon.is-leaf:before {
+        content: '\f22d';
+        font-family: "Font Awesome 5 Free";
+        color: #C0C4CC!important; // override element-ui default setting
+      }
 
       @media (max-width: $mobile-size) {
         display: flex;
