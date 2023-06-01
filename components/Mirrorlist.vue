@@ -89,6 +89,7 @@ export default {
         success: 'success',
         paused: 'warning',
         failed: 'danger',
+        'pre-syncing': ''
       },
       listData: [],
       fullscreenLoading: false,
