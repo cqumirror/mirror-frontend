@@ -430,6 +430,15 @@ img {
   min-height: 62vh;
 }
 
+//// news page breadcrumb
+.el-breadcrumb__separator{
+  &:before {
+    content: '\f105';
+    font-family: "Font Awesome 5 Free";
+    font-style: normal;
+  }
+}
+
 //// pagination
 #news-page-pagination {
   margin-left: 30vw;
