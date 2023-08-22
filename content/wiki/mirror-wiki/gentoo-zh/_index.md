@@ -55,6 +55,7 @@ emerge -aq <package>
 gentoo-zh 是 https://github.com/microcai/gentoo-zh 的完整镜像，是 [ebuild](https://wiki.gentoo.org/wiki/Ebuild) 仓库，并不包含 ebuild 引用的二进制和源代码内容。
 {{% /notice %}}
 
+
 {{% notice warn %}}
 gentoo-zh 中部分包需要启用 `~amd64` 关键字，如注重稳定性需要取舍。
 {{% /notice %}}
