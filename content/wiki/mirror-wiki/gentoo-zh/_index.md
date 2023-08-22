@@ -35,7 +35,7 @@ eselect repository add gentoo-zh git https://mirrors.cqu.edu.cn/git/gentoo-zh.gi
 并执行同步：
 
 ```bash
-emerge --sync
+emerge --sync gentoo-zh
 ```
 
 使用 eix 查询包：
