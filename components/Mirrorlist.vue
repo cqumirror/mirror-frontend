@@ -1,5 +1,6 @@
 <template>
-  <el-container id="mirror-list">
+  <keep-alive>
+    <el-container id="mirror-list">
     <el-main v-loading="fullscreenLoading">
       <h3><fa :icon="['fas','layer-group']" style="margin-right: 1vw"/>镜像列表</h3>
       <el-table
@@ -45,6 +46,7 @@
       </el-table>
     </el-main>
   </el-container>
+  </keep-alive>
 </template>
 
 <script>

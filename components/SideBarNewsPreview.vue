@@ -20,8 +20,14 @@
 <script>
 // import '@/assets/css/main.scss'
 
+import cacheControl from "~/middleware/cacheControl";
+
 export default {
   name: "SideBarNewsPreview",
+  middleware: cacheControl({
+    'max-age': 600,
+    'stale-when-revalidate': 5
+  }),
   async fetch() {
     this.content = await this.$content('news').only(['title','slug','date'])
       .sortBy('date', 'desc').limit(3).fetch()
