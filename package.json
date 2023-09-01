@@ -7,6 +7,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start --port 3010",
+    "gen-doclist": "node utils/thirdparty/GenDocsLink/GenDocsLink.js",
     "gen-ubuntu": "node utils/thirdparty/GrabUbuntuRelease/GrabUbuntuRelease.js",
     "generate": "nuxt generate",
     "local-clean": "rm -rf dist node_modules/.cache .nuxt",
