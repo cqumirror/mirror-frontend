@@ -17,9 +17,9 @@ async function readTarget(dir) {
 
 function writeToOutput(file) {
   let path = file.toString()
-    .replaceAll(/filepath:\s+'\s?/g, '')
-    .replaceAll(/_index\s?'\s?/g, '')
-    .replaceAll(/\/wiki\/mirror-wiki\//g, '')
+    .replace(/filepath:\s+'\s?/g, '')
+    .replace(/_index\s?'\s?/g, '')
+    .replace(/\/wiki\/mirror-wiki\//g, '')
     .replace('/', '')
   path = '\t\t\t\'' + path + '\':' + ' prefix + \'#/wiki/mirror-wiki/' + path + '\',\n'
 
