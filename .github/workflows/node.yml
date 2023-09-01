@@ -28,6 +28,8 @@ jobs:
       run: npm run setup
     - name: Generator running
       run: yarn run gen-ubuntu
+    - name: Generate doc list
+      run: yarn run gen-doclist
     - name: Clean up
       run: yarn local-clean
     - name: Pack static site
