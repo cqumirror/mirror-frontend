@@ -1,6 +1,7 @@
 <template>
   <div id="status-container" v-loading="fullscreenLoading">
-    <table class="status-table">
+    <keep-alive>
+      <table class="status-table">
       <tbody>
       <tr>
         <th class="status-list">Name</th>
@@ -20,15 +21,21 @@
       </template>
       </tbody>
     </table>
+    </keep-alive>
   </div>
 </template>
 
 <script>
 import Api_mirror from "@/components/Api/Api_mirror";
+import cacheControl from "~/middleware/cacheControl";
 // import "@/assets/css/main.scss"
 
 export default {
   name: "Statuslist",
+  middleware: cacheControl({
+    'max-age': 600,
+    'stale-when-revalidate': 5
+  }),
   computed: {
     scoped() {
       return scoped

@@ -42,8 +42,14 @@
 <script>
 // import '@/assets/css/main.scss'
 
+import cacheControl from "~/middleware/cacheControl";
+
 export default {
   name: "news",
+  middleware: cacheControl({
+    'max-age': 600,
+    'stale-when-revalidate': 5
+  }),
   data() {
     return {
       articles: [],
