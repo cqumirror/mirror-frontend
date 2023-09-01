@@ -5,8 +5,8 @@ export default {
 		const list = {
 			'archlinux': prefix + '#/wiki/mirror-wiki/archlinux',
 			'archlinuxcn': prefix + '#/wiki/mirror-wiki/archlinuxcn',
-			'crates.io-index': prefix + '#/wiki/mirror-wiki/crates.io-index',
 			'centos': prefix + '#/wiki/mirror-wiki/centos',
+			'crates.io-index': prefix + '#/wiki/mirror-wiki/crates.io-index',
 			'debian': prefix + '#/wiki/mirror-wiki/debian',
 			'debian-security': prefix + '#/wiki/mirror-wiki/debian-security',
 			'fedora': prefix + '#/wiki/mirror-wiki/fedora',
