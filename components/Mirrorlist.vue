@@ -26,6 +26,16 @@
                 </template>
               </el-table-column>
               <el-table-column
+                v-else-if="item.prop === 'docs'"
+                :prop="item.prop"
+                :label="item.label"
+                :width="item.width"
+              >
+                <template slot-scope="scope" v-if="scope.row.docs">
+                  <a class="doc-links" :href="scope.row.docs"><i/></a>
+                </template>
+              </el-table-column>
+              <el-table-column
                 v-else
                 :prop="item.prop"
                 :label="item.label"
@@ -33,7 +43,7 @@
               />
             </template>
             <el-table-column
-              v-else
+              v-else-if="item.prop === 'name'"
               min-width="170"
               :prop="item.prop"
               :label="item.label"
@@ -51,6 +61,7 @@
 
 <script>
 import Api_mirror from "@/components/Api/Api_mirror";
+import Api_doclist from "@/components/Api/Api_doclist";
 
 export default {
   name: "Mirrorlist",
@@ -66,6 +77,18 @@ export default {
           prop: 'name',
           label: 'Name',
           hidden: false,
+        },
+        {
+          prop: 'git',
+          label: 'Git',
+          width: '50',
+          hidden: true
+        },
+        {
+          prop: 'docs',
+          label: 'Doc',
+          width: '50',
+          hidden: false
         },
         {
           prop: 'lastUpdate',
@@ -150,17 +173,22 @@ export default {
         if (a > b) return 1;
         return 0;
       })
+      // get docs list
+      const docList = Api_doclist.getDocLink('')
+
       // generate table data
       let listData = []
       data.forEach(item => {
         listData.push({
           name: item.name,
+          docs: docList[item.name],
           lastUpdate: this.timeConvert(item['last_update']),
           status: item.status,
           tag: this.tagList[item.status]
         })
       })
       this.listData = JSON.parse(JSON.stringify(listData))
+      console.log(listData)
     },
     timeConvert(timeStr) {
       const splitStr = timeStr.split(" ")

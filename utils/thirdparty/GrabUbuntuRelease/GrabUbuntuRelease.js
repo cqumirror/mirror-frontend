@@ -4,7 +4,7 @@ const fs = require('fs')
 
 
 const url = 'https://wiki.ubuntu.com/Releases'
-const template = './utils/thirdparty/_index.template.ubuntu.md'
+const template = './utils/thirdparty/GrabUbuntuRelease/_index.template.ubuntu.md'
 const target = './content/wiki/mirror-wiki/ubuntu-releases/_index.md'
 
 
