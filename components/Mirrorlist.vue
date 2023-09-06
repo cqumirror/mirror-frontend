@@ -32,7 +32,16 @@
                 :width="item.width"
               >
                 <template slot-scope="scope" v-if="scope.row.docs">
-                  <a class="doc-links" :href="scope.row.docs"><i/></a>
+                  <el-tooltip
+                    class="doc-tooltip"
+                    effect="dark"
+                    :content="scope.row.name+' 文档'"
+                    placement="left"
+                    transition=""
+                    hide-after="550"
+                  >
+                    <a class="doc-links" :href="scope.row.docs"><i/></a>
+                  </el-tooltip>
                 </template>
               </el-table-column>
               <el-table-column
