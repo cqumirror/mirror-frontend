@@ -6,7 +6,7 @@ export default {
   ssr: false,
   // loading indicator options
   loadingIndicator: {
-    name: '@/static/template/indicator.html',
+    name: '@/template/indicator.html',
     color: '#3ab499',
     background: 'white'
   },
