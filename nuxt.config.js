@@ -4,6 +4,12 @@ export default {
   // target: 'static',
   target: 'static',
   ssr: false,
+  // loading indicator options
+  loadingIndicator: {
+    name: '@/static/template/indicator.html',
+    color: '#3ab499',
+    background: 'white'
+  },
   server: {
     port: 3010, //线上端口
     host: '0.0.0.0'

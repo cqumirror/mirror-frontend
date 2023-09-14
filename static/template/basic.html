@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>重庆大学开源软件镜像站</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description"
+        content="重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。">
+  <meta name="keywords" content="镜像站,镜像源,Linux,软件源,开源">
+  <meta name="author" content="Lanunion">
+  <meta name="format-detection" content="telephone=no">
+  <meta charset="utf-8">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="重庆大学开源软件镜像站">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="og:type" property="og:type" content="website">
+  <meta name="og:title" property="og:title" content="重庆大学开源软件镜像站">
+  <meta name="og:site_name" property="og:site_name" content="重庆大学开源软件镜像站">
+  <meta name="og:description" property="og:description"
+        content="重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。">
+</head>
+<body>
+<h1>Mirror List</h1>
+<ul>
+  <li style="display: flex;flex-direction: row;">
+    <a href="https://mirrors.cqu.edu.cn/#/"> Featured HTML </a><div>&nbsp|&nbsp</div>
+    <div> Basic HTML </div>
+  </li>
+  <li style="display: flex;flex-direction: row;">
+    <a  href="https://mirrors.cqu.edu.cn/#/"> 常规站点 </a><div>&nbsp|&nbsp</div>
+    <div> 简版站点 </div>
+  </li>
+</ul>
+<ul id="dataList"></ul>
+
+<script type="text/javascript">
+  fetch('/static/tunasync.json')
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return res.json();
+    })
+    .then(data => {
+      const dataList = document.getElementById('dataList');
+      data.sort(function(s, t) {
+        let a = s.name.toLowerCase();
+        let b = t.name.toLowerCase();
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+      })
+      data.forEach(item => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a')
+        link.href = "/" + item.name.toLowerCase()
+        link.textContent = item.name
+
+        listItem.textContent = "Status: " + "\t" + item.status + "\t"
+        if (item.status === 'failed') {
+          listItem.style.color = "#ff2424"
+        }
+        listItem.appendChild(link)
+        dataList.appendChild(listItem);
+      });
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+</script>
+</body>
+</html>
