@@ -36,6 +36,8 @@ Debian 软件仓库
 
 ## 使用说明
 
+### Debian Stable
+
 默认情况下，以下命令可以将默认软件源（`deb.debian.org/debian`）替换为重庆大学镜像站（`mirrors.cqu.edu.cn/debian`）。
 
 ```bash
@@ -64,3 +66,34 @@ deb http://mirrors.cqu.edu.cn/debian stable-updates main contrib non-free
 # deb http://mirrors.cqu.edu.cn/debian stable-proposed-updates main contrib non-free
 # deb-src http://mirrors.cqu.edu.cn/debian stable-proposed-updates main contrib non-free
 ```
+
+
+{{% notice note %}}
+注意：从 Debian 12 (bookworm) 开始，Debian 安装 CD 已经包含了部分非自由固件（nonfree-firmware）。以下列出了更改后的部分：
+{{% /notice %}}
+
+
+```txt[/etc/apt/sources.list]
+deb http://mirrors.cqu.edu.cn/debian stable main contrib non-free non-free-firmware
+# deb-src http://mirrors.cqu.edu.cn/debian stable main contrib non-free non-free-firmware
+deb http://mirrors.cqu.edu.cn/debian stable-updates main contrib non-free non-free-firmware
+# deb-src http://mirrors.cqu.edu.cn/debian stable-updates main contrib non-free non-free-firmware
+
+# deb http://mirrors.cqu.edu.cn/debian stable-proposed-updates main contrib non-free non-free-firmware
+# deb-src http://mirrors.cqu.edu.cn/debian stable-proposed-updates main contrib non-free non-free-firmware
+```
+
+## Debian Unstable (sid)
+
+Debian Sid 需要且仅仅需要按照如下样例设置自己的`sources.list`：
+
+```txt
+deb https://mirrors.cqu.edu.cn/debian sid main contrib non-free non-free-firmware
+# deb-src http://mirrors.cqu.edu.cn/debian sid main contrib non-free non-free-firmware
+```
+
+
+
+{{% notice warning %}}
+为了避免更新冲突导致问题，请回避使用 `apt full-upgrade`,并仅仅使用 `apt upgrade`
+{{% /notice %}}
