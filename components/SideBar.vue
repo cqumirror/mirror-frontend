@@ -11,6 +11,7 @@
         :show-icon="item.showIcon"
         :theme="item.theme"
         :callback="item.callback"
+        :action="item.action"
         class="site-notice"
       />
     </template>

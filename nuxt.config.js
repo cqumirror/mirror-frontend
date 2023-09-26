@@ -200,7 +200,10 @@ export default {
           goto: '/hugo-wiki'
         }
       ]
-    }
+    },
+    whiteListDomain: [
+      'mirrors.cqu.edu.cn'
+    ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

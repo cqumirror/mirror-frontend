@@ -197,7 +197,7 @@ export default {
         })
       })
       this.listData = JSON.parse(JSON.stringify(listData))
-      console.log(listData)
+      // console.log(listData)
     },
     timeConvert(timeStr) {
       const splitStr = timeStr.split(" ")
