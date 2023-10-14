@@ -38,7 +38,7 @@
                     :content="scope.row.name+' 文档'"
                     placement="left"
                     transition=""
-                    hide-after="550"
+                    :hide-after="550"
                   >
                     <a class="doc-links" :href="scope.row.docs"><i/></a>
                   </el-tooltip>
@@ -102,7 +102,7 @@ export default {
         {
           prop: 'lastUpdate',
           label: 'Last Update',
-          width: '160',
+          width: '175',
           hidden: false,
         },
         {
