@@ -2,7 +2,7 @@
 title: "Gentoo portage git 源使用帮助"
 draft: false
 weight: 2
-filepath: '/wiki/mirror-wiki/gentoo-portage/_index'
+filepath: '/wiki/mirror-wiki/gentoo-portage.git/_index'
 ---
 ## 地址
 

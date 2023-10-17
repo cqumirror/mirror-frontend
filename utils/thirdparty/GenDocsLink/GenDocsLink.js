@@ -21,6 +21,7 @@ function writeToOutput(file) {
     .replace(/_index\s?'\s?/g, '')
     .replace(/\/wiki\/mirror-wiki\//g, '')
     .replace('/', '')
+  console.log(path)
   path = '\t\t\t\'' + path + '\':' + ' prefix + \'#/wiki/mirror-wiki/' + path + '\',\n'
 
   fs.appendFile(output, path, function (err) {

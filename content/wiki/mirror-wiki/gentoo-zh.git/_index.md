@@ -2,7 +2,7 @@
 title: "Gentoo-zh 社区源使用帮助"
 draft: false
 weight: 2
-filepath: '/wiki/mirror-wiki/gentoo-zh/_index'
+filepath: '/wiki/mirror-wiki/gentoo-zh.git/_index'
 ---
 ## 地址
 
@@ -22,20 +22,20 @@ Gentoo zh git 同步仓库。
 如果同步过 gentoo-zh 需要删除已经同步过的内容并重新同步：
 
 ```bash
-rm -rf /var/db/repos/gentoo-zh
+rm -rf /var/db/repos/gentoo-zh.git
 ```
 
 执行以下内容添加 gentoo-zh 镜像：
 
 
 ```bash
-eselect repository add gentoo-zh git https://mirrors.cqu.edu.cn/git/gentoo-zh.git
+eselect repository add gentoo-zh.git git https://mirrors.cqu.edu.cn/git/gentoo-zh.git
 ```
 
 并执行同步：
 
 ```bash
-emerge --sync gentoo-zh
+emerge --sync gentoo-zh.git
 ```
 
 使用 eix 查询包：
