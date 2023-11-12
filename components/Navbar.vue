@@ -4,7 +4,7 @@
       <a class="nav-brand" href="/">
         {{ siteTitle }}
       </a>
-      <button class="nav-toggle" @click="handleToggle">&#8943</button>
+      <button class="nav-toggle" @click="handleToggle">&#8943;</button>
     </div>
     <div class="nav-right">
       <ul class="nav">
