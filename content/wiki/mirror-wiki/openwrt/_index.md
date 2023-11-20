@@ -8,7 +8,7 @@ filepath: '/wiki/mirror-wiki/openwrt/_index'
 http://mirrors.cqu.edu.cn/openwrt/
 ## 说明
 OpenWrt / LEDE 软件源
-## 收录框架
+## 收录架构
 官方支持的全部架构
 ## 使用说明
 ### Luci
