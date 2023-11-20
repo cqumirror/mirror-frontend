@@ -8,7 +8,7 @@ filepath: '/wiki/mirror-wiki/rockylinux/_index'
 http://mirrors.cqu.edu.cn/rockylinux
 ## 说明
 Rocky Linux 软件源
-## 收录框架
+## 收录架构
 - x86_64
 - aarch64
 

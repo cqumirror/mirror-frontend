@@ -8,7 +8,7 @@ filepath: '/wiki/mirror-wiki/manjaro/_index'
 https://mirrors.cqu.edu.cn/manjaro/
 ## 说明
 Monjoro Linux 软件源
-## 收录框架
+## 收录架構
 - x86_64
 - i686
 ## 使用说明
