@@ -1,5 +1,5 @@
 ---
-title: "Fedora 镜像使用帮助"
+title: "Alpine Linux 镜像使用帮助"
 draft: false
 weight: 2
 filepath: '/wiki/mirror-wiki/alpine/_index'
