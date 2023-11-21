@@ -1,8 +1,8 @@
 <template>
   <div style="margin: 0;padding: 0;" id="index-news-container">
     <ul>
-      <li v-for="item in content">
         <NuxtLink :to="{name: 'news-page', params: { page: item.slug }}">
+      <li v-for="(item, index) in content" :key="index">
           <div :style="styleNews" id="news-list">
             {{ item.date + " " }}{{ item.title }}
           </div>

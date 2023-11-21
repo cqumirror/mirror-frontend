@@ -2,8 +2,8 @@
   <div style="margin: 0;padding: 0">
     <div id="news-page-title">NEWS HISTORY</div>
     <ul id="news-page-list" v-loading="loading">
-      <template v-for="article in articles">
-        <li :key="article.slug">
+      <template v-for="article in articles" :key="article.slug">
+        <li>
           <div>
             <!--title-->
             <div class="article-block">

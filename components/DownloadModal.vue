@@ -5,7 +5,7 @@
       <!-- radio button group -->
       <div id="radio-button-group">
         <form>
-          <template v-for="item of $props.isoCategory">
+          <template v-for="(item, index) of isoCategory" :key="index">
             <label>
               <input
                 type="radio"
@@ -23,12 +23,12 @@
         <div>
           <label>选择发行版: </label>
           <select v-model="selectedDistro" v-if="selectedCategory === 0" @change="selectedChanged">
-            <template v-for="item of $props.isoCategory[0].column">
+            <template v-for="(item, index) of isoCategory[0].column" :key="index">
               <option :value="item.key">{{ item.distro }}</option>
             </template>
           </select>
           <select v-model="selectedSoftware" v-if="selectedCategory === 1" @change="selectedChanged">
-            <template v-for="item of $props.isoCategory[1].column">
+            <template v-for="(item, index) of isoCategory[1].column" :key="index">
               <option :value="item.key">{{ item.distro }}</option>
             </template>
           </select>
@@ -37,7 +37,7 @@
         <div>
           <label>选择版本: </label>
           <select v-model="selectedVersionUrl" @change="versionUrlChanged">
-            <template v-for="item of versionList">
+            <template v-for="(item, index) of versionList" :key="index">
               <option :value="item.url">{{ item.name }}</option>
             </template>
           </select>
