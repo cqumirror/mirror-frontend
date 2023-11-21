@@ -1,18 +1,13 @@
 <template>
-  <modal name="download-dialog" :adaptive="true" :focusTrap="true" height="auto" width="440px"
-         @before-close="handleBeforeClose">
+  <modal name="download-dialog" adaptive focusTrap height="auto" width="440px"
+    @before-close="handleBeforeClose">
     <div id="download-modal">
       <!-- radio button group -->
       <div id="radio-button-group">
         <form>
           <template v-for="(item, index) of isoCategory" :key="index">
             <label>
-              <input
-                type="radio"
-                v-model="selectedCategory"
-                :value="item.key"
-                :checked="selectedCategory === item.key"
-              />
+              <input type="radio" v-model="selectedCategory" :value="item.key" :checked="selectedCategory === item.key" />
               {{ item.label }}
             </label>
           </template>
@@ -54,136 +49,114 @@
 
 <script>
 export default {
-  name: "DownloadModal",
-  props: {
-    isoCategory: {type: Array}
-  },
-  data() {
-    return {
-      selectedCategory: 0,
-      selectedDistro: 0,
-      selectedSoftware: 0,
-      selectedVersionUrl: 'about:blank',
-      selectedColumnKey: 0,
-      versionList: [
-        {
-          name: '---',
-          url: 'about:blank'
-        }
-      ],
-      timer: undefined,
-      timerInWatch: undefined
-
-    }
-  },
-  computed: {
-    currentCategoryKey() {
-      return this.$store.state.downloadDialogChosen.currentCategory
-    },
-    currentDistroKey() {
-      return this.$store.state.downloadDialogChosen.currentDistro
-    },
-    currentSoftwareKey() {
-      return this.$store.state.downloadDialogChosen.currentSoftware
-    }
-  },
-  created() {
-    this.selectedCategory = this.currentCategoryKey
-    this.selectedDistro = this.currentDistroKey
-    this.selectedSoftware = this.currentSoftwareKey
-
-    this.selectedColumnKey = 0
-  },
+  name: 'DownloadModal',
   methods: {
     handleCancel() {
       this.$modal.hide('download-dialog')
-    },
-    handleBeforeClose() {
-      this.$emit('before-close')
-    },
-    verify() {
-
-    },
-    handleDownload() {
-      const url = this.selectedVersionUrl
-      if (url === 'about:blank') {
-        return
-      }
-      const name = url.slice(url.lastIndexOf("/") + 1)
-      const a = document.createElement("a")
-      this.verify(url)
-      a.setAttribute("href", this.selectedVersionUrl)
-      a.setAttribute("download", name)
-      a.click()
-      a.remove()
-    },
-    selectedChanged(newVal) {
-      if (this.selectedCategory === 0) {
-        this.$store.commit('downloadDialogChosen/changeChosenDistro', this.selectedDistro)
-        this.listCleanUp()
-        this.generateUrlList(this.selectedCategory, this.selectedDistro)
-      } else if (this.selectedCategory === 1) {
-        this.$store.commit('downloadDialogChosen/changeChosenSoftware', this.selectedSoftware)
-        this.listCleanUp()
-        this.generateUrlList(this.selectedCategory, this.selectedSoftware)
-      }
-    },
-    versionUrlChanged(newVal) {
-
-    },
-    test() {
-      if (!this.$props.isoCategory[0].column[0]) {
-        console.log("category not ready yet")
-      } else {
-        console.log("timer cleanup")
-        this.generateUrlList(0, 0)
-        clearInterval(this.timer)
-      }
-    },
-    generateUrlList(category, column) {
-      this.$props.isoCategory[category].column[column].urls.forEach(item => {
-        this.versionList.push(item)
-      })
-    },
-    listCleanUp() {
-      this.versionList = this.versionList.slice(0, 1)
-      this.resetModel()
-    },
-    resetModel() {
-      this.selectedVersionUrl = 'about:blank'
     }
-  },
-  watch: {
-    'selectedCategory': {
-      handler: function () {
-        this.$store.commit('downloadDialogChosen/changeCategory', this.selectedCategory)
-        this.$nextTick(() => {
-          if (this.selectedCategory === 0) {
-            this.listCleanUp()
-            this.generateUrlList(this.selectedCategory, this.selectedDistro)
-          } else if (this.selectedCategory === 1) {
-            this.listCleanUp()
-            this.generateUrlList(this.selectedCategory, this.selectedSoftware)
-          }
-
-        })
-
-      },
-    },
-    'isoCategory': {
-      handler: async function () {
-        console.log("inject timer")
-        if (!this.$props.isoCategory[0].column[0]) {
-          this.timer = setInterval(this.test, 40)
-        }
-      },
-      immediate: true,
-    }
-
   }
 }
 </script>
+<script setup>
+import { nextTick, watch, onMounted } from 'vue'
+import { useDownloadDialogChosenStore } from '../store/download-dialog-chosen'
 
-<style scoped>
-
-</style>
+const props = defineProps({
+  isoCategory: {
+    type: Array
+  }
+})
+const emit = defineEmits(['before-close'])
+const selectedCategory = ref(0)
+const selectedDistro = ref(0)
+const selectedSoftware = ref(0)
+const selectedVersionUrl = ref('about:blank')
+const selectedColumnKey = ref(0)
+const versionList = ref([
+  {
+    name: '---',
+    url: 'about:blank'
+  }
+])
+const downloadDialogChosenStore = useDownloadDialogChosenStore()
+const currentCategoryKey = computed(() => downloadDialogChosenStore.currentCategory)
+const currentDistroKey = computed(() => downloadDialogChosenStore.currentDistro)
+const currentSoftwareKey = computed(() => downloadDialogChosenStore.currentSoftware)
+let timer = null
+const timerInWatch = ref(null)
+const currentCategory = useState('downloadDialogChosen.currentCategory')
+watch(selectedCategory, () => {
+  downloadDialogChosenStore.changeCategory(selectedCategory.value)
+  nextTick(() => {
+    if (selectedCategory.value === 0) {
+      listCleanUp()
+      generateUrlList(selectedCategory.value, selectedDistro.value)
+    } else if (selectedCategory.value === 1) {
+      listCleanUp()
+      generateUrlList(selectedCategory.value, selectedSoftware.value)
+    }
+  })
+}, { deep: true })
+watch(() => props.isoCategory, () => {
+  console.log('inject timer')
+  if (!props.isoCategory[0].column[0]) {
+    timer = setInterval(test, 40)
+  }
+}, { immediate: true, deep: true })
+function selectedChanged(newVal) {
+  if (selectedCategory.value === 0) {
+    downloadDialogChosenStore.changeChosenDistro(selectedDistro.value)
+    listCleanUp()
+    generateUrlList(selectedCategory.value, selectedDistro.value)
+  } else if (selectedCategory.value === 1) {
+    downloadDialogChosenStore.changeChosenSoftware(selectedSoftware.value)
+    listCleanUp()
+    generateUrlList(selectedCategory.value, selectedSoftware.value)
+  }
+}
+function handleBeforeClose() {
+  emit('before-close')
+}
+function verify() { }
+function handleDownload() {
+  const url = selectedVersionUrl.value
+  if (url === 'about:blank') {
+    return
+  }
+  const name = url.slice(url.lastIndexOf('/') + 1)
+  const a = document.createElement('a')
+  verify(url)
+  a.setAttribute('href', selectedVersionUrl.value)
+  a.setAttribute('download', name)
+  a.click()
+  a.remove()
+}
+function versionUrlChanged(newVal) { }
+function test() {
+  if (!props.isoCategory[0].column[0]) {
+    console.log('category not ready yet')
+  } else {
+    console.log('timer cleanup')
+    generateUrlList(0, 0)
+    clearInterval(timer)
+  }
+}
+function generateUrlList(category, column) {
+  props.isoCategory[category].column[column].urls.forEach((item) => {
+    versionList.value.push(item)
+  })
+}
+function listCleanUp() {
+  versionList.value = versionList.value.slice(0, 1)
+  resetModel()
+}
+function resetModel() {
+  selectedVersionUrl.value = 'about:blank'
+}
+onMounted(() => {
+  selectedCategory.value = currentCategoryKey.value
+  selectedDistro.value = currentDistroKey.value
+  selectedSoftware.value = currentSoftwareKey.value
+  selectedColumnKey.value = 0
+})
+</script>
