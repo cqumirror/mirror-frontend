@@ -83,21 +83,22 @@
 </template>
 
 <script>
-import Api_mirror from "@/components/Api/Api_mirror";
 import WarpNotice from "@/components/scroll-notice/warpNotice.vue";
 
+import ApiMirror from '@/components/Api/ApiMirror'
+import config from '../utils/config'
 
 export default {
   name: "SideBar",
   components: {WarpNotice},
   data() {
     return {
-      indexToolBox: process.env.indexFloatBox,
-      exportUrls: process.env.exportUrls,
-      contactUrls: process.env.contactUrls,
-      siteLinks: process.env.siteLinks,
-      mirror_url: process.env.mirrorURL,
-      style: "text-decoration: none;" + "color:" + process.env.baseLinkColor + ";",
+      indexToolBox: config.indexFloatBox,
+      exportUrls: config.exportUrls,
+      contactUrls: config.contactUrls,
+      siteLinks: config.siteLinks,
+      style:
+        'text-decoration: none;' + 'color:' + config.baseLinkColor + ';',
       isoList: [],
 
       isoCategory: [
