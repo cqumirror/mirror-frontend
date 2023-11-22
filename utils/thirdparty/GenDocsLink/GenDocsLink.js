@@ -2,7 +2,7 @@ const fs = require('fs')
 const readline = require('readline')
 
 const target = 'content/wiki/mirror-wiki/'
-const output = 'components/Api/Api_doclist.js'
+const output = 'components/Api/ApiDoclist.js'
 
 let fileList
 
@@ -16,33 +16,35 @@ async function readTarget(dir) {
 }
 
 function writeToOutput(file) {
-  let path = file.toString()
+  let path = file
+    .toString()
     .replace(/filepath:\s+'\s?/g, '')
     .replace(/_index\s?'\s?/g, '')
     .replace(/\/wiki\/mirror-wiki\//g, '')
     .replace('/', '')
   console.log(path)
-  path = '\t\t\t\'' + path + '\':' + ' prefix + \'#/wiki/mirror-wiki/' + path + '\',\n'
+  path =
+    "\t\t\t'" + path + "':" + " prefix + '#/wiki/mirror-wiki/" + path + "',\n"
 
   fs.appendFile(output, path, function (err) {
     if (err) {
       throw err
     }
   })
-
 }
 
 async function prepare() {
   fs.writeFile(
     output,
     'const prefix = process.env.baseURL\n' +
-    '\n' +
-    'export default {\n' +
-    '\tgetDocLink: params => {\n' +
-    '\t\tconst list = {\n',
+      '\n' +
+      'export default {\n' +
+      '\tgetDocLink: params => {\n' +
+      '\t\tconst list = {\n',
     function (err) {
-      if (err) throw err;
-    })
+      if (err) throw err
+    }
+  )
 }
 
 async function generate() {
@@ -54,7 +56,7 @@ async function generate() {
 
       const rl = readline.createInterface({
         input: fileStream,
-        crlfDelay: Infinity
+        crlfDelay: Infinity,
       })
 
       let lineCount = 0
@@ -69,7 +71,7 @@ async function generate() {
               resolve()
             } else {
               console.error(`Please checkout document ${file} on line 5`)
-              console.error("It must have `filepath` to generate links")
+              console.error('It must have `filepath` to generate links')
               process.exit(255)
             }
           }

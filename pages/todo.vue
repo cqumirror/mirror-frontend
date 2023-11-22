@@ -13,16 +13,17 @@
     </transition>
   </div>
 </template>
+
 <script>
 export default {
   data() {
     return {
       showNav: false
-    };
+    }
   }
-};
-
+}
 </script>
+
 <style scoped>
 .nav-menu-container {
   position: relative;
@@ -44,7 +45,7 @@ export default {
 .slide-leave-active {
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
-.slide-enter {
+.slide-enter-from {
   transform: translateX(100%);
   opacity: 0;
 }

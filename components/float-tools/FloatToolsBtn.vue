@@ -1,23 +1,26 @@
 <template>
- <div class="float-tools-parent">
-   <div class="float-tools-conatiner">
-     <template v-for="item of data">
-       <el-tooltip class="item" effect="dark" :content="item.tooltip" placement="left">
-         <div class="float-tools-item" @click="handleClick(item.goto)">
-           <pre>{{ item.label }}</pre>
-         </div>
-       </el-tooltip>
-     </template>
-     <slot class="float-tools-item" name="back-to-top">
-
-     </slot>
-   </div>
- </div>
+  <div class="float-tools-parent">
+    <div class="float-tools-conatiner">
+      <template v-for="(item, index) of data" :key="index">
+        <el-tooltip
+          class="item"
+          effect="dark"
+          :content="item.tooltip"
+          placement="left"
+        >
+          <div class="float-tools-item" @click="handleClick(item.goto)">
+            <pre>{{ item.label }}</pre>
+          </div>
+        </el-tooltip>
+      </template>
+      <slot class="float-tools-item" name="back-to-top"></slot>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "FloatToolsBtn",
+  name: 'FloatToolsBtn',
   props: {
     data: { type: Array }
   },
@@ -29,7 +32,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

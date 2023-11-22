@@ -15,5 +15,5 @@ export const useDownloadDialogChosenStore = defineStore('download-dialog-chosen'
     changeChosenSoftware(key) {
       this.currentSoftware = typeof key === 'number' ? key : 0
     }
-  },
+  }
 })

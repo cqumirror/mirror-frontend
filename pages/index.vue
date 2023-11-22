@@ -1,11 +1,10 @@
 <template>
   <div id="index-container">
-    <Mirrorlist/>
+    <Mirrorlist />
     <div id="side-car">
-      <SideBar/>
+      <SideBar />
     </div>
   </div>
-
 </template>
 
 <script>
