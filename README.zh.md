@@ -1,5 +1,57 @@
 # 重庆大学开源软件镜像站前端
 
+此分支尝试将架构迁移到 Vue3
+
+## 架构改变
+
+nuxt2 -> nuxt3
+
+element-ui -> element-plus
+
+vuex -> pinia
+
+nodejs 14.20.0 -> nodejs ≥16.16
+
+## 尚未迁移的部分
+
+此列表可能不全
+
+### nuxt.config.js
+
+* modules > [nuxt-compress, axios]
+* target
+* loadingIndicator
+* css > @/assets/css/global.scss
+* head
+* pwa
+* axios
+* router > trailingSlash
+
+assets
+
+* css > global.scss
+
+plugins
+
+* vue-modal
+* fancy-ui
+
+package.json
+
+* scripts
+
+### font awesome
+
+### 代码
+
+* 改写以兼容新的API
+
+* 用 composition api 重写组件
+
+
+
+
+
 ## 关于此文档
 
 这个文档又臭又长，但是希望后继维护者能耐心看完，将从以下几方面入手：
