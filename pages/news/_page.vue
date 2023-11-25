@@ -1,8 +1,15 @@
 <template>
-  <div style="margin:0;padding:0;">
-    <el-breadcrumb separator-class="el-icon-arrow-right" class="news-page-breadcrumb">
-      <el-breadcrumb-item :to="{ path: '/' }" class="breadcrumb-item">HOME</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/news' }" class="breadcrumb-item">NEWS</el-breadcrumb-item>
+  <div style="margin: 0; padding: 0">
+    <el-breadcrumb
+      separator-class="el-icon-arrow-right"
+      class="news-page-breadcrumb"
+    >
+      <el-breadcrumb-item :to="{ path: '/' }" class="breadcrumb-item"
+        >HOME</el-breadcrumb-item
+      >
+      <el-breadcrumb-item :to="{ path: '/news' }" class="breadcrumb-item"
+        >NEWS</el-breadcrumb-item
+      >
       <el-breadcrumb-item>{{ article.title }}</el-breadcrumb-item>
     </el-breadcrumb>
     <article id="md-content" class="news-detail-content" @click="imgProxy">
@@ -15,28 +22,25 @@
           {{ article.author }}
         </div>
       </div>
-      <nuxt-content :document="article"/>
+      <nuxt-content :document="article" />
     </article>
   </div>
-
-
 </template>
 
 <script>
 import 'assets/css/lib/fontawesome.min.css'
 import 'assets/css/main.scss'
-import Vue from "vue";
-import ClipboardBtn from "@/components/ClipboardBtn.vue";
+import ClipboardBtn from '@/components/ClipboardBtn.vue'
 
 export default {
-  name: "page",
+  name: 'page',
   data() {
     return {
       article: {}
     }
   },
   created() {
-    console.log("loaded pages")
+    console.log('loaded pages')
   },
   methods: {
     imgProxy(e) {
@@ -46,7 +50,7 @@ export default {
         tag: e.target.tagName.toLowerCase()
       }
       if (element.tag === 'img') {
-        console.info("img clicked")
+        console.info('img clicked')
         // TODO imgViewer
       }
     },
@@ -57,21 +61,18 @@ export default {
         if (!codeEl) continue
         const copyBtn = block.querySelector('.copy-btn')
         if (!copyBtn) {
-          const CopyButton = Vue.extend(ClipboardBtn)
+          const CopyButton = ClipboardBtn
           const component = new CopyButton().$mount()
           block.appendChild(component.$el)
         }
-
       }
     },
     async fetchData() {
-
       const params = this.$router.currentRoute.params
-      console.log(params,"params")
+      console.log(params, 'params')
       let article = {}
       try {
-        article = await this.$content('news',
-          params.page).fetch()
+        article = await this.$content('news', params.page).fetch()
         this.article = JSON.parse(JSON.stringify(article))
         this.$nextTick(() => {
           this.addChild('nuxt-content-highlight')
@@ -82,11 +83,11 @@ export default {
           message: 'Page not found'
         })
       }
-    },
+    }
   },
   async fetch() {
     await this.fetchData()
-  },
+  }
 }
 </script>
 

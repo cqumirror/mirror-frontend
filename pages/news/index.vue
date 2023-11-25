@@ -1,13 +1,15 @@
 <template>
-  <div style="margin: 0;padding: 0">
+  <div style="margin: 0; padding: 0">
     <div id="news-page-title">NEWS HISTORY</div>
     <ul id="news-page-list" v-loading="loading">
-      <template v-for="article in articles">
-        <li :key="article.slug">
+      <template v-for="article in articles" :key="article.slug">
+        <li>
           <div>
             <!--title-->
             <div class="article-block">
-              <NuxtLink :to="{name: 'news-page', params: { page: article.slug }}">
+              <NuxtLink
+                :to="{ name: 'news-page', params: { page: article.slug } }"
+              >
                 <div class="article-title">
                   {{ article.title }}
                 </div>
@@ -42,10 +44,10 @@
 <script>
 // import '@/assets/css/main.scss'
 
-import cacheControl from "~/middleware/cacheControl";
+import cacheControl from '~/middleware/cacheControl'
 
 export default {
-  name: "news",
+  name: 'news',
   middleware: cacheControl({
     'max-age': 600,
     'stale-when-revalidate': 5
@@ -54,17 +56,17 @@ export default {
     return {
       articles: [],
       currentPage: 0,
-      pageSize: process.env.newsPage.pageSize,
+      pageSize: config.newsPage.pageSize,
       total: 1000,
-      loading: false,
+      loading: false
     }
   },
   methods: {
     formatDate(date) {
-      const y = this.formatByIntl(date, {year: 'numeric'})
-      const m = this.formatByIntl(date, {month: '2-digit'})
-      const d = this.formatByIntl(date, {day: '2-digit'})
-      return (y + "-" + m + "-" + d) // TODO: use navigator to get locale
+      const y = this.formatByIntl(date, { year: 'numeric' })
+      const m = this.formatByIntl(date, { month: '2-digit' })
+      const d = this.formatByIntl(date, { day: '2-digit' })
+      return y + '-' + m + '-' + d // TODO: use navigator to get locale
       // return date
     },
     formatByIntl(date, option) {
@@ -75,7 +77,6 @@ export default {
       this.currentPage = currentPage
       const articles = await this.queryContent(this.currentPage)
       this.articles = JSON.parse(JSON.stringify(articles))
-
     },
     async queryContent(currentPage) {
       this.loadingCheck()
@@ -83,8 +84,10 @@ export default {
       const skipSize = (currentPage - 1) * pageSize
       const articles = await this.$content('news')
         .only(['title', 'description', 'img', 'slug', 'author', 'date'])
-        .sortBy('date', 'desc').skip(skipSize)
-        .limit(pageSize).fetch()
+        .sortBy('date', 'desc')
+        .skip(skipSize)
+        .limit(pageSize)
+        .fetch()
       this.loadingCheck()
       return articles
     },
@@ -108,7 +111,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

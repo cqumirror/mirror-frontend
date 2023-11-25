@@ -1,10 +1,10 @@
 <template>
-  <div style="margin: 0;padding: 0;" id="index-news-container">
+  <div style="margin: 0; padding: 0" id="index-news-container">
     <ul>
-      <li v-for="item in content">
-        <NuxtLink :to="{name: 'news-page', params: { page: item.slug }}">
+      <li v-for="(item, index) in content" :key="index">
+        <NuxtLink :to="{ name: 'news-page', params: { page: item.slug } }">
           <div :style="styleNews" id="news-list">
-            {{ item.date + " " }}{{ item.title }}
+            {{ item.date + ' ' }} {{ item.title }}
           </div>
         </NuxtLink>
       </li>
@@ -20,17 +20,20 @@
 <script>
 // import '@/assets/css/main.scss'
 
-import cacheControl from "~/middleware/cacheControl";
+import cacheControl from '~/middleware/cacheControl'
 
 export default {
-  name: "SideBarNewsPreview",
+  name: 'SideBarNewsPreview',
   middleware: cacheControl({
     'max-age': 600,
     'stale-when-revalidate': 5
   }),
   async fetch() {
-    this.content = await this.$content('news').only(['title','slug','date'])
-      .sortBy('date', 'desc').limit(3).fetch()
+    this.content = await this.$content('news')
+      .only(['title', 'slug', 'date'])
+      .sortBy('date', 'desc')
+      .limit(3)
+      .fetch()
   },
   props: {
     styleNews: { type: String }
@@ -39,10 +42,6 @@ export default {
     return {
       content: []
     }
-  },
+  }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

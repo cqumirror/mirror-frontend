@@ -9,13 +9,13 @@
 <script>
 export default {
   name: 'error',
-  layout: 'empty', //OR layout:'default'
+  layout: 'empty', // OR layout:'default'
   props: {
     error: {
-      type: Object,
+      type: Object
     },
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss" scoped>

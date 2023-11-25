@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import { library,config } from '@fortawesome/fontawesome-svg-core'
+import { library, config } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // import all icons
@@ -28,9 +27,7 @@ import {
   faFileArchive,
   faPaperPlane
 } from '@fortawesome/free-regular-svg-icons'
-import {
-  faGithub
-} from "@fortawesome/free-brands-svg-icons"
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 library.add(faNewspaper)
 library.add(faPaperclip)
@@ -47,7 +44,7 @@ config.showMissingIcons = true
 
 // add font awesome icon component
 // use <fa icon=""/> to add icon
-Vue.component('fa', FontAwesomeIcon)
 
-// disable productionTip
-Vue.config.productionTip = false
+export default defineNuxtPlugin(nuxtApp => {
+  nuxtApp.vueApp.component('fa', FontAwesomeIcon)
+})

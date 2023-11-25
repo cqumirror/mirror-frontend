@@ -1,13 +1,12 @@
 <template>
-  <div id="clipboard-check"/>
+  <div id="clipboard-check" />
 </template>
+
 <script>
 export default {
   name: 'IconClipboardCheck',
   data() {
-    return {
-
-    }
+    return {}
   }
 }
 </script>
