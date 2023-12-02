@@ -28,7 +28,6 @@ nodejs 14.20.0 -> nodejs ≥16.16
 
 plugins
 
-* vue-modal
 * fancy-ui
 
 package.json

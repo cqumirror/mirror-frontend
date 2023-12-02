@@ -73,8 +73,8 @@
     </div>
     <!--download dialog-->
     <DownloadModal
+      v-model="modalVisible"
       :iso-category="isoCategory"
-      @before-close="handleDialogClose"
     />
 
     <!--contact-->
@@ -129,87 +129,67 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import ApiMirror from '@/components/Api/ApiMirror'
 import WarpNotice from '@/components/scroll-notice/warpNotice.vue'
 import config from '../utils/config'
 
-export default {
-  name: 'SideBar',
-  components: { WarpNotice },
-  setup() {
-    return {
-      indexToolBox: config.indexFloatBox,
-      exportUrls: config.exportUrls,
-      contactUrls: config.contactUrls,
-      siteLinks: config.siteLinks,
-      style:
-        'text-decoration: none;' + 'color:' + config.baseLinkColor + ';',
-      isoList: [],
+const indexToolBox = config.indexFloatBox
+const exportUrls = config.exportUrls
+const contactUrls = config.contactUrls
+const siteLinks = config.siteLinks
+const style = 'text-decoration: none;' + 'color:' + config.baseLinkColor + ';'
+const isoList = ref([])
 
-      isoCategory: [
-        { prop: 'os', label: '系统镜像', column: [], key: 0 },
-        { prop: 'app', label: '常用软件', column: [], key: 1 }
-      ],
+const isoCategory = [
+  { prop: 'os', label: '系统镜像', column: [], key: 0 },
+  { prop: 'app', label: '常用软件', column: [], key: 1 }
+]
 
-      notices: {}
-    }
-  },
-  async created() {
-    await this.init()
-  },
-  methods: {
-    handleDialogClose() {
-      document.removeEventListener('mousewheel', this.eventHandler, {
-        passive: true
+const notices = ref({})
+
+async function init() {
+  await fetch(ApiMirror.getNotices())
+    .then((data) => data.json())
+    .then((res) => {
+      notices.value = JSON.parse(JSON.stringify(res))
+    })
+  await fetch(ApiMirror.getIsoList())
+    .then((data) => data.json())
+    .then((res) => {
+      isoList.value = JSON.parse(JSON.stringify(res))
+      generateIsoBase()
+    })
+}
+init()
+
+const modalVisible = ref(false)
+function handleDialogRaise() {
+  modalVisible.value = true
+}
+function eventHandler(e) {
+  e.preventDefault()
+}
+function generateIsoBase() {
+  if (isoList.value.length !== 0) {
+    isoList.value.forEach((item) => {
+      const index = isoCategory.findIndex((co) => {
+        return co.prop === item.category
       })
-    },
-    handleDialogRaise() {
-      document.addEventListener('mousewheel', this.eventHandler, {
-        passive: false
-      })
-      this.$modal.show('download-dialog')
-    },
-    eventHandler(e) {
-      e.preventDefault()
-    },
-    generateIsoBase() {
-      if (this.isoList.length !== 0) {
-        this.isoList.forEach((item) => {
-          const index = this.isoCategory.findIndex((co) => {
-            return co.prop === item.category
-          })
-          if (index !== -1) {
-            const param = {
-              distro: item.distro,
-              urls: item.urls
-            }
-            this.isoCategory[index].column.push(param)
-          }
-        })
-      }
-      for (const item of this.isoCategory) {
-        let count = 0
-        for (const child of item.column) {
-          child.key = count
-          count++
+      if (index !== -1) {
+        const param = {
+          distro: item.distro,
+          urls: item.urls
         }
+        isoCategory[index].column.push(param)
       }
-
-      // console.log(this.isoCategory)
-    },
-    async init() {
-      await fetch(ApiMirror.getNotices())
-        .then((data) => data.json())
-        .then((res) => {
-          this.notices = JSON.parse(JSON.stringify(res))
-        })
-      await fetch(ApiMirror.getIsoList())
-        .then((data) => data.json())
-        .then((res) => {
-          this.isoList = JSON.parse(JSON.stringify(res))
-          this.generateIsoBase()
-        })
+    })
+  }
+  for (const item of isoCategory) {
+    let count = 0
+    for (const child of item.column) {
+      child.key = count
+      count++
     }
   }
 }
