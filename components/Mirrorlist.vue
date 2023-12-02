@@ -247,7 +247,7 @@ export default {
 </script>
 
 <style scoped>
-.el-tag--mini /deep/ {
+:deep(.el-tag--small) {
   height: 23px !important;
   width: 60px;
   text-align: center;
@@ -260,27 +260,27 @@ export default {
   height: 0px;
 }
 
-.el-table /deep/ .el-table__cell {
+.el-table :deep(.el-table__cell) {
   border-bottom: 0px solid transparent !important;
 }
 
-.el-table /deep/ tbody tr:hover>td {
+.el-table :deep(tbody tr:hover>td) {
   background-color: #00000000;
 }
 
-.el-table /deep/ .pending-row {
+.el-table :deep(.pending-row) {
   background: #fff4e3;
 }
 
-.el-table /deep/ .error-row {
+.el-table :deep(.error-row) {
   background: #ffd9cb;
 }
 
-.el-table /deep/ .syncing-row {
+.el-table :deep(.syncing-row) {
   background: #e3fffd;
 }
 
-.el-table /deep/ .success-row {
+.el-table :deep(.success-row) {
   background: #ffffff;
 }
 

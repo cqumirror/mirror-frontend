@@ -1,6 +1,5 @@
 <template>
-  <modal name="download-dialog" adaptive focusTrap height="auto" width="440px"
-    @before-close="handleBeforeClose">
+  <el-dialog :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)" name="download-dialog" :width="440">
     <div id="download-modal">
       <!-- radio button group -->
       <div id="radio-button-group">
@@ -44,19 +43,9 @@
         <button @click="handleDownload" id="button-confirm">确认下载</button>
       </div>
     </div>
-  </modal>
+  </el-dialog>
 </template>
 
-<script>
-export default {
-  name: 'DownloadModal',
-  methods: {
-    handleCancel() {
-      this.$modal.hide('download-dialog')
-    }
-  }
-}
-</script>
 <script setup>
 import { nextTick, watch, onMounted } from 'vue'
 import { useDownloadDialogChosenStore } from '../store/download-dialog-chosen'
@@ -64,9 +53,13 @@ import { useDownloadDialogChosenStore } from '../store/download-dialog-chosen'
 const props = defineProps({
   isoCategory: {
     type: Array
+  },
+  modelValue: {
+    type: Boolean,
+    default: false
   }
 })
-const emit = defineEmits(['before-close'])
+const emit = defineEmits(['before-close', 'update:modelValue'])
 const selectedCategory = ref(0)
 const selectedDistro = ref(0)
 const selectedSoftware = ref(0)
@@ -114,10 +107,10 @@ function selectedChanged(newVal) {
     generateUrlList(selectedCategory.value, selectedSoftware.value)
   }
 }
-function handleBeforeClose() {
-  emit('before-close')
-}
 function verify() { }
+function handleCancel() {
+  emit('update:modelValue', false)
+}
 function handleDownload() {
   const url = selectedVersionUrl.value
   if (url === 'about:blank') {

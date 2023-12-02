@@ -22,10 +22,11 @@
         >
           <NuxtLink
             v-if="item.type !== 'url'"
+            v-slot="{ href }"
             :to="item.index"
-            :custom="true"
+            custom
           >
-            <a @click="handleToggle">
+            <a :href="href" @click="handleToggle">
               {{ item.label }}
             </a>
           </NuxtLink>

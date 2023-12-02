@@ -44,7 +44,6 @@ export default defineNuxtConfig({
     '@/assets/css/main.scss'
   ],
   plugins: [
-    '@/plugins/element-plus',
     '@/plugins/font-awesome',
     '@/plugins/vue-scrollto',
     '@/plugins/clipboard-js'
@@ -54,7 +53,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
     '@nuxtjs/google-fonts',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@element-plus/nuxt'
   ],
   content: {
     markdown: {
