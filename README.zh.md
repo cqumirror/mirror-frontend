@@ -21,15 +21,10 @@ nodejs 14.20.0 -> nodejs ≥16.16
 * modules > [nuxt-compress, axios]
 * target
 * loadingIndicator
-* css > @/assets/css/global.scss
 * head
 * pwa
 * axios
 * router > trailingSlash
-
-assets
-
-* css > global.scss
 
 plugins
 
