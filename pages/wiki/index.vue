@@ -6,6 +6,10 @@
     <transition name="slide">
     <div class="wiki-nav-container" v-if="showNav">
       <div class="wiki-nav">
+<!--        <el-input-->
+<!--          placeholder="输入关键字进行过滤"-->
+<!--          v-model="filterText">-->
+<!--        </el-input>-->
         <el-tree
           ref="navTree"
           :data="data"
@@ -13,6 +17,7 @@
           node-key="id"
           @node-click="handleNodeClick"
           :default-expanded-keys="expandedKeys"
+          :filter-node-method="filterNode"
           accordion
         >
           <template slot-scope="{node,data}">
@@ -50,6 +55,7 @@ export default {
   name: "wiki",
   data() {
     return {
+      filterText: '',
       wikiFloatBox: process.env.wikiFloatBox,
       data: [],
       defaultProps: {
@@ -65,6 +71,12 @@ export default {
     }
   },
   methods: {
+    filterNode(value, data) {
+      if (!value) {
+        return true
+      }
+      return data.label.indexOf(value) !== -1;
+    },
     handleShowNav() {
       this.showNav=true
       const blocks = document.getElementsByClassName('wiki-content-parent')
@@ -208,7 +220,7 @@ export default {
           this.expandedKeys = []
           this.handleCollapseAll()
         }
-        
+
       },
       immediate: true,
     },
@@ -218,7 +230,12 @@ export default {
 
         }
       }
-    }
+    },
+    'filterText': {
+      handler: function (val) {
+        this.$refs.navTree.filter(val);
+      }
+    },
   },
 
 

@@ -14,9 +14,11 @@ openSUSE Leap 软件仓库
 
 ## 收录架构
 - i586
+- aarch64
+- powerpc
 - x86_64
 ## 收录版本
-生命期内 Leap 版本
+生命期内 Leap 版本(不包含 src 包(源码包)和 debug 包)
 ## 使用说明
 ### 简易版本
 {{% notice note %}}

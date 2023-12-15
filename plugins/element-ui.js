@@ -9,6 +9,7 @@ import locale from 'element-ui/lib/locale/lang/zh-CN'
 // production options
 import {
   Pagination,
+  Input,
   Table,
   TableColumn,
   Breadcrumb,
@@ -26,6 +27,7 @@ import {
 } from "element-ui";
 
 Vue.use(Pagination,{ locale })
+Vue.use(Input, { locale })
 Vue.use(Table,{ locale })
 Vue.use(TableColumn,{ locale })
 Vue.use(Breadcrumb,{ locale })
