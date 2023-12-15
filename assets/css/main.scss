@@ -778,7 +778,7 @@ img {
   }
 }
 
-// wiki content (wiki/index/_.vue)
+// wiki content (wiki/index/[...slug].vue)
 .wiki-content-parent {
   width: 78%;
   @media (max-width: 1700px) {
