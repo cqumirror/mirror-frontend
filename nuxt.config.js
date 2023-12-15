@@ -56,11 +56,9 @@ export default defineNuxtConfig({
   ],
   content: {
     markdown: {
-      remarkPlugins: [
-        ['remark-gfm'],
-        ['@/utils/shortcode', { startBlock: '[[', endBlock: ']]' }],
-        ['@/utils/expand']
-      ],
+      remarkPlugins: {
+        'remark-gfm': true
+      },
       async highlighter() {
         const highlighter = await shiki.getHighlighter({
           // Complete themes: https://github.com/shikijs/shiki/tree/master/packages/themes
