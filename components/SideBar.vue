@@ -167,9 +167,6 @@ const modalVisible = ref(false)
 function handleDialogRaise() {
   modalVisible.value = true
 }
-function eventHandler(e) {
-  e.preventDefault()
-}
 function generateIsoBase() {
   if (isoList.value.length !== 0) {
     isoList.value.forEach((item) => {

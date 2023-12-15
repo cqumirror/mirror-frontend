@@ -1,28 +1,23 @@
 import shiki from 'shiki'
+import fs from 'fs/promises'
+import path from 'path'
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+async function listContentRoutes(directory, prefix = '/') {
+  const entries = await fs.readdir(directory, { withFileTypes: true })
+  const files = entries.filter(entry => entry.name.toLocaleLowerCase().endsWith('.md'))
+  const directories = entries.filter(entry => entry.isDirectory())
+
+  let routes = files.map(f => (prefix + f.name.toLocaleLowerCase().replace(/\.md$/, '')).replace(/\/_index/, ''))
+  routes = routes.concat(...await Promise.all(directories.map(d => listContentRoutes(path.join(directory, d.name), `${prefix}${d.name}/`))))
+  return routes
+}
+
 export default defineNuxtConfig({
   ssr: false,
   devServer: {
     port: 3010,
     host: '0.0.0.0'
-  },
-  generate: {
-    async routes() {
-      console.warn('generating routes')
-      const { $content } = require('@nuxt/content')
-
-      const blogRoutes = await $content('wiki', { deep: true }).only(['slug', 'path']).fetch()
-        .then(files => {
-          return files.map(file => `/wiki/${file.slug}`)
-        })
-
-      const newsRoutes = await $content('news', { deep: true }).only(['slug']).fetch()
-        .then(files => {
-          return files.map(file => file.path.replace('/_index', ''))
-        })
-
-      return [...blogRoutes, ...newsRoutes]
-    }
   },
   router: {
     options: {
@@ -33,6 +28,9 @@ export default defineNuxtConfig({
     'generate:page': page => {
       // 解决 nuxt 不尊重 metadata 的问题
       page.html = page.html.replace(/ data-n-head=".*?"/gi, '').replace(/ data-hid=".*?"/gi, '')
+    },
+    async 'nitro:config'(nitroConfig) {
+      nitroConfig.prerender.routes.push(...await listContentRoutes(path.join(__dirname, 'content')))
     }
   },
   css: [
@@ -58,11 +56,9 @@ export default defineNuxtConfig({
   ],
   content: {
     markdown: {
-      remarkPlugins: [
-        ['remark-gfm'],
-        ['@/utils/shortcode', { startBlock: '[[', endBlock: ']]' }],
-        ['@/utils/expand']
-      ],
+      remarkPlugins: {
+        'remark-gfm': true
+      },
       async highlighter() {
         const highlighter = await shiki.getHighlighter({
           // Complete themes: https://github.com/shikijs/shiki/tree/master/packages/themes
