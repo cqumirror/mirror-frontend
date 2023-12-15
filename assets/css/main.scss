@@ -431,15 +431,6 @@ img {
   min-height: 62vh;
 }
 
-//// news page breadcrumb
-.el-breadcrumb__separator{
-  &:before {
-    content: '\f105';
-    font-family: "Font Awesome 5 Free";
-    font-style: normal;
-  }
-}
-
 //// pagination
 #news-page-pagination {
   margin-left: 30vw;
@@ -746,17 +737,6 @@ img {
     .wiki-nav {
 
       border-right: 1px solid #efefef;
-
-      .el-tree-node__expand-icon:before {
-        content: '\f0da';
-        font-family: "Font Awesome 5 Free";
-        color: #8e8f9a !important;
-      }
-      .el-tree-node__expand-icon.is-leaf:before {
-        content: '\f22d';
-        font-family: "Font Awesome 5 Free";
-        color: #C0C4CC!important; // override element-ui default setting
-      }
 
       @media (max-width: $mobile-size) {
         display: flex;
