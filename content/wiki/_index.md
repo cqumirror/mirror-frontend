@@ -8,23 +8,7 @@ filepath: '/wiki/_index'
 镜像站 wiki 施工中，已列出部分可以参考（按照完成顺序）:
 {{% /notice %}}
 
-- Archlinux
-- Archlinux CN
-- CentOS
-- Manjaro
-- Fedora
-- Ubuntu
-- openSUSE Leap
-- openSUSE Tumbleweed
-- OpenWrt / LEDE
-- Debian Security
-- Debian
-- Gentoo
-- Kali
-- KiCad
-- Rocky
-- Homebrew Formula
-- Linux git 仓库
-- PyPI
-- Rust crates.io 索引
-- ROS
+
+{{% notice warn %}}
+由于缓存策略，可能查看到的页面并非最新更改，如有疑问请先强制刷新网页并再次查看。
+{{% /notice %}}
