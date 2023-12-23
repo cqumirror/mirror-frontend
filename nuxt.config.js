@@ -42,8 +42,7 @@ export default defineNuxtConfig({
   ],
   plugins: [
     '@/plugins/font-awesome',
-    '@/plugins/vue-scrollto',
-    '@/plugins/clipboard-js'
+    '@/plugins/vue-scrollto'
   ],
   components: true,
   devtools: { enabled: true },

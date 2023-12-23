@@ -9,6 +9,7 @@
 // import '@/assets/css/main.scss'
 import IconClipboardCheck from '@/components/btnComponent/IconClipboardCheck.vue'
 import IconClipboardCopy from '@/components/btnComponent/IconClipboardCopy.vue'
+import clipboard from 'clipboard'
 
 export default {
   name: 'ClipboardBtn',
@@ -35,7 +36,7 @@ export default {
     }
   },
   mounted() {
-    this.copyCode = new this.clipboard(this.$refs.copy, {
+    this.copyCode = new clipboard(this.$refs.copy, {
       target(elem) {
         console.log('element', elem)
         return elem.previousElementSibling

@@ -24,8 +24,8 @@
   </div>
 </template>
 <script setup>
+import { h, render } from 'vue'
 import ClipboardBtn from '@/components/ClipboardBtn.vue'
-
 import { Fancybox } from '@fancyapps/ui'
 import '@fancyapps/ui/dist/fancybox/fancybox.css'
 
@@ -64,19 +64,12 @@ async function fetchData() {
   }
 }
 
-function addChild(className) {
-  // 这段肯定是有bug的。会向shortcode block 插入复制按钮，未知原因，原生vue无法复现，可能是框架bug
-  const blocks = document.getElementsByClassName(className)
-  for (const block of blocks) {
-    const codeEl = block.querySelector('.shiki')
-    if (codeEl) {
-      debugger
-      const copyBtn = block.querySelector('.copy-btn')
-      if (!copyBtn) {
-        const CopyButton = ClipboardBtn
-        const component = new CopyButton().$mount()
-        block.appendChild(component.$el)
-      }
+function addChild(selector) {
+  const codeEls = document.querySelectorAll(selector)
+  for (const codeEl of codeEls) {
+    const copyBtn = codeEl.querySelector('.copy-btn')
+    if (!copyBtn) {
+      render(h(ClipboardBtn), codeEl)
     }
   }
 }
