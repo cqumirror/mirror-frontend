@@ -84,7 +84,7 @@ function addChild(className) {
 function updated() {
   if (!loaded.value) {
     setTimeout(() => {
-      addChild('nuxt-content-highlight')
+      addChild('pre.shiki')
       loaded.value = true
       if (route.hash) {
         const id = decodeUrlString(route.hash)
