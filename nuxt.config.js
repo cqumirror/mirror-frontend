@@ -1,4 +1,3 @@
-import shiki from 'shiki'
 import fs from 'fs/promises'
 import path from 'path'
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -43,8 +42,7 @@ export default defineNuxtConfig({
   ],
   plugins: [
     '@/plugins/font-awesome',
-    '@/plugins/vue-scrollto',
-    '@/plugins/clipboard-js'
+    '@/plugins/vue-scrollto'
   ],
   components: true,
   devtools: { enabled: true },
@@ -58,16 +56,11 @@ export default defineNuxtConfig({
     markdown: {
       remarkPlugins: {
         'remark-gfm': true
-      },
-      async highlighter() {
-        const highlighter = await shiki.getHighlighter({
-          // Complete themes: https://github.com/shikijs/shiki/tree/master/packages/themes
-          theme: 'nord'
-        })
-        return (rawCode, lang) => {
-          return highlighter.codeToHtml(rawCode, lang)
-        }
       }
+    },
+    highlight: {
+      theme: 'nord',
+      preload: ['bash']
     },
     liveEdit: false
   },

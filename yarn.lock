@@ -1996,11 +1996,6 @@ ansi-regex@^6.0.1:
   resolved "https://registry.npmmirror.com/ansi-regex/-/ansi-regex-6.0.1.tgz#3183e38fae9a65d7cb5e53945cd5897d0260a06a"
   integrity sha512-n5M855fKb2SsfMIiFFoVrABHJC8QtHwVx+mHWP3QcEqBHYienj5dHSgjbxtC0WEZXYt4wcD6zrQElDPhFuZgfA==
 
-ansi-sequence-parser@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.npmmirror.com/ansi-sequence-parser/-/ansi-sequence-parser-1.1.1.tgz#e0aa1cdcbc8f8bb0b5bca625aac41f5f056973cf"
-  integrity sha512-vJXt3yiaUL4UU546s3rPXlsry/RnM730G1+HkpKE012AN0sx1eOrxSu95oKDIonskeLTijMgqWZ3uDEe3NFvyg==
-
 ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://registry.npmmirror.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
@@ -7259,16 +7254,6 @@ shiki-es@^0.14.0:
   resolved "https://registry.npmmirror.com/shiki-es/-/shiki-es-0.14.0.tgz#64f7902ad47eda244840836f70f68f9d24aac6e6"
   integrity sha512-e+/aueHx0YeIEut6RXC6K8gSf0PykwZiHD7q7AHtpTW8Kd8TpFUIWqTwhAnrGjOyOMyrwv+syr5WPagMpDpVYQ==
 
-shiki@^0.14.5:
-  version "0.14.5"
-  resolved "https://registry.npmmirror.com/shiki/-/shiki-0.14.5.tgz#375dd214e57eccb04f0daf35a32aa615861deb93"
-  integrity sha512-1gCAYOcmCFONmErGTrS1fjzJLA7MGZmKzrBNX7apqSwhyITJg2O102uFzXUeBxNnEkDA9vHIKLyeKq0V083vIw==
-  dependencies:
-    ansi-sequence-parser "^1.1.0"
-    jsonc-parser "^3.2.0"
-    vscode-oniguruma "^1.7.0"
-    vscode-textmate "^8.0.0"
-
 shikiji@^0.6.10:
   version "0.6.12"
   resolved "https://registry.npmmirror.com/shikiji/-/shikiji-0.6.12.tgz#2cd28f32380337ef2117cdd5328f868a31e6c416"
@@ -8364,16 +8349,6 @@ vscode-languageserver@^7.0.0:
   integrity sha512-60HTx5ID+fLRcgdHfmz0LDZAXYEV68fzwG0JWwEPBode9NuMYTIxuYXPg4ngO8i8+Ou0lM7y6GzaYWbiDL0drw==
   dependencies:
     vscode-languageserver-protocol "3.16.0"
-
-vscode-oniguruma@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.npmmirror.com/vscode-oniguruma/-/vscode-oniguruma-1.7.0.tgz#439bfad8fe71abd7798338d1cd3dc53a8beea94b"
-  integrity sha512-L9WMGRfrjOhgHSdOYgCt/yRMsXzLDJSL7BPrOZt73gU0iWO4mpqzqQzOz5srxqTvMBaR0XZTSrVWo4j55Rc6cA==
-
-vscode-textmate@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.npmmirror.com/vscode-textmate/-/vscode-textmate-8.0.0.tgz#2c7a3b1163ef0441097e0b5d6389cd5504b59e5d"
-  integrity sha512-AFbieoL7a5LMqcnOF04ji+rpXadgOXnZsxQr//r83kLPr7biP7am3g9zbaZIaBGwBRWeSvoMD4mgPdX3e4NWBg==
 
 vscode-uri@^3.0.2:
   version "3.0.8"

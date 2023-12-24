@@ -1,7 +1,6 @@
-.nuxt-content-highlight {
-  .shiki {
-    padding: 1.5em;
-    font-size: 0.75rem !important;
-    overflow-y: auto;
-  }
+pre.shiki {
+  padding: 1.5em;
+  font-size: 0.75rem !important;
+  overflow-y: auto;
+  background-color: rgb(46, 52, 64);
 }
