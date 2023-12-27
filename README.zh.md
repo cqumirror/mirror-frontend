@@ -21,8 +21,6 @@ nodejs 14.20.0 -> nodejs ≥16.16
 * modules > [nuxt-compress, axios]
 * target
 * loadingIndicator
-* head
-* pwa
 * axios
 * router > trailingSlash
 

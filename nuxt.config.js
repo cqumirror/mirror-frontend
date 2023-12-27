@@ -70,7 +70,8 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxtjs/google-fonts',
     '@pinia/nuxt',
-    '@element-plus/nuxt'
+    '@element-plus/nuxt',
+    '@vite-pwa/nuxt'
   ],
   content: {
     markdown: {
@@ -118,6 +119,17 @@ export default defineNuxtConfig({
           })
         }
       })
+    }
+  },
+  pwa: {
+    manifest: {
+      name: '重庆大学开源软件镜像站',
+      lang: 'zh-CN',
+      short_name: '重大镜像站',
+      start_url: 'https://mirrors.cqu.edu.cn',
+      theme_color: '#ffffff',
+      description: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。',
+      useWebmanifestExtension: false
     }
   }
 })

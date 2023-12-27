@@ -34,6 +34,7 @@
     "@nuxt/content": "^2.9.0",
     "@nuxtjs/google-fonts": "^3.0.2",
     "@pinia/nuxt": "^0.5.1",
+    "@vite-pwa/nuxt": "^0.4.0",
     "clipboard": "^2.0.11",
     "element-plus": "^2.4.2",
     "pinia": "^2.1.7",
