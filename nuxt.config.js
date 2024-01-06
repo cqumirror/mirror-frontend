@@ -75,6 +75,7 @@ export default defineNuxtConfig({
   ],
   content: {
     markdown: {
+      anchorLinks: false,
       remarkPlugins: {
         'remark-gfm': true
       }

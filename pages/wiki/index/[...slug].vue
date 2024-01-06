@@ -5,12 +5,12 @@
       <article id="md-content" class="wiki-page-content" @click="imgProxy">
         <ContentRenderer ref="nuxtContent" :value="article" />
       </article>
-      <aside class="wiki-content-toc" v-if="article.toc && article.toc.length > 0">
+      <aside class="wiki-content-toc" v-if="article.body.toc.links.length > 0">
         <div class="wiki-toc">
           <h2 class="wiki-toc-title">目录</h2>
           <nav class="wiki-toc-nav">
             <ul>
-              <li class="toc-list" v-for="link of article.toc" :key="link.id">
+              <li class="toc-list" v-for="link of article.body.toc.links" :key="link.id">
                 <a role="button" class="" :href="`/#${$route.fullPath}#${link.id}`"
                   @click.prevent="handleScrollTo(link.id)">
                   {{ link.text }}
