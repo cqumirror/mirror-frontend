@@ -61,8 +61,7 @@ export default defineNuxtConfig({
     '@/assets/css/main.scss'
   ],
   plugins: [
-    '@/plugins/font-awesome',
-    '@/plugins/vue-scrollto'
+    '@/plugins/font-awesome'
   ],
   components: true,
   devtools: { enabled: true },

@@ -86,18 +86,16 @@ function updated() {
     }, 450)
   }
 }
+
+function handleScrollTo(id) {
+  document.querySelector('#' + id).scrollIntoView({
+    behavior: 'smooth'
+  })
+}
+
 watch(route, async () => {
   loaded.value = false
   await fetchData()
   updated()
 }, { deep: true, immediate: true })
-</script>
-<script>
-export default {
-  methods: {
-    handleScrollTo(id) {
-      this.$scrollTo('#' + id)
-    }
-  }
-}
 </script>
