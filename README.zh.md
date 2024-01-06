@@ -32,7 +32,6 @@ package.json
 
 * scripts
 
-### font awesome
 
 ### 代码
 
