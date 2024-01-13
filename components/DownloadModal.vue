@@ -109,7 +109,6 @@ export default {
         return
       }
       const name = url.slice(url.lastIndexOf("/") + 1)
-
       this.verifyPre(url)
       const blobUrl = this.xhrDownloadHandler(this.selectedVersionUrl)
       // const a = document.createElement("a")
