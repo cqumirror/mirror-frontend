@@ -112,11 +112,11 @@ export default {
       console.log(url,"====> url")
       const a = document.createElement("a")
       this.verifyPre(url)
-      // a.setAttribute("href", this.selectedVersionUrl)
-      // a.setAttribute("download", name)
-      // a.click()
-      // a.remove()
-      // this.$modal.hide('download-dialog')
+      a.setAttribute("href", this.selectedVersionUrl)
+      a.setAttribute("download", name)
+      a.click()
+      a.remove()
+      this.$modal.hide('download-dialog')
     },
     async verifyPre(key) {
       console.log(key)
