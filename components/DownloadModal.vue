@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import Api_mirror from "@/components/Api/Api_mirror";
+
 export default {
   name: "DownloadModal",
   props: {
@@ -101,21 +103,38 @@ export default {
     handleBeforeClose() {
       this.$emit('before-close')
     },
-    verify() {
-
-    },
     handleDownload() {
       const url = this.selectedVersionUrl
       if (url === 'about:blank') {
         return
       }
       const name = url.slice(url.lastIndexOf("/") + 1)
+      console.log(url,"====> url")
       const a = document.createElement("a")
-      this.verify(url)
+      this.verifyPre(url)
       a.setAttribute("href", this.selectedVersionUrl)
       a.setAttribute("download", name)
       a.click()
       a.remove()
+      this.$modal.hide('download-dialog')
+    },
+    async verifyPre(key) {
+      console.log(key)
+      const xhr = new XMLHttpRequest()
+      const url = Api_mirror.getBaseurl({}) + key
+      xhr.open('HEAD', url, true)
+      xhr.send()
+      xhr.onreadystatechange = await function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          // success
+          const headers = xhr.getResponseHeader('x-remote-addr')
+          this.addCookie('addr', headers, key)
+        }
+      }.bind(this)
+    },
+    addCookie(cookieName, cookieValue, path) {
+      document.cookie = `${cookieName}=${cookieValue}; max-age=300;`
+      setTimeout("location.reload()", 5000)
     },
     selectedChanged(newVal) {
       if (this.selectedCategory === 0) {

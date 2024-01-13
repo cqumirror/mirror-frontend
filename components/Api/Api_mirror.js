@@ -11,5 +11,8 @@ export default {
   },
   getNotices: params => {
     return (prefix + "/static/notice.json")
+  },
+  getBaseurl: params => {
+    return prefix
   }
 }
