@@ -111,19 +111,19 @@ export default {
       const name = url.slice(url.lastIndexOf("/") + 1)
 
       this.verifyPre(url)
-      const blobUrl = this.xhrDownloadHandler(this.selectedVersionUrl).toString()
-      const a = document.createElement("a")
-      a.setAttribute("href", blobUrl)
-      // a.setAttribute("href", this.selectedVersionUrl)
-      a.setAttribute("download", name)
-      a.click()
-      a.remove()
-      URL.revokeObjectURL(blobUrl)
+      const blobUrl = this.xhrDownloadHandler(this.selectedVersionUrl)
+      // const a = document.createElement("a")
+      // a.setAttribute("href", blobUrl)
+      // // a.setAttribute("href", this.selectedVersionUrl)
+      // a.setAttribute("download", name)
+      // a.click()
+      // a.remove()
       this.$modal.hide('download-dialog')
     },
     async verifyPre(key) {
       const xhr = new XMLHttpRequest()
       const url = Api_mirror.getBaseurl({}) + key
+      // xhr.open('HEAD','https://mirrors.cqu.edu.cn/test.iso', true)
       xhr.open('HEAD', url, true)
       xhr.send()
       xhr.onreadystatechange = await function () {
@@ -136,14 +136,25 @@ export default {
     },
     async xhrDownloadHandler(url) {
       const xhr = new XMLHttpRequest()
-      xhr.setRequestHeader('Cookie', document.cookie)
+
+      // xhr.open('GET', 'https://mirrors.cqu.edu.cn/test.iso', true)
       xhr.open('GET', url, true)
+      xhr.withCredentials = true
+      xhr.responseType = "blob"
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            const data = xhr.response
-            const blob = new Blob([data], { type: 'application/octet-stream'})
-            return URL.createObjectURL(blob)
+            const blob = xhr.response
+            const reader = new FileReader()
+            reader.readAsDataURL(blob)
+            reader.onload = function (e) {
+              const a = document.createElement("a")
+              a.setAttribute("href", e.target.result )
+              // a.setAttribute("href", this.selectedVersionUrl)
+              a.setAttribute("download", name)
+              a.click()
+              a.remove()
+            }
           } else {
             console.error('request failed. ', xhr.status)
             return ''
@@ -154,7 +165,7 @@ export default {
     },
     addCookie(cookieName, cookieValue, path) {
       document.cookie = `${cookieName}=${cookieValue}; max-age=300;`
-      setTimeout("location.reload()", 5000)
+      // setTimeout("location.reload()", 5000)
     },
     selectedChanged(newVal) {
       if (this.selectedCategory === 0) {
