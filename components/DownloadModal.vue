@@ -135,7 +135,6 @@ export default {
     },
     async xhrDownloadHandler(url) {
       const xhr = new XMLHttpRequest()
-
       // xhr.open('GET', 'https://mirrors.cqu.edu.cn/test.iso', true)
       xhr.open('GET', url, true)
       xhr.withCredentials = true
