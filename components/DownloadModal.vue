@@ -109,17 +109,19 @@ export default {
         return
       }
       const name = url.slice(url.lastIndexOf("/") + 1)
-      console.log(url,"====> url")
-      const a = document.createElement("a")
+
       this.verifyPre(url)
-      a.setAttribute("href", this.selectedVersionUrl)
+      const blobUrl = this.xhrDownloadHandler(this.selectedVersionUrl).toString()
+      const a = document.createElement("a")
+      a.setAttribute("href", blobUrl)
+      // a.setAttribute("href", this.selectedVersionUrl)
       a.setAttribute("download", name)
       a.click()
       a.remove()
+      URL.revokeObjectURL(blobUrl)
       this.$modal.hide('download-dialog')
     },
     async verifyPre(key) {
-      console.log(key)
       const xhr = new XMLHttpRequest()
       const url = Api_mirror.getBaseurl({}) + key
       xhr.open('HEAD', url, true)
@@ -131,6 +133,24 @@ export default {
           this.addCookie('addr', headers, key)
         }
       }.bind(this)
+    },
+    async xhrDownloadHandler(url) {
+      const xhr = new XMLHttpRequest()
+      xhr.setRequestHeader('Cookie', document.cookie)
+      xhr.open('GET', url, true)
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            const data = xhr.response
+            const blob = new Blob([data], { type: 'application/octet-stream'})
+            return URL.createObjectURL(blob)
+          } else {
+            console.error('request failed. ', xhr.status)
+            return ''
+          }
+        }
+      }.bind(this)
+      xhr.send()
     },
     addCookie(cookieName, cookieValue, path) {
       document.cookie = `${cookieName}=${cookieValue}; max-age=300;`
