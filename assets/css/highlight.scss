@@ -3,4 +3,8 @@ pre.shiki {
   font-size: 0.75rem !important;
   overflow-y: auto;
   background-color: rgb(46, 52, 64);
+
+  span {
+    --shiki-default: rgb(216, 222, 233);
+  }
 }
