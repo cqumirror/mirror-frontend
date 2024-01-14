@@ -83,7 +83,7 @@ export default defineNuxtConfig({
     },
     highlight: {
       theme: 'nord',
-      preload: ['bash']
+      preload: ['bash', 'ini', 'vue', 'yaml']
     },
     liveEdit: false
   },
