@@ -751,7 +751,7 @@ img {
       }
 
 
-      .leaf-parent .leaf-end.nuxt-link-exact-active {
+      .leaf-parent .leaf-end.router-link-exact-active {
         background-color: #deffd0;
         border-left: 5px solid #1ccb4c;
         border-right: 5px solid #deffd0;
@@ -764,7 +764,7 @@ img {
           margin-left: 5px;
 
         }
-        .nuxt-link-exact-active {
+        .router-link-exact-active {
           background-color: #deffd0;
         }
       }
