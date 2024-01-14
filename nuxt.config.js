@@ -74,9 +74,11 @@ export default defineNuxtConfig({
   ],
   content: {
     markdown: {
+      mdc: false,
       anchorLinks: false,
       remarkPlugins: {
-        'remark-gfm': true
+        'remark-gfm': true,
+        '../../utils/shortcode.js': { startBlock: '[[', endBlock: ']]' }
       }
     },
     highlight: {

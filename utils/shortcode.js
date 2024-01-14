@@ -1,5 +1,5 @@
-const startRegex = /{{%\s+(notice).+%}}/
-const endRegex = /{{%\s+(\/notice).+%}}/
+const startRegex = /%\s+(notice).+%/
+const endRegex = /%\s+(\/notice).+%/
 
 const classMap = {
   tip: 'notice-tip',
@@ -11,101 +11,54 @@ const classMap = {
 }
 // TODO expend collapse support
 
-module.exports = shortcodes
-
-function shortcodes(options) {
+export default function shortcodes(options) {
   return (node) => {
-    // console.log(node)
     const nodeCopy = node
     nodeCopy.children.forEach((item, index) => {
       const children = item.children
 
       if (item.type === 'paragraph') {
         children.forEach((child, childIndex) => {
-          if (startCodeBlock(child.value)) {
-            if (isShortcodeBlock(child.value)) {
-              // block without html inside
-              const block = child.value.split('\n')
-              const start = block[0]
-              const end = block[block.length - 1]
-
-              const startHtml =
-                '<div class="' +
-                classMap[
-                  start
-                    .replace('{{%', '')
-                    .replace('%}}', '')
-                    .replace('notice', '')
-                    .trim()
-                ] +
-                '">' +
-                '<p class="shortcode-block">'
-              const endHtml = '</p></div>'
-
-              const result = {
-                type: 'html',
-                value: child.value
-                  .replace(start, startHtml)
-                  .replace(end, endHtml)
+          // Hugo shortcode 格式会被误识别为 binding，故这样检测
+          if (child.name === 'binding' && startCodeBlock(child.attributes.value)) {
+            // block contains html for markdown
+            const startIndex = childIndex
+            let endIndex
+            for (
+              let i = startIndex;
+              i < nodeCopy.children[index].children.length;
+              i++
+            ) {
+              const currChild = nodeCopy.children[index].children[i]
+              if (currChild.name === 'binding' && endCodeBlock(currChild.attributes.value)) {
+                endIndex = i
+                break
               }
-
-              node.children = [
-                ...node.children.slice(0, index),
-                result,
-                ...node.children.slice(index + 1)
-              ]
-            } else {
-              // block contains html for markdown
-              const startIndex = childIndex
-              // console.log("start index: "+ startIndex)
-              let endIndex
-              for (
-                let i = startIndex;
-                i < nodeCopy.children[index].children.length;
-                i++
-              ) {
-                if (endCodeBlock(nodeCopy.children[index].children[i].value)) {
-                  endIndex = i
-                  break
-                }
-              }
-              const oldStart =
-                nodeCopy.children[index].children[startIndex].value
-              const mapTag = parseTag(oldStart)
-
-              const startHtml =
-                '<div class="' +
-                classMap[mapTag.tag] +
-                '">' +
-                '<p class="shortcode-block">' +
-                mapTag.text
-              // console.log(startHtml)
-              const endTag = nodeCopy.children[index].children[
-                endIndex
-              ].value.replace('{{% /notice %}}', '')
-              const endHtml = endTag + '</p></div>'
-
-              const start = {
-                type: 'html',
-                value: startHtml
-              }
-
-              const end = {
-                type: 'html',
-                value: endHtml
-              }
-
-              node.children[index].children = [
-                ...node.children[index].children.slice(0, startIndex),
-                start,
-                ...node.children[index].children.slice(
-                  startIndex + 1,
-                  endIndex
-                ),
-                end,
-                ...node.children[index].children.slice(endIndex + 1)
-              ]
             }
+            const oldStart = nodeCopy.children[index].children[startIndex].attributes.value
+            const typeMatched = oldStart.match(/%\s+notice\s+(\w+)\s+%/)
+            const noticeClass = typeMatched ? classMap[typeMatched[1]] : ''
+
+            const startHtml = `<div class="${noticeClass}"><p class="shortcode-block">`
+            const endHtml = '</p></div>'
+
+            const start = {
+              type: 'html',
+              value: startHtml
+            }
+
+            const end = {
+              type: 'html',
+              value: endHtml
+            }
+
+            node.children[index].children = [
+              ...node.children[index].children.slice(0, startIndex),
+              start,
+              ...node.children[index].children.slice(startIndex + 1, endIndex),
+              end,
+              ...node.children[index].children.slice(endIndex + 1)
+            ]
           }
         })
       }
@@ -118,18 +71,5 @@ function shortcodes(options) {
 
   function endCodeBlock(value) {
     return endRegex.test(value)
-  }
-
-  // to test if is shortcode block
-  function isShortcodeBlock(value) {
-    return startRegex.test(value) && endRegex.test(value)
-  }
-
-  function parseTag(value) {
-    const va = value.split('%}}')[0]
-    return {
-      tag: va.replace('\n', '').replace('{{%', '').replace('notice', '').trim(),
-      text: value.split('%}}')[1]
-    }
   }
 }
