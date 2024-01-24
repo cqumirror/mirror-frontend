@@ -56,8 +56,7 @@ async function fetchData() {
     if (data.length === 1) {
       article.value = data[0]
     } else {
-      const index = data.findIndex((item) => item._path.split('/').pop() === '_index')
-      article.value = data[index]
+      article.value = data.find(item => item._path === `/wiki/${slug.join('/')}/_index`)
     }
   } catch (e) {
     console.error(e)
