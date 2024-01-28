@@ -134,7 +134,7 @@ export default {
     },
     addCookie(cookieName, cookieValue, path) {
       document.cookie = `${cookieName}=${cookieValue}; max-age=300;`
-      setTimeout("location.reload()", 5000)
+      // setTimeout("location.reload()", 5000)
     },
     selectedChanged(newVal) {
       if (this.selectedCategory === 0) {
