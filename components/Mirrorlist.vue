@@ -57,7 +57,7 @@
               :prop="item.prop"
               :label="item.label"
             ><template slot-scope="scope">
-              <a class="mirror-href" :href="mirror_url + scope.row.name">{{ scope.row.name }}</a>
+              <a class="mirror-href" :href="'/' + scope.row.name + '/'">{{ scope.row.name }}</a>
             </template>
             </el-table-column>
           </template>
