@@ -109,13 +109,21 @@ export default {
         return
       }
       const name = url.slice(url.lastIndexOf("/") + 1)
-      console.log(url,"====> url")
-      const a = document.createElement("a")
-      this.verifyPre(url)
-      a.setAttribute("href", this.selectedVersionUrl)
+      const location = window.location
+      const params = {
+        protocol: location.protocol,
+        host: location.host,
+        path: url
+      }
+      const requestsURL = `${params.protocol}//${params.host}${params.path}`
+      window.open(requestsURL, '_blank')
+      // window.open()
+      // const a = document.createElement("a")
+      // this.verifyPre(url)
+      // a.setAttribute("href", this.selectedVersionUrl)
       // a.setAttribute("download", name)
-      a.click()
-      a.remove()
+      // a.click()
+      // a.remove()
       this.$modal.hide('download-dialog')
     },
     async verifyPre(key) {
