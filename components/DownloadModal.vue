@@ -113,7 +113,7 @@ export default {
       const a = document.createElement("a")
       this.verifyPre(url)
       a.setAttribute("href", this.selectedVersionUrl)
-      a.setAttribute("download", name)
+      // a.setAttribute("download", name)
       a.click()
       a.remove()
       this.$modal.hide('download-dialog')
