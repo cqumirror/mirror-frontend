@@ -152,9 +152,27 @@ export default {
       theme_color: '#ffffff',
       description: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。',
       useWebmanifestExtension: false
+    },
+    workbox: {
+      cacheNames: {
+        prefix: 'cqumirror',
+        suffix: process.env.VERSION || 'v1',
+        precache: 'prc',
+        runtime: 'rtm'
+      },
+      offline: true,
+      offlineStrategy: 'StaleWhileRevalidate',
+      runtimeCaching: [
+        {
+          urlPattern: '/*',
+          handler: 'networkFirst',
+          method: 'GET'
+        }
+      ]
     }
   },
   env: {
+    VERSION: 'VERSION-TO-MANAGE',
     baseURL: (process.env.NODE_ENV === 'production' ? '' : 'https://mirrors.cqu.edu.cn/'),
     // baseURL: 'https://mirrors.cqu.edu.cn/',
     mirrorURL: (process.env.NODE_ENV === 'production' ? '/' : 'https://mirrors.cqu.edu.cn/'),
