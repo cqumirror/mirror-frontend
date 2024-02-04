@@ -12,8 +12,7 @@
     "generate": "nuxt generate",
     "local-clean": "rm -rf dist node_modules/.cache .nuxt",
     "pack-site": "yarn generate && cp -rf static/template/basic.html dist/. && rm -rf dist/template && tar -cvf nuxt.tar.gz dist/*",
-    "test": "clear && yarn run dev",
-    "tag": 'COMMIT_HASH=$(git rev-parse --short HEAD); sed -i 's/VERSION-TO-MANAGE/$COMMIT_HASH/g' nuxt.config.js'
+    "test": "clear && yarn run dev"
   },
   "dependencies": {
     "@fancyapps/ui": "^5.0.17",
