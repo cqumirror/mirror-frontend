@@ -66,10 +66,3 @@ try {
   })
 }
 </script>
-
-<style scoped>
-.breadcrumb-item:hover:deep(.el-breadcrumb__inner:hover) {
-  color: #1ccb4c;
-  cursor: pointer;
-}
-</style>
