@@ -14,10 +14,10 @@
               </NuxtLink>
               <div class="article-detail-container">
                 <div class="article-time">
-                  {{ article.date }}
+                  &nbsp;{{ article.date }}
                 </div>
                 <div class="article-author">
-                  {{ article.author }}
+                  &nbsp;{{ article.author }}
                 </div>
               </div>
             </div>

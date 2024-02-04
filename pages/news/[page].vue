@@ -9,10 +9,10 @@
       <div id="news-detail-title">{{ article.title }}</div>
       <div class="news-detail-container">
         <div id="news-detail-date">
-          {{ article.date }}
+          &nbsp;{{ article.date }}
         </div>
         <div id="news-detail-author">
-          {{ article.author }}
+          &nbsp;{{ article.author }}
         </div>
       </div>
       <ContentRenderer :value="article" />
