@@ -57,6 +57,12 @@ async function fetchData() {
       article.value = data[0]
     } else {
       article.value = data.find(item => item._path === `/wiki/${slug.join('/')}/_index`)
+      if (!article.value) {
+        showError({
+          statusCode: 404,
+          message: 'Page not found'
+        })
+      }
     }
   } catch (e) {
     console.error(e)
