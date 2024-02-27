@@ -58,7 +58,7 @@ SigLevel 建议为 TrustedOnly
 
 
 ## 相关链接
-Arch Linux 中文社区主页:</br>
-[https://www.archlinuxcn.org](https://www.archlinuxcn.org)</br>
-Arch Linux 中文社区仓库 / 镜像加速源介绍:</br>
+Arch Linux 中文社区主页:<br>
+[https://www.archlinuxcn.org](https://www.archlinuxcn.org)<br>
+Arch Linux 中文社区仓库 / 镜像加速源介绍:<br>
 [https://www.archlinuxcn.org/archlinux-cn-repo-and-mirror/](https://www.archlinuxcn.org/archlinux-cn-repo-and-mirror/)

@@ -3,7 +3,7 @@
 Document: ENG | [CHS](https://github.com/cqumirror/mirror-frontend/blob/master/README.zh.md)
 
 ## Build Setup
-**!!!IMPORTANT!!!**</br>
+**!!!IMPORTANT!!!**<br>
 Before you setup this project, make sure you have install `nvm` and set NodeJS version to v14.20.0.
 
 

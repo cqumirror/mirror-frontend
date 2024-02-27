@@ -26,7 +26,7 @@ cd /etc/yum.repos.d/ && mkdir -p backup && mv Rocky-* backup/.
 ```
 
 根据版本号下载相应文件到指定目录：
-</br>
+<br>
 
 ```bash
 for i in {AppStream,BaseOS,Devel,Extras,HighAvailability,PowerTools,Sources}; do wget https://mirrors.cqu.edu.cn/repo/rockylinux/8/Rocky-${i}.repo; done
@@ -49,7 +49,7 @@ cd /etc/yum.repos.d/ && mkdir -p backup && mv rocky* backup/.
 ```
 
 根据版本号下载相应文件到指定目录：
-</br>
+<br>
 
 ```bash
 for i in {'',-addons,-devel,-extras}; do wget https://mirrors.cqu.edu.cn/repo/rockylinux/9/rocky${i}.repo; done

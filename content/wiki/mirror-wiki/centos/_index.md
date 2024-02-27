@@ -42,7 +42,7 @@ cat /etc/system-release
 ```
 
 
-根据版本号下载相应文件到指定目录：</br>
+根据版本号下载相应文件到指定目录：<br>
 **CentOS 5**:
 
 ```bash

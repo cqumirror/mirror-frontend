@@ -17,8 +17,8 @@ filepath: '/wiki/about/this-site'
 
 相关设施代码如下:
 
-[前端 - AGPL ](https://github.com/cqumirror/mirror-frontend)</br>
-[后端 - MIT ](https://github.com/tuna/tunasync)</br>
+[前端 - AGPL ](https://github.com/cqumirror/mirror-frontend)<br>
+[后端 - MIT ](https://github.com/tuna/tunasync)<br>
 [alter-fancy - MIT ](https://github.com/cqumirror/alter-fancy)
 
 在此之前曾长期使用来自清华大学TUNA协会的镜像站前端代码，受此启发外加2023年镜像站硬件设施翻新，决定基于相同或类似布局进行重写。
