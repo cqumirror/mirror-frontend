@@ -27,6 +27,15 @@ img {
   width: 100%;
 }
 
+/* font awesome*/
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("@/assets/fonts/fa-solid-900.woff2") format('woff2');
+}
+
 // homepage
 #index-container {
   display: flex;
