@@ -136,7 +136,7 @@ export default {
         }
       ],
       tagList: {
-        syncing: '',
+        syncing: 'info',
         success: 'success',
         paused: 'warning',
         failed: 'danger',
