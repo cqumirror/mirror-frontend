@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import path from 'path'
+import path, { dirname } from 'path'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 async function listContentRoutes(directory, prefix = '/') {
@@ -11,6 +11,9 @@ async function listContentRoutes(directory, prefix = '/') {
   routes = routes.concat(...await Promise.all(directories.map(d => listContentRoutes(path.join(directory, d.name), `${prefix}${d.name}/`))))
   return routes
 }
+
+// 获取不含驱动器的项目绝对路径，用于导入自定义 remarkPlugin
+const projectDir = __dirname.includes(':') ? __dirname.split(':')[1] : __dirname
 
 export default defineNuxtConfig({
   app: {
@@ -78,7 +81,7 @@ export default defineNuxtConfig({
       anchorLinks: false,
       remarkPlugins: {
         'remark-gfm': true,
-        '../../utils/shortcode.js': { startBlock: '[[', endBlock: ']]' }
+        [projectDir + '/utils/shortcode.js']: { startBlock: '[[', endBlock: ']]' }
       }
     },
     highlight: {
