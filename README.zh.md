@@ -10,7 +10,7 @@ element-ui -> element-plus
 
 vuex -> pinia
 
-nodejs 14.20.0 -> nodejs ≥16.16
+nodejs 14.20.0 -> nodejs ≥18
 
 ## 尚未迁移的部分
 
@@ -27,10 +27,6 @@ nodejs 14.20.0 -> nodejs ≥16.16
 plugins
 
 * fancy-ui
-
-package.json
-
-* scripts
 
 
 ### 代码
