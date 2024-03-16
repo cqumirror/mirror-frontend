@@ -1,5 +1,5 @@
-const fs = require('fs')
-const readline = require('readline')
+import fs from 'fs'
+import readline from 'readline'
 
 const target = 'content/wiki/mirror-wiki/'
 const output = 'components/Api/ApiDoclist.js'

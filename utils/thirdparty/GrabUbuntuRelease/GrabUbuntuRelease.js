@@ -1,6 +1,6 @@
-const cheerio = require('cheerio')
-const https = require('https')
-const fs = require('fs')
+import cheerio from 'cheerio'
+import https from 'https'
+import fs from 'fs'
 
 const url = 'https://wiki.ubuntu.com/Releases'
 const template = './utils/thirdparty/GrabUbuntuRelease/_index.template.ubuntu.md'
