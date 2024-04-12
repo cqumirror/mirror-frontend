@@ -12,31 +12,6 @@ vuex -> pinia
 
 nodejs 14.20.0 -> nodejs ≥18
 
-## 尚未迁移的部分
-
-此列表可能不全
-
-### nuxt.config.js
-
-* modules > [nuxt-compress, axios]
-* target
-* loadingIndicator
-* axios
-* router > trailingSlash
-
-plugins
-
-* fancy-ui
-
-
-### 代码
-
-* 改写以兼容新的API
-
-* 用 composition api 重写组件
-
-
-
 
 
 ## 关于此文档
