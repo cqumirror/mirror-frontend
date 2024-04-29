@@ -3,6 +3,7 @@ category: news
 layout: news
 title: "镜像站维护公告"
 author: Tiger3018
+date: "2024-04-29"
 ---
 
 根据重庆大学信息化办公室 [4 月 28 日的紧急通知](https://net.cqu.edu.cn/info/1007/2620.htm)，镜像站将于 2024 年 4 月 30 日 0 时（UTC+8）起下线，直至机房空调恢复正常运行。
