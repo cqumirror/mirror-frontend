@@ -44,7 +44,7 @@ http://dl-cdn.alpinelinux.org/alpine/v3.18/community
 更改为重庆大学开源镜像站：
 
 ```bash
-sed -i 's|dl-cdn.aplinelinux.org|mirrors.cqu.edu.cn|g' /etc/apk/repositories
+sed -i 's|dl-cdn.alpinelinux.org|mirrors.cqu.edu.cn|g' /etc/apk/repositories
 ```
 
 如果希望添加测试仓库，可以添加如下行，`replease-ver` 应替换为具体值 ：
