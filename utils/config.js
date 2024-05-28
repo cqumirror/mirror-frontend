@@ -1,4 +1,5 @@
 export default {
+  VERSION: 'VERSION-TO-MANAGE',
   baseURL: (process.env.NODE_ENV === 'production' ? '' : 'https://mirrors.cqu.edu.cn/'),
   // baseURL: 'https://mirrors.cqu.edu.cn/',
   mirrorURL: (process.env.NODE_ENV === 'production' ? '/' : 'https://mirrors.cqu.edu.cn/'),

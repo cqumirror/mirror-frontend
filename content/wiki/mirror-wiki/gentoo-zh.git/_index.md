@@ -4,6 +4,7 @@ draft: false
 weight: 2
 filepath: '/wiki/mirror-wiki/gentoo-zh.git/_index'
 ---
+
 ## 地址
 
 http://mirrors.cqu.edu.cn/git/gentoo-zh.git
@@ -19,7 +20,19 @@ Gentoo zh git 同步仓库。
 ## 使用说明
 ### 首次使用
 
-如果同步过 gentoo-zh 需要删除已经同步过的内容并重新同步：
+
+{{% notice error %}}
+务必确保已经预先安装了 `git` ，没有 `git` 将导致以下全部索引添加步骤操作无效。
+{{% /notice %}}
+
+
+确保已经安装了 `git`，如未安装，使用如下命令进行安装：
+
+```bash
+sudo emerge -aq git
+```
+
+如果同步过 `gentoo-zh` 需要删除已经同步过的内容并重新同步：
 
 ```bash
 rm -rf /var/db/repos/gentoo-zh.git

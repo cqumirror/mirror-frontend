@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import path, { dirname } from 'path'
+import path from 'path'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 async function listContentRoutes(directory, prefix = '/') {
@@ -135,6 +135,15 @@ export default defineNuxtConfig({
       theme_color: '#ffffff',
       description: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。',
       useWebmanifestExtension: false
+    },
+    workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: '/*',
+          handler: 'NetworkFirst',
+          method: 'GET'
+        }
+      ]
     }
   }
 })

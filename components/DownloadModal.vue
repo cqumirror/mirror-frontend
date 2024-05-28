@@ -116,13 +116,15 @@ function handleDownload() {
   if (url === 'about:blank') {
     return
   }
-  const name = url.slice(url.lastIndexOf('/') + 1)
-  const a = document.createElement('a')
-  verify(url)
-  a.setAttribute('href', selectedVersionUrl.value)
-  a.setAttribute('download', name)
-  a.click()
-  a.remove()
+  const location = window.location
+  const params = {
+    protocol: location.protocol,
+    host: location.host,
+    path: url
+  }
+  const requestsURL = `${params.protocol}//${params.host}${params.path}`
+  window.open(requestsURL, '_blank')
+  emit('update:modelValue', false)
 }
 function versionUrlChanged(newVal) { }
 function test() {

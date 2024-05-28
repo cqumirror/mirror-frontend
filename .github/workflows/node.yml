@@ -32,6 +32,9 @@ jobs:
       run: yarn run gen-doclist
     - name: Clean up
       run: yarn local-clean
+    - name: tag version
+      run: |
+        sed -i "s/VERSION-TO-MANAGE/$(git rev-parse --short HEAD)/g" nuxt.config.js
     - name: Pack static site
       run: yarn pack-site
     - name: Capture build artifacts

@@ -75,7 +75,7 @@
                 <template #default="scope">
                   <a
                     class="mirror-href"
-                    :href="mirror_url + scope.row.name"
+                    :href="`/${scope.row.name}/`"
                   >{{
                     scope.row.name
                   }}</a>

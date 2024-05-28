@@ -10,9 +10,11 @@ http://mirrors.cqu.edu.cn/opensuse/tumbleweed/
 openSUSE tumbleweed 软件仓库
 ## 收录架构
 - i586
+- aarch64
+- powerpc
 - x86_64
 ## 收录版本
-Tumbleweed
+Tumbleweed (不包含 src 包(源码包)和 debug 包)
 ## 使用说明
 
 首先禁用全部仓库：
@@ -25,10 +27,12 @@ sudo zypper mr -da
 sudo zypper ar -fc http://mirrors.cqu.edu.cn/opensuse/tumbleweed/repo/oss   openSUSE-CQU-OSS
 # NON-OSS
 sudo zypper ar -fc http://mirrors.cqu.edu.cn/opensuse/tumbleweed/repo/non-oss   openSUSE-CQU-NON-OSS
+# UPDATE
+sudo zypper ar -fc http://mirrors.cqu.edu.cn/opensuse/update/tumbleweed openSUSE-CQU-UPDATE
 ```
 然后执行：
 ```bash
-zypper up
+zypper refresh
 ```
 刷新缓存
 

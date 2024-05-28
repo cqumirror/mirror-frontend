@@ -7,7 +7,7 @@
       <div class="wiki-nav-container" v-if="showNav">
         <div class="wiki-nav">
           <el-tree ref="navTree" :data="data" :props="defaultProps" node-key="id" @node-click="handleNodeClick"
-            :default-expanded-keys="expandedKeys" accordion>
+            :default-expanded-keys="expandedKeys" :filter-node-method="filterNode" accordion>
             <template v-slot="{ data }">
               <div class="leaf-parent">
                 <nuxt-link :to="`${data._path}`" class="leaf-end">{{
@@ -45,6 +45,13 @@ const defaultProps = {
   children: 'children',
   label: 'title',
   id: 'id'
+}
+
+function filterNode(value, data) {
+  if (!value) {
+    return true
+  }
+  return data.label.indexOf(value) !== -1
 }
 
 const showNav = ref(false)
