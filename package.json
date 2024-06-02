@@ -10,7 +10,7 @@
     "gen-doclist": "node utils/thirdparty/GenDocsLink/GenDocsLink.js",
     "gen-ubuntu": "node utils/thirdparty/GrabUbuntuRelease/GrabUbuntuRelease.js",
     "generate": "nuxt generate",
-    "local-clean": "rm -rf dist node_modules/.cache .nuxt",
+    "local-clean": "rm -rf dist .output node_modules/.cache .nuxt",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "pack-site": "yarn generate && cp -rf public/template/basic.html dist/. && rm -rf dist/template && tar -cvf nuxt.tar.gz dist/*",

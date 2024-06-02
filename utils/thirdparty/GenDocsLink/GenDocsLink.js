@@ -15,7 +15,7 @@ async function readTarget(dir) {
   }
 }
 
-function writeToOutput(file) {
+async function writeToOutput(file) {
   let path = file
     .toString()
     .replace(/filepath:\s+'\s?/g, '')
@@ -26,11 +26,7 @@ function writeToOutput(file) {
   path =
     "\t\t\t'" + path + "':" + " prefix + '#/wiki/mirror-wiki/" + path + "',\n"
 
-  fs.appendFile(output, path, function (err) {
-    if (err) {
-      throw err
-    }
-  })
+  await fs.promises.appendFile(output, path)
 }
 
 async function prepare() {
@@ -66,9 +62,9 @@ async function generate() {
           lineCount++
           if (lineCount === 5 && line.lastIndexOf('filepath') !== -1) {
             if (line.lastIndexOf('filepath') !== -1) {
-              writeToOutput(line)
-              rl.close()
-              resolve()
+              writeToOutput(line).then(resolve).catch(reject).finally(() => {
+                rl.close()
+              })
             } else {
               console.error(`Please checkout document ${file} on line 5`)
               console.error('It must have `filepath` to generate links')
