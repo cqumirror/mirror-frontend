@@ -11,7 +11,7 @@ http://mirrors.cqu.edu.cn/git/gentoo-zh.git
 
 ## 说明
 
-Gentoo zh git 同步仓库。
+Gentoo zh Overlay
 
 ## 收录架构
 
@@ -67,6 +67,9 @@ emerge -aq <package>
 {{% notice note %}}
 gentoo-zh 是 https://github.com/microcai/gentoo-zh 的完整镜像，是 [ebuild](https://wiki.gentoo.org/wiki/Ebuild) 仓库，并不包含 ebuild 引用的二进制和源代码内容。
 {{% /notice %}}
+
+
+如需要使用 `distfiles 缓存` 请参考： [Gentoo zh distfile 缓存镜像使用帮助](/wiki/mirror-wiki/gentoo-zh.git/cache)中的说明。
 
 
 {{% notice warn %}}
