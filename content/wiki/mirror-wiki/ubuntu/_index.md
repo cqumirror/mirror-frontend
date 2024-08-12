@@ -47,6 +47,12 @@ Release
 
 ### 通用版本
 
+
+{{% notice note %}}
+在 Ubuntu 24.04 之前，Ubuntu 的软件源配置文件使用传统的 One-Line-Style，路径为 /etc/apt/sources.list；从 Ubuntu 24.04 开始，Ubuntu 的软件源配置文件变更为 [DEB822 格式]({{  < relref "#DEB822" >  }})，路径为 /etc/apt/sources.list.d/ubuntu.sources
+{{% /notice %}}
+
+
 首先备份 `sources.list` 文件
 
 ```bash
@@ -114,6 +120,22 @@ deb http://mirrors.cqu.edu.cn/ubuntu/ jammy-security main restricted universe mu
 # deb-src http://mirrors.cqu.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse
 ```
 
+对于 Ubuntu 24.04 (noble) (建议采用 [DEB822 格式]({{  < relref "#DEB822" >  }}))
+
+```bash
+deb https://mirrors.cqu.edu.cn/ubuntu/ noble main restricted universe multiverse
+# deb-src https://mirrors.cqu.edu.cn/ubuntu/ noble main restricted universe multiverse
+deb https://mirrors.cqu.edu.cn/ubuntu/ noble-updates main restricted universe multiverse
+# deb-src https://mirrors.cqu.edu.cn/ubuntu/ noble-updates main restricted universe multiverse
+deb https://mirrors.cqu.edu.cn/ubuntu/ noble-backports main restricted universe multiverse
+# deb-src https://mirrors.cqu.edu.cn/ubuntu/ noble-backports main restricted universe multiverse
+deb https://mirrors.cqu.edu.cn/ubuntu/ noble-security main restricted universe multiverse
+# deb-src https://mirrors.cqu.edu.cn/ubuntu/ noble-security main restricted universe multiverse
+
+# deb https://mirrors.cqu.edu.cn/ubuntu/ noble-proposed main restricted universe multiverse
+# # deb-src https://mirrors.cqu.edu.cn/ubuntu/ noble-proposed main restricted universe multiverse
+```
+
 然后执行
 
 ```bash
@@ -129,6 +151,93 @@ sudo apt upgrade
 ```
 
 即可更新软件包。
+
+#### DEB822 格式{#DEB822}
+
+首先备份 `ubuntu.sources` 文件
+
+```bash
+sudo cp /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources.bak
+```
+
+然后执行
+
+```bash
+sudo nano /etc/apt/sources.list.d/ubuntu.sources
+```
+
+将其中的内容替换为：
+
+对于Ubuntu 24.04 (noble)
+
+```bash
+Types: deb
+URIs: https://mirrors.cqu.edu.cn/ubuntu
+Suites: noble noble-updates noble-backports
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+# Types: deb-src
+# URIs: https://mirrors.cqu.edu.cn/ubuntu
+# Suites: noble noble-updates noble-backports
+# Components: main restricted universe multiverse
+# Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# 以下安全更新软件源包含了官方源与镜像站配置，如有需要可自行修改注释切换
+# Types: deb
+# URIs: https://mirrors.cqu.edu.cn/ubuntu
+# Suites: noble-security
+# Components: main restricted universe multiverse
+# Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# # Types: deb-src
+# # URIs: https://mirrors.cqu.edu.cn/ubuntu
+# # Suites: noble-security
+# # Components: main restricted universe multiverse
+# # Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+Types: deb
+URIs: http://security.ubuntu.com/ubuntu/
+Suites: noble-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# Types: deb-src
+# URIs: http://security.ubuntu.com/ubuntu/
+# Suites: noble-security
+# Components: main restricted universe multiverse
+# Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# 预发布软件源，不建议启用
+# Types: deb
+# URIs: https://mirrors.cqu.edu.cn/ubuntu
+# Suites: noble-proposed
+# Components: main restricted universe multiverse
+# Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# # Types: deb-src
+# # URIs: https://mirrors.cqu.edu.cn/ubuntu
+# # Suites: noble-proposed
+# # Components: main restricted universe multiverse
+# # Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+```
+
+按 <kbd>Ctrl</kbd> + <kbd>o</kbd> 进行写入更改，按  <kbd>ctrl</kbd> + <kbd>o</kbd>  退出。
+
+然后执行
+
+```bash
+sudo apt update
+```
+
+更新 apt 缓存即可生效。
+
+执行
+
+```bash
+sudo apt upgrade
+```
 
 ## 相关链接
 
