@@ -49,7 +49,7 @@ Release
 
 
 {{% notice note %}}
-在 Ubuntu 24.04 之前，Ubuntu 的软件源配置文件使用传统的 One-Line-Style，路径为 /etc/apt/sources.list；从 Ubuntu 24.04 开始，Ubuntu 的软件源配置文件变更为 [DEB822 格式]({{  < relref "#DEB822" >  }})，路径为 /etc/apt/sources.list.d/ubuntu.sources
+在 **Ubuntu 24.04** 之前，Ubuntu 的软件源配置文件使用传统的 **One-Line-Style**，路径为 `/etc/apt/sources.list`；从 **Ubuntu 24.04** 开始，Ubuntu 的软件源配置文件变更为 [DEB822 格式](#DEB822-格式)，路径为 `/etc/apt/sources.list.d/ubuntu.sources`
 {{% /notice %}}
 
 
@@ -120,7 +120,7 @@ deb http://mirrors.cqu.edu.cn/ubuntu/ jammy-security main restricted universe mu
 # deb-src http://mirrors.cqu.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse
 ```
 
-对于 Ubuntu 24.04 (noble) (建议采用 [DEB822 格式]({{  < relref "#DEB822" >  }}))
+对于 Ubuntu 24.04 (noble) (建议采用 [DEB822 格式](#DEB822-格式)
 
 ```bash
 deb https://mirrors.cqu.edu.cn/ubuntu/ noble main restricted universe multiverse
@@ -152,7 +152,7 @@ sudo apt upgrade
 
 即可更新软件包。
 
-#### DEB822 格式{#DEB822}
+#### DEB822 格式
 
 首先备份 `ubuntu.sources` 文件
 
@@ -223,7 +223,7 @@ Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 # # Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 ```
 
-按 <kbd>Ctrl</kbd> + <kbd>o</kbd> 进行写入更改，按  <kbd>ctrl</kbd> + <kbd>o</kbd>  退出。
+按 <kbd>Ctrl</kbd> + <kbd>o</kbd> 进行写入更改 (输入 <kbd>Enter</kbd> 确认文件名)，按 <kbd>ctrl</kbd> + <kbd>x</kbd> 退出。
 
 然后执行
 
