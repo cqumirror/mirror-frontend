@@ -49,7 +49,11 @@ Release
 
 
 {{% notice note %}}
-在 **Ubuntu 24.04** 之前，Ubuntu 的软件源配置文件使用传统的 **One-Line-Style**，路径为 `/etc/apt/sources.list`；从 **Ubuntu 24.04** 开始，Ubuntu 的软件源配置文件变更为 [DEB822 格式](#DEB822-格式)，路径为 `/etc/apt/sources.list.d/ubuntu.sources`
+在 **Ubuntu 24.04** 之前，Ubuntu 的软件源配置文件使用传统的 **One-Line-Style**，路径为 `/etc/apt/sources.list`；从 **Ubuntu 24.04** 开始，Ubuntu 的软件源配置文件变更为 [DEB822 格式](#deb822-格式)，路径为 `/etc/apt/sources.list.d/ubuntu.sources`。
+{{% /notice %}}
+
+{{% notice info %}}
+以下命令适用于 **Ubuntu 24.04 之前**的版本，对于 **Ubuntu 24.04** 版本，`/etc/apt/sources.list`将会是一个**空文件**，需要**直接填充**相应的软件源配置内容，并**删除**`/etc/apt/sources.list.d/ubuntu.sources`防止配置重复，因此建议**直接采用 [DEB822 格式](#deb822-格式) 进行配置**。
 {{% /notice %}}
 
 
@@ -120,7 +124,7 @@ deb http://mirrors.cqu.edu.cn/ubuntu/ jammy-security main restricted universe mu
 # deb-src http://mirrors.cqu.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse
 ```
 
-对于 Ubuntu 24.04 (noble) (建议采用 [DEB822 格式](#DEB822-格式)
+对于 Ubuntu 24.04 (noble) (建议采用 [DEB822 格式](#deb822-格式))
 
 ```bash
 deb https://mirrors.cqu.edu.cn/ubuntu/ noble main restricted universe multiverse
@@ -152,7 +156,11 @@ sudo apt upgrade
 
 即可更新软件包。
 
-#### DEB822 格式
+### DEB822 格式
+
+{{% notice info %}}
+以下命令仅适用于 **Ubuntu 24.04 及之后**的版本。
+{{% /notice %}}
 
 首先备份 `ubuntu.sources` 文件
 
