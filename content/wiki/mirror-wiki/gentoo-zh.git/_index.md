@@ -35,20 +35,20 @@ sudo emerge -aq git
 如果同步过 `gentoo-zh` 需要删除已经同步过的内容并重新同步：
 
 ```bash
-rm -rf /var/db/repos/gentoo-zh.git
+rm -rf /var/db/repos/gentoo-zh
 ```
 
 执行以下内容添加 gentoo-zh 镜像：
 
 
 ```bash
-eselect repository add gentoo-zh.git git https://mirrors.cqu.edu.cn/git/gentoo-zh.git
+eselect repository add gentoo-zh git https://mirrors.cqu.edu.cn/git/gentoo-zh.git
 ```
 
 并执行同步：
 
 ```bash
-emerge --sync gentoo-zh.git
+emerge --sync gentoo-zh
 ```
 
 使用 eix 查询包：
