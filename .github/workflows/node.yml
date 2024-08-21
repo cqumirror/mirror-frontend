@@ -18,11 +18,9 @@ jobs:
         node-version: [14.20.0]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
-    - uses: actions/checkout@v3
-    - name: Update Submodules
-      run: |
-        git pull --recurse-submodules
-        git submodule update --remote --recursive
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'true'
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
