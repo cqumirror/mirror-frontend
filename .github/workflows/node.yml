@@ -40,7 +40,7 @@ jobs:
     - name: Pack static site
       run: yarn pack-site
     - name: Capture build artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: nuxt.tar.gz
         path: nuxt.tar.gz
