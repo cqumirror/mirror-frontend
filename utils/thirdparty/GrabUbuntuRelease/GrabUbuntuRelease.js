@@ -54,7 +54,14 @@ function parseToMD(version,code,code_url,docs,docs_url,release,release_url,eos,e
 function parseTable(reqBody) {
   const $ = cheerio.load(reqBody)
 
-  const table = $('#content > div:nth-child(18) > table')['0'].children
+  const tableElement = $('#content table').first()
+
+  if (tableElement.length === 0) {
+    console.error("Critical Error: Ubuntu release table not found using selector '#content table'. The page structure may have changed.")
+    throw new Error('Target release table not found.')
+  }
+
+  const table = tableElement.get(0).children
 
   table[0].children.forEach((item, index) => {
     if (index !== 0) {
