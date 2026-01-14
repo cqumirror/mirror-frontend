@@ -1,125 +1,78 @@
-const cheerio = require('cheerio')
-const https = require('https')
-const fs = require('fs')
+const cheerio = require('cheerio');
+const https = require('https');
+const fs = require('fs');
 
-// 更新为新地址
-const url = 'https://documentation.ubuntu.com/project/release-team/list-of-releases/'
-const template = './utils/thirdparty/GrabUbuntuRelease/_index.template.ubuntu.md'
-const target = './content/wiki/mirror-wiki/ubuntu-releases/_index.md'
+const url = 'https://documentation.ubuntu.com/project/release-team/list-of-releases/';
+const template = './utils/thirdparty/GrabUbuntuRelease/_index.template.ubuntu.md';
+const target = './content/wiki/mirror-wiki/ubuntu-releases/_index.md';
 
-let reqBody = ''
-
-async function queryUbuntuRelease(uri) {
-  https.get(url, res => {
-    let data = '';
-    res.on('data', chunk => {
-      reqBody += chunk;
-    });
-    res.on('end', () => {
-      parseTable(reqBody)
-    })
-  }).on('error', err => {
-    console.log(err.message);
-  })
+// 封装 HTTPS 请求为 Promise
+function fetchData(uri) {
+  return new Promise((resolve, reject) => {
+    https.get(uri, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve(data));
+    }).on('error', err => reject(err));
+  });
 }
 
 function parseURL(uri) {
   if (!uri) return '';
-  // 如果是绝对路径
-  if (uri.startsWith('http')) {
-    return uri;
-  }
-  // 处理相对路径，新站点基础路径不同
-  if (uri.startsWith('/')) {
-    return 'https://documentation.ubuntu.com' + uri;
-  } else {
-    return 'https://documentation.ubuntu.com/project/release-team/list-of-releases/' + uri;
-  }
+  if (uri.startsWith('http')) return uri;
+  // 适配新站点的相对路径
+  return 'https://documentation.ubuntu.com' + (uri.startsWith('/') ? uri : '/' + uri);
 }
 
-function parseToMD(version, code, code_url, docs, docs_url, release, release_url, eos, eos_url, eol) {
-  if (version) {
-    let data = `| ${version} | [${code}](${code_url}) | [${docs}](${docs_url}) | [${release}](${release_url}) | `;
-    if (eos_url) {
-      data += `[${eos}](${eos_url}) | ${eol} |\n`;
-    } else {
-      data += `${eos} | ${eol} |\n`;
-    }
-    fs.appendFile(target, data, 'utf-8', (err) => {
-      if (err) throw err;
-    });
-  }
-}
+function parseTable(html) {
+  const $ = cheerio.load(html);
 
-function parseTable(reqBody) {
-  const $ = cheerio.load(reqBody)
+  // 策略：寻找包含 "Version" 和 "End of life" 文字的表格
+  const targetTable = $('table').filter((i, el) => {
+    const text = $(el).text();
+    return text.includes('Version') && text.includes('End of life');
+  }).first();
 
-  const tableElement = $('#content table').first()
-
-  if (tableElement.length === 0) {
-    console.error("Critical Error: Ubuntu release table not found using selector '#content table'. The page structure may have changed.")
-    throw new Error('Target release table not found.')
-  }
-
-  const table = tableElement.get(0).children
-
-  if (targetTable.length === 0) {
-    console.error('Critical Error: Ubuntu release table not found. Page structure might have changed.');
-    process.exit(1);
+  if (!targetTable.length) {
+    throw new Error('Critical Error: Ubuntu release table not found using content filter.');
   }
 
   const rows = targetTable.find('tbody tr');
+  let mdContent = fs.readFileSync(template, 'utf-8');
 
-  rows.each((index, tr) => {
+  rows.each((i, tr) => {
     const tds = $(tr).find('td');
-    if (tds.length < 6) return; // 确保行数据完整
+    if (tds.length < 6) return;
 
-    // 提取文本和链接的辅助函数
-    const getText = (cell) => $(cell).text().trim();
-    const getLink = (cell) => {
-      const a = $(cell).find('a').first();
-      return {
-        text: a.text().trim() || getText(cell),
-        url: parseURL(a.attr('href'))
-      };
-    };
+    const version = $(tds[0]).text().trim();
+    const code = $(tds[1]).text().trim();
+    const code_url = parseURL($(tds[1]).find('a').attr('href'));
+    const docs = $(tds[2]).text().trim() || 'Docs';
+    const docs_url = parseURL($(tds[2]).find('a').attr('href'));
+    const release = $(tds[3]).text().trim();
+    const release_url = parseURL($(tds[3]).find('a').attr('href'));
+    const eos = $(tds[4]).text().trim();
+    const eos_url = parseURL($(tds[4]).find('a').attr('href'));
+    const eol = $(tds[5]).text().trim();
 
-    // 根据新表格列顺序解析:
-    // 0: Version, 1: Code name, 2: Docs, 3: Release date, 4: End of standard support, 5: End of life
-    const version = getText(tds[0]);
-    const codeInfo = getLink(tds[1]);
-    const docsInfo = getLink(tds[2]);
-    const releaseInfo = getLink(tds[3]);
-    const eosInfo = getLink(tds[4]);
-    const eol = getText(tds[5]);
-
-    parseToMD(
-      version,
-      codeInfo.text,
-      codeInfo.url,
-      docsInfo.text,
-      docsInfo.url,
-      releaseInfo.text,
-      releaseInfo.url,
-      eosInfo.text,
-      eosInfo.url,
-      eol
-    );
+    if (version) {
+      mdContent += `| ${version} | [${code}](${code_url}) | [${docs}](${docs_url}) | [${release}](${release_url}) | ${eos_url ? `[${eos}](${eos_url})` : eos} | ${eol} |\n`;
+    }
   });
+
+  fs.writeFileSync(target, mdContent, 'utf-8');
+  console.log('Successfully updated Ubuntu releases.');
 }
 
-async function prepare() {
+async function run() {
   try {
-    const data = fs.readFileSync(template);
-    fs.writeFileSync(target, data.toString('utf-8'));
+    console.log('Fetching Ubuntu releases from new docs...');
+    const html = await fetchData(url);
+    parseTable(html);
   } catch (err) {
-    console.error("Prepare failed:", err);
-    throw err;
+    console.error(err.message);
+    process.exit(1);
   }
 }
 
-// 执行脚本
-(async () => {
-  await prepare();
-  queryUbuntuRelease(url);
-})();
+run();
