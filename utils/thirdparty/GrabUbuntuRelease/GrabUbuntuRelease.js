@@ -2,22 +2,20 @@ const cheerio = require('cheerio')
 const https = require('https')
 const fs = require('fs')
 
-
-const url = 'https://wiki.ubuntu.com/Releases'
+// 更新为新地址
+const url = 'https://documentation.ubuntu.com/project/release-team/list-of-releases/'
 const template = './utils/thirdparty/GrabUbuntuRelease/_index.template.ubuntu.md'
 const target = './content/wiki/mirror-wiki/ubuntu-releases/_index.md'
 
-
 let reqBody = ''
 
-async function queryUbuntuRelease (uri) {
-  await https.get(url, res => {
+async function queryUbuntuRelease(uri) {
+  https.get(url, res => {
     let data = '';
     res.on('data', chunk => {
       reqBody += chunk;
     });
     res.on('end', () => {
-      // console.log(reqBody)
       parseTable(reqBody)
     })
   }).on('error', err => {
@@ -26,28 +24,30 @@ async function queryUbuntuRelease (uri) {
 }
 
 function parseURL(uri) {
-  // console.log(uri)
-  if (uri && uri.lastIndexOf('http') !== -1) {
-    return uri
-  } else if (uri) {
-    let new_url = 'https://wiki.ubuntu.com'+uri
-    return new_url.toString()
+  if (!uri) return '';
+  // 如果是绝对路径
+  if (uri.startsWith('http')) {
+    return uri;
+  }
+  // 处理相对路径，新站点基础路径不同
+  if (uri.startsWith('/')) {
+    return 'https://documentation.ubuntu.com' + uri;
+  } else {
+    return 'https://documentation.ubuntu.com/project/release-team/list-of-releases/' + uri;
   }
 }
 
-function parseToMD(version,code,code_url,docs,docs_url,release,release_url,eos,eos_url,eol) {
+function parseToMD(version, code, code_url, docs, docs_url, release, release_url, eos, eos_url, eol) {
   if (version) {
-    let data = '| ' + version + ' | [' + code + '](' + code_url + ') | [' + docs + '](' + docs_url + ') | [' + release + '](' +
-      release_url + ') | '
+    let data = `| ${version} | [${code}](${code_url}) | [${docs}](${docs_url}) | [${release}](${release_url}) | `;
     if (eos_url) {
-      data += '[' + eos + '](' + eos_url + ') | ' + eol + ' |\n'
+      data += `[${eos}](${eos_url}) | ${eol} |\n`;
     } else {
-      data += eos + ' | ' + eol + ' |\n'
+      data += `${eos} | ${eol} |\n`;
     }
-    fs.appendFile(target, data, 'utf-8',
-      function (err) {
-        if (err) throw err;
-      })
+    fs.appendFile(target, data, 'utf-8', (err) => {
+      if (err) throw err;
+    });
   }
 }
 
@@ -63,70 +63,63 @@ function parseTable(reqBody) {
 
   const table = tableElement.get(0).children
 
-  table[0].children.forEach((item, index) => {
-    if (index !== 0) {
-      const selected = $(item).toString()
-        .replace('<tr> ','')
-        .replace('</tr>','')
-        .replace(/<\/td>/g,'')
-        .replace(/<td.+?>/g,'')
-        .replace(/<span.+?><\/span>/g,'')
-      const reParseText = cheerio.load(selected)
-      const p_selector = reParseText("p[class^='line']");
-      const release_version = p_selector.eq(0).text()
-      // console.log(release_version)
-      const a_selector = reParseText("a")
-      const release_code = a_selector.eq(0).text()
-      // console.log(release_code)
-      let release_code_url = a_selector.eq(0).attr("href") === undefined  ? '': a_selector.eq(0).attr("href")
-      release_code_url = parseURL(release_code_url)
-      // console.log(release_code_url)
-      const release_docs = a_selector.eq(1).text()
-      // console.log(release_docs)
-      let release_docs_url = a_selector.eq(1).attr("href") === undefined  ? '': a_selector.eq(1).attr("href")
-      release_docs_url = parseURL(release_docs_url)
-      // console.log(release_docs_url)
-      const release_date = a_selector.eq(2).text()
-      // console.log(release_date)
-      let release_date_url = a_selector.eq(2).attr("href") === undefined  ? '': a_selector.eq(2).attr("href")
-      release_date_url = parseURL(release_date_url)
-      // console.log(release_date_url)
-      const eos_date = p_selector.eq(4).text()
-      // console.log(eos_date)
-      let eos_date_url = a_selector.eq(3).attr("href") === undefined  ? '': a_selector.eq(3).attr("href")
-      eos_date_url = parseURL(eos_date_url)
-      // console.log(eos_date_url)
-      const eol_date = p_selector.eq(5).text()
-      // console.log(eol_date)
-      parseToMD(
-        release_version,
-        release_code,
-        release_code_url,
-        release_docs,
-        release_docs_url,
-        release_date,
-        release_date_url,
-        eos_date,
-        eos_date_url,
-        eol_date
-      )
-    }
-  })
+  if (targetTable.length === 0) {
+    console.error('Critical Error: Ubuntu release table not found. Page structure might have changed.');
+    process.exit(1);
+  }
+
+  const rows = targetTable.find('tbody tr');
+
+  rows.each((index, tr) => {
+    const tds = $(tr).find('td');
+    if (tds.length < 6) return; // 确保行数据完整
+
+    // 提取文本和链接的辅助函数
+    const getText = (cell) => $(cell).text().trim();
+    const getLink = (cell) => {
+      const a = $(cell).find('a').first();
+      return {
+        text: a.text().trim() || getText(cell),
+        url: parseURL(a.attr('href'))
+      };
+    };
+
+    // 根据新表格列顺序解析:
+    // 0: Version, 1: Code name, 2: Docs, 3: Release date, 4: End of standard support, 5: End of life
+    const version = getText(tds[0]);
+    const codeInfo = getLink(tds[1]);
+    const docsInfo = getLink(tds[2]);
+    const releaseInfo = getLink(tds[3]);
+    const eosInfo = getLink(tds[4]);
+    const eol = getText(tds[5]);
+
+    parseToMD(
+      version,
+      codeInfo.text,
+      codeInfo.url,
+      docsInfo.text,
+      docsInfo.url,
+      releaseInfo.text,
+      releaseInfo.url,
+      eosInfo.text,
+      eosInfo.url,
+      eol
+    );
+  });
 }
 
 async function prepare() {
-  let tmp
-  fs.readFile(template,
-    function (err,data) {
-      if (err) throw err;
-      tmp = data.toString('utf-8')
-      fs.writeFile(target,tmp,
-        function (err) {
-          if (err) throw err;
-        })
-    })
+  try {
+    const data = fs.readFileSync(template);
+    fs.writeFileSync(target, data.toString('utf-8'));
+  } catch (err) {
+    console.error("Prepare failed:", err);
+    throw err;
+  }
 }
 
-prepare()
-queryUbuntuRelease(url)
-
+// 执行脚本
+(async () => {
+  await prepare();
+  queryUbuntuRelease(url);
+})();
