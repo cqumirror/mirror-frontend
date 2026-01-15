@@ -10,7 +10,7 @@ function parseURL(uri) {
   if (!uri) return '';
   if (uri.startsWith('http')) return uri;
   if (uri.startsWith('/')) return 'https://documentation.ubuntu.com' + uri;
-  // 处理 Sphinx 的相对路径
+  // 处理 Sphinx 的相对路径，去除 ../ 等
   const cleanUri = uri.replace(/^(\.\.\/)+/, '');
   return 'https://documentation.ubuntu.com/project/release-team/list-of-releases/' + cleanUri;
 }
@@ -18,10 +18,10 @@ function parseURL(uri) {
 function parseTable(html) {
   const $ = cheerio.load(html);
 
-  // 1. 根据源码中的类名定位表格
+  // 1. 根据新版官网类名定位表格
   let targetTable = $('table.docutils.align-default').first();
 
-  // 2. 如果类名匹配失败，回退到查找包含特定表头的表格
+  // 2. 如果类名匹配失败，回退到查找包含特定关键信息的表格
   if (!targetTable.length) {
     targetTable = $('table').filter((i, el) => $(el).text().includes('End of life'));
   }
@@ -31,14 +31,19 @@ function parseTable(html) {
   }
 
   const rows = targetTable.find('tbody tr');
-  // 读取模板并确保结尾有换行
+
+  // 【关键修改点 1】：读取模板，清理末尾多余空格
+  // 并由脚本统一写入表格头，确保表格语法连贯无断行
   let mdContent = fs.readFileSync(template, 'utf-8').trim() + '\n\n';
+  mdContent += '| 版本 | 代号 | 发行注记 | 发行时间 | 停止支持 | 生命周期结束 |\n';
+  mdContent += '|:--|:-:|:-:|:--|--:|--:|\n';
 
   rows.each((i, tr) => {
     const tds = $(tr).find('td');
-    if (tds.length < 6) return; // 源码中包含 6 列数据
+    // 确保有足够的列
+    if (tds.length < 6) return;
 
-    // 清洗函数：合并空白符、去除换行以及新文档中特有的箭头符号 (↗)
+    // 清洗函数：合并空白符、去除新文档中特有的箭头符号 (↗)
     const cleanText = (el) => $(el).text().replace(/\s+/g, ' ').replace(/↗/g, '').trim();
 
     const getLink = (el) => {
@@ -47,26 +52,27 @@ function parseTable(html) {
     };
 
     // 映射列索引
-    const version     = cleanText(tds[0]); // Version
-    const codeText    = cleanText(tds[1]); // Code name
+    const version     = cleanText(tds[0]);
+    const codeText    = cleanText(tds[1]);
     const codeLink    = getLink(tds[1]);
-    const docsText    = cleanText(tds[2]); // Docs
+    const docsText    = cleanText(tds[2]);
     const docsLink    = getLink(tds[2]);
-    const releaseText = cleanText(tds[3]); // Release date
+    const releaseText = cleanText(tds[3]);
     const releaseLink = getLink(tds[3]);
-    const eosText     = cleanText(tds[4]); // End of standard support
+    const eosText     = cleanText(tds[4]);
     const eosLink     = getLink(tds[4]);
-    const eolText     = cleanText(tds[5]); // End of life
+    const eolText     = cleanText(tds[5]);
 
+    // 【关键修改点 2】：过滤掉表头行，只处理数据行
     if (version && !version.toLowerCase().includes('version')) {
-      // 组装符合原有 Wiki 格式的 Markdown 行
+      // 组装行，末尾只保留一个 \n，确保表格行之间紧密连接
       const row = `| ${version} | [${codeText}](${codeLink}) | [${docsText}](${docsLink}) | [${releaseText}](${releaseLink}) | ${eosLink ? `[${eosText}](${eosLink})` : eosText} | ${eolText} |\n`;
       mdContent += row;
     }
   });
 
   fs.writeFileSync(target, mdContent, 'utf-8');
-  console.log(`Update completed. Target: ${target}`);
+  console.log(`Update completed successfully. Target: ${target}`);
 }
 
 const options = {
