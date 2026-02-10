@@ -60,6 +60,16 @@
                   </template>
                 </el-table-column>
                 <el-table-column
+                  v-else-if="item.prop === 'lastUpdate'"
+                  :prop="item.prop"
+                  :label="item.label"
+                  :width="item.width"
+                >
+                  <template #default="scope">
+                    <span class="update-time-text">{{ scope.row.lastUpdate }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column
                   v-else
                   :prop="item.prop"
                   :label="item.label"
@@ -119,7 +129,7 @@ export default {
         {
           prop: 'lastUpdate',
           label: 'Last Update',
-          width: '175',
+          width: '185',
           hidden: false
         },
         {
@@ -287,5 +297,10 @@ export default {
 .mirror-href {
   color: #1ccb4c;
   text-decoration: none;
+}
+.update-time-text {
+  white-space: nowrap;  /* 强制不换行 */
+  font-size: 13px;      /* 稍微缩小字体 */
+  font-family: 'Roboto Mono', monospace; /* 等宽字体 */
 }
 </style>
