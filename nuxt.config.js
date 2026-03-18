@@ -210,7 +210,7 @@ export default {
       ]
     },
     wikiFloatBox: {
-      enabled: true,
+      enabled: false,
       data: [
         {
           label: '回到\n旧版',
