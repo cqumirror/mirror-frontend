@@ -37,7 +37,7 @@
     <div>
       <h4><fa :icon="['far','file-archive']" style="margin-right: 1vw"/>下载链接</h4>
       <div style="display: flex;flex-direction: column; margin-left: 2vw;">
-        <span>常用发行版 iso 和应用工具安装包下载</span>
+        <span>常用发行版镜像、应用工具安装包和字体下载</span>
         <button id="download-pkg" @click="handleDialogRaise">获取下载链接</button>
       </div>
     </div>
@@ -103,6 +103,7 @@ export default {
       isoCategory: [
         { prop: 'os', label: '系统镜像' , column: [], key:0 },
         { prop: 'app', label: '常用软件', column: [], key:1 },
+        { prop: 'font', label: "常用字体", column: [], key:2 },
       ],
 
       notices: {}

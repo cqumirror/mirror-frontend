@@ -26,7 +26,7 @@
       margin: 5px;
       padding-left: 10%;
 
-      @screen (max-with: $mobile-size) {
+      @media (max-width: $mobile-size) {
         padding-left: 5%;
         flex-direction: column;
       }
