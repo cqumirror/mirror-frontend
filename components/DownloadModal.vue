@@ -21,7 +21,7 @@
       <div id="select-group">
         <!-- select group -->
         <div>
-          <label>选择发行版: </label>
+          <label>选择项目: </label>
           <select v-model="selectedDistro" v-if="selectedCategory === 0" @change="selectedChanged">
             <template v-for="item of $props.isoCategory[0].column">
               <option :value="item.key">{{ item.distro }}</option>
@@ -29,6 +29,11 @@
           </select>
           <select v-model="selectedSoftware" v-if="selectedCategory === 1" @change="selectedChanged">
             <template v-for="item of $props.isoCategory[1].column">
+              <option :value="item.key">{{ item.distro }}</option>
+            </template>
+          </select>
+          <select v-model="selectedSoftware" v-if="selectedCategory === 2" @change="selectedChanged">
+            <template v-for="item of $props.isoCategory[2].column">
               <option :value="item.key">{{ item.distro }}</option>
             </template>
           </select>
