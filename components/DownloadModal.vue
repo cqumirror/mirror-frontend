@@ -196,8 +196,10 @@ export default {
           } else if (this.selectedCategory === 1) {
             this.listCleanUp()
             this.generateUrlList(this.selectedCategory, this.selectedSoftware)
+          } else if (this.selectedCategory === 2) {
+            this.listCleanUp()
+            this.generateUrlList(this.selectedCategory, this.selectedSoftware)
           }
-
         })
 
       },
