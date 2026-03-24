@@ -17,7 +17,7 @@
     select {
       margin-left: 10px;
       max-width: 13rem;
-      min-width: 10rem;
+      min-width: 13rem;
     }
 
     div {
@@ -26,7 +26,7 @@
       margin: 5px;
       padding-left: 10%;
 
-      @screen (max-with: $mobile-size) {
+      @media (max-width: $mobile-size) {
         padding-left: 5%;
         flex-direction: column;
       }
