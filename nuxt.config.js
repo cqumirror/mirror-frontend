@@ -200,7 +200,7 @@ export default {
       pageSize: 10
     },
     indexFloatBox: {
-      enabled: true,
+      enabled: false,
       data: [
         {
           label: '回到\n旧版',
@@ -210,7 +210,7 @@ export default {
       ]
     },
     wikiFloatBox: {
-      enabled: true,
+      enabled: false,
       data: [
         {
           label: '回到\n旧版',
