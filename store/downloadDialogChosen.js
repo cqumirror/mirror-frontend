@@ -1,7 +1,8 @@
 export const state = () => ({
   currentCategory: 0,
   currentDistro: 0,
-  currentSoftware: 0
+  currentSoftware: 0,
+  currentFont: 0,
 })
 
 export const mutations = {
@@ -13,5 +14,8 @@ export const mutations = {
   },
   changeChosenSoftware(state, key) {
     state.currentSoftware = typeof key === 'number' ? key : 0
-  }
+  },
+  changeChosenFont(state, key) {
+    state.currentFont = typeof key === 'number' ? key : 0
+  },
 }

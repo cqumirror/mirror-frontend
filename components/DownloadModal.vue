@@ -32,7 +32,7 @@
               <option :value="item.key">{{ item.distro }}</option>
             </template>
           </select>
-          <select v-model="selectedSoftware" v-if="selectedCategory === 2" @change="selectedChanged">
+          <select v-model="selectedFont" v-if="selectedCategory === 2" @change="selectedChanged">
             <template v-for="item of $props.isoCategory[2].column">
               <option :value="item.key">{{ item.distro }}</option>
             </template>
@@ -67,9 +67,45 @@ export default {
   },
   data() {
     return {
+      selectedItem: {
+        0: {
+          name: "系统镜像",
+          selectCategory: {
+            name: "选择发行版",
+            item: []
+          },
+          selectVersion: {
+            name: "选择版本",
+            item: []
+          }
+        },
+        1: {
+          name: "常用软件",
+          selectCategory: {
+            name: "选择项目",
+            item: []
+          },
+          selectVersion: {
+            name: "选择版本",
+            item: []
+          }
+        },
+        2: {
+          name: "开源字体",
+          selectCategory: {
+            name: "选择发行版",
+            item: []
+          },
+          selectVersion: {
+            name: "选择版本",
+            item: []
+          }
+        }
+      },
       selectedCategory: 0,
       selectedDistro: 0,
       selectedSoftware: 0,
+      selectedFont: 0,
       selectedVersionUrl: 'about:blank',
       selectedColumnKey: 0,
       versionList: [
@@ -122,13 +158,6 @@ export default {
       }
       const requestsURL = `${params.protocol}//${params.host}${params.path}`
       window.open(requestsURL, '_blank')
-      // window.open()
-      // const a = document.createElement("a")
-      // this.verifyPre(url)
-      // a.setAttribute("href", this.selectedVersionUrl)
-      // a.setAttribute("download", name)
-      // a.click()
-      // a.remove()
       this.$modal.hide('download-dialog')
     },
     async verifyPre(key) {
@@ -158,6 +187,11 @@ export default {
         this.$store.commit('downloadDialogChosen/changeChosenSoftware', this.selectedSoftware)
         this.listCleanUp()
         this.generateUrlList(this.selectedCategory, this.selectedSoftware)
+      } else if (this.selectedCategory === 2) {
+        this.$store.commit('downloadDialogChosen/changeChosenFont', this.selectedFont)
+        this.listCleanUp()
+        this.generateUrlList(this.selectedCategory, this.selectedFont)
+        
       }
     },
     versionUrlChanged(newVal) {
@@ -198,8 +232,9 @@ export default {
             this.generateUrlList(this.selectedCategory, this.selectedSoftware)
           } else if (this.selectedCategory === 2) {
             this.listCleanUp()
-            this.generateUrlList(this.selectedCategory, this.selectedSoftware)
+            this.generateUrlList(this.selectedCategory, this.selectedFont)
           }
+
         })
 
       },
