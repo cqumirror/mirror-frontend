@@ -1,0 +1,7 @@
+// 只保留这一行，删除所有其他的 Element 样式导入
+@import 'element-plus/dist/index.css';
+
+html {
+  font-family: "Noto Sans SC", monospace;
+  background-color: #ffffff;
+}
