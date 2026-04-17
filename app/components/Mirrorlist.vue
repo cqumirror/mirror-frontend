@@ -41,7 +41,9 @@
                     transition=""
                     :hide-after="550"
                   >
-                    <a class="doc-links" :href="scope.row.docs"><i/></a>
+                    <a class="doc-links" :href="scope.row.docs">
+                      <fa icon="book" class="doc-icon" />
+                    </a>
                   </el-tooltip>
                 </template>
               </el-table-column>
@@ -99,7 +101,7 @@ export default {
         {
           prop: 'docs',
           label: 'Doc',
-          width: '50',
+          width: '60',
           hidden: false
         },
         {
@@ -225,7 +227,7 @@ export default {
 </script>
 <style scoped>
 
-.el-tag--mini /deep/ {
+.el-tag--mini :deep(*) {
   height: 23px !important;
   width: 60px;
   text-align: center;
@@ -238,26 +240,26 @@ export default {
   height: 0px;
 }
 
-.el-table /deep/ .el-table__cell {
+.el-table :deep(.el-table__cell) {
   border-bottom: 0px solid transparent !important;
 }
 
-.el-table /deep/ tbody tr:hover>td {
+.el-table :deep(tbody tr:hover>td) {
   background-color: #00000000;
 }
-.el-table /deep/ .pending-row {
+.el-table :deep(.pending-row) {
   background: #FFF4E3;
 }
 
-.el-table /deep/ .error-row {
+.el-table :deep(.error-row) {
   background: #ffd9cb;
 }
 
-.el-table /deep/ .syncing-row {
+.el-table :deep(.syncing-row) {
   background: #E3FFFD;
 }
 
-.el-table /deep/ .success-row {
+.el-table :deep(.success-row) {
   background: #FFFFFF;
 }
 

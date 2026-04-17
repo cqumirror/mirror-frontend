@@ -35,7 +35,7 @@ function writeToOutput(file) {
 async function prepare() {
   fs.writeFile(
     output,
-    'const prefix = process.env.baseURL\n' +
+    'const prefix = useRuntimeConfig().public.baseURL\n' +
     '\n' +
     'export default {\n' +
     '\tgetDocLink: params => {\n' +

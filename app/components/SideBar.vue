@@ -94,12 +94,12 @@ export default {
   components: { WarpNotice },
   data() {
     return {
-      indexToolBox: process.env.indexFloatBox || { enabled: false, data: {} },
-      exportUrls: process.env.exportUrls || [],
-      contactUrls: process.env.contactUrls || [],
-      siteLinks: process.env.siteLinks || { enabled: false, links: [] },
-      mirror_url: process.env.mirrorURL || '',
-      style: "text-decoration: none;" + "color:" + (process.env.baseLinkColor || '#000') + ";",
+      indexToolBox: useRuntimeConfig().public.indexFloatBox || { enabled: false, data: {} },
+      exportUrls: useRuntimeConfig().public.exportUrls || [],
+      contactUrls: useRuntimeConfig().public.contactUrls || [],
+      siteLinks: useRuntimeConfig().public.siteLinks || { enabled: false, links: [] },
+      mirror_url: useRuntimeConfig().public.mirrorURL || '',
+      style: "text-decoration: none;" + "color:" + (useRuntimeConfig().public.baseLinkColor || '#000') + ";",
       isoList: [],
       isoCategory: [
         { prop: 'os', label: '系统镜像', column: [], key: 0 },

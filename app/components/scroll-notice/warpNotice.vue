@@ -51,7 +51,7 @@ export default {
         const prop = that.$props
         if (prop.action) {
           let action = prop.action
-          const whiteList = process.env.whiteListDomain
+          const whiteList = useRuntimeConfig().public.whiteListDomain
           if (action === 'url') {
             // 必须进行校验
             if (this.isDomainInWhitelist(prop.callback, whiteList)) {
@@ -60,11 +60,11 @@ export default {
               return
             }
           } else if (action === 'news') {
-            this.$router.push({name: 'news-page', params: { page: this.$props.callback }})
+            this.$router.push(`/news/${this.$props.callback}`)
           } else if (action === 'wiki') {
-            this.$router.push({name: 'wiki', params: { page: prop.callback }})
+            this.$router.push(`/wiki/${prop.callback}`)
           } else {
-            this.$router.push({name: 'news-page', params: { page: this.$props.callback }})
+            this.$router.push(`/news/${this.$props.callback}`)
           }
         }
       }

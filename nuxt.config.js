@@ -1,54 +1,40 @@
 import shiki from 'shiki';
+
 export default defineNuxtConfig({
-  // Target: https://go.nuxtjs.dev/config-target
-  // target: 'static',
   compatibilityDate: '2026-04-11',
-  nitro: {
-    preset: 'static'
-  },
+
+  // 使用 Vite 构建器（Nuxt 4 默认）
+  builder: 'vite',
+
+  // SSR 配置
   ssr: false,
-  // loading indicator options
-  loadingIndicator: {
-    name: '@/template/indicator.html',
-    color: '#3ab499',
-    background: 'white'
-  },
-  devServer: {
-    port: 3000,      // 开发服务器端口
-    host: '0.0.0.0'  // 监听所有网络接口
-  },
-  generate: {
-    async routes() {
-      console.warn("generating routes")
-      const { $content } = require('@nuxt/content')
 
-      const blogRoutes = await $content('wiki',{ deep: true }).only(['slug','path']).fetch()
-        .then(files => {
-          return files.map(file => `/wiki/${file.slug}`)
-        })
-
-      const newsRoutes = await $content('news',{deep: true}).only(['slug']).fetch()
-        .then(files => {
-          return files.map(file => file.path.replace('/_index',''))
-        })
-
-      return [...blogRoutes, ...newsRoutes]
+  // Nitro 配置
+  nitro: {
+    preset: 'static',
+    prerender: {
+      routes: async () => {
+        console.warn("generating routes")
+        return []
+      }
     }
   },
-  // router: {
-  //   trailingSlash: false,
-  //   mode: 'hash'
-  // },
-  // Global page headers: https://go.nuxtjs.dev/config-head
+
+  // 开发服务器配置
+  devServer: {
+    port: 3000,
+    host: '0.0.0.0'
+  },
+
+  // 应用配置
   app: {
     head: {
       title: '重庆大学开源软件镜像站',
       htmlAttrs: {
-        lang: ['zh-CN','en-US']
+        lang: 'zh-CN'
       },
       meta: [
         { charset: 'utf-8' },
-        { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。' },
         { name: 'keywords', content: '镜像站,镜像源,Linux,软件源,开源'},
@@ -58,21 +44,12 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/static/favicon.png' }
       ]
-    },
-    hooks: {
-      'generate:page': page => {
-        // 解决 nuxt 不尊重 metadata 的问题
-        page.html = page.html.replace(/ data-n-head=".*?"/gi, '').replace(/ data-hid=".*?"/gi, '')
-
-      }
     }
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
+  // CSS 配置
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css',
-    '@/assets/css/lib/fontawesome.min.css',
-    // 'element-ui/lib/theme-chalk/index.css',
     '@/assets/css/lib/fontawesome.min.css',
     '@/assets/css/fonts.css',
     '@/assets/css/global.scss',
@@ -80,56 +57,34 @@ export default defineNuxtConfig({
     'vue-final-modal/style.css'
   ],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '@/plugins/element-plus',
-    '@/plugins/font-awesome',
-    '@/plugins/vue-scrollto',
-    '@/plugins/clipboard-js',
-    '@/plugins/vue-final-modal'
-  ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
+  // 组件自动导入
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    '@nuxtjs/pwa',
-    '@pinia/nuxt'
-  ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
+  // 模块配置
   modules: [
     '@nuxt/content',
     '@nuxtjs/google-fonts',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@vite-pwa/nuxt'
   ],
-  // module configs
-  axios: {
-    proxy: false,
-    baseURL: process.env.baseURL,
-    proxyHeaders: false,
-    credentials: false
-  },
+
+  // Content 模块配置
   content: {
     markdown: {
       remarkPlugins: [
-        ['remark-gfm'],
-        ['@/utils/shortcode', {startBlock: "[[",endBlock: "]]"}],
-        ['@/utils/expand']
+        'remark-gfm',
+        '@/utils/shortcode',
+        '@/utils/expand'
       ],
-      async highlighter() {
-        const highlighter = await shiki.getHighlighter({
-          // Complete themes: https://github.com/shikijs/shiki/tree/master/packages/themes
-          theme: 'nord'
-        })
-        return (rawCode, lang) => {
-          return highlighter.codeToHtml(rawCode, lang)
-        }
+      highlighter: 'shiki',
+      shiki: {
+        theme: 'nord'
       }
     },
-    liveEdit: false,
+    documentDriven: false
   },
+
+  // Google Fonts 配置
   googleFonts: {
     families: {
       Roboto: true,
@@ -137,70 +92,50 @@ export default defineNuxtConfig({
       'Noto+Sans+SC': true
     },
     display: 'swap',
-    useStylesheet: true,
     download: true,
-    base64: false,
-    inject: true,
-    overwriting: false,
-    outputDir: '@/assets',
-    stylePath: 'css/fonts.css',
-    fontsPath: '@/assets/fonts'
+    inject: true
   },
+
+  // PWA 配置（使用 @vite-pwa/nuxt）
   pwa: {
-    meta: {
-      theme_color: '#ffffff',
-    },
     manifest: {
       name: '重庆大学开源软件镜像站',
-      lang: 'zh-CN',
       short_name: '重大镜像站',
-      start_url: 'https://mirrors.cqu.edu.cn',
-      theme_color: '#ffffff',
       description: '重庆大学开源软件镜像站，致力于为国内和校内用户提供高质量的开源软件镜像、Linux 镜像源服务，帮助用户更方便地获取开源软件。本镜像站由重庆大学蓝盟负责维护。',
-      useWebmanifestExtension: false
+      theme_color: '#ffffff',
+      lang: 'zh-CN',
+      start_url: '/',
+      display: 'standalone'
     },
     workbox: {
-      cacheNames: {
-        prefix: 'cqumirror',
-        suffix: process.env.VERSION || 'v1',
-        precache: 'prc',
-        runtime: 'rtm'
-      },
-      offline: true,
-      offlineStrategy: 'StaleWhileRevalidate',
-      runtimeCaching: [
-        {
-          urlPattern: '/*',
-          handler: 'networkFirst',
-          method: 'GET'
-        }
-      ]
+      navigateFallback: '/',
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}']
     }
   },
+
+  // 运行时配置
   runtimeConfig: {
     public: {
-      VERSION: 'VERSION-TO-MANAGE',
-      baseURL: (process.env.NODE_ENV === 'production' ? '' : 'https://mirrors.cqu.edu.cn/'),
-      // baseURL: 'https://mirrors.cqu.edu.cn/',
-      mirrorURL: (process.env.NODE_ENV === 'production' ? '/' : 'https://mirrors.cqu.edu.cn/'),
-      // mirrorURL: 'https://mirrors.cqu.edu.cn/',
+      VERSION: process.env.VERSION || '1.0.0',
+      baseURL: process.env.NODE_ENV === 'production' ? '/' : 'https://mirrors.cqu.edu.cn/',
+      mirrorURL: process.env.NODE_ENV === 'production' ? '/' : 'https://mirrors.cqu.edu.cn/',
       baseLinkColor: '#1ccb4c',
       siteTitle: "重庆大学开源软件镜像站",
       exportUrls: [
-        {url:'https://mirrors.cqu.edu.cn/',desc:' 解析ipv4和ipv6 '},
-        {url:'http://mirrors.cqu.edu.cn/',desc:' 解析ipv4和ipv6 '}
+        { url: 'https://mirrors.cqu.edu.cn/', desc: ' 解析ipv4和ipv6 ' },
+        { url: 'http://mirrors.cqu.edu.cn/', desc: ' 解析ipv4和ipv6 ' }
       ],
       contactUrls: [
-        {url:'https://github.com/cqumirror/feedback',desc:''}
+        { url: 'https://github.com/cqumirror/feedback', desc: '' }
       ],
       siteLinks: {
         enabled: true,
         links: [
-          {url:'/#/wiki',desc:' 使用帮助 '},
-          {url:'/#/status',desc:' 服务器状态 '},
-          {url:'/#/news',desc: ' 新闻公告 '},
-          {url:'https://net.cqu.edu.cn',desc: ' 重庆大学信息化办公室 '},
-          {url:'http://lanunion.cqu.edu.cn/',desc:' 重大蓝盟 '}
+          { url: '/wiki', desc: ' 使用帮助 ' },
+          { url: '/status', desc: ' 服务器状态 ' },
+          { url: '/news', desc: ' 新闻公告 ' },
+          { url: 'https://net.cqu.edu.cn', desc: ' 重庆大学信息化办公室 ' },
+          { url: 'http://lanunion.cqu.edu.cn/', desc: ' 重大蓝盟 ' }
         ]
       },
       newsPage: {
@@ -232,27 +167,73 @@ export default defineNuxtConfig({
     }
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    transpile: [/^element-ui/],
-    // enable babelrc
-    babelrc: true,
-    extend(config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        // 在开发模式下运行自定义代码
-        console.log('运行自定义代码')
-      }
-
-      // 在构建前运行自定义代码
-      config.plugins.push({
-        apply: (compiler) => {
-          compiler.hooks.beforeCompile.tap('MyPlugin', () => {
-            console.log('在构建前运行自定义代码')
-          })
+  // Vite 配置
+  vite: {
+    // 自定义 Vite 插件
+    plugins: [],
+    // 优化依赖
+    optimizeDeps: {
+      include: [
+        'element-plus',
+        'vue-scrollto', // CJS
+        'clipboard', // CJS
+        '@fortawesome/fontawesome-svg-core',
+        '@fortawesome/vue-fontawesome',
+        '@fortawesome/free-solid-svg-icons',
+        '@fortawesome/free-regular-svg-icons',
+        '@fortawesome/free-brands-svg-icons',
+        'vue-final-modal',
+        '@vue/devtools-kit',
+        '@vue/devtools-core',
+        '@fancyapps/ui',
+      ]
+    },
+    // 构建选项
+    build: {
+      sourcemap: false,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'element-plus': ['element-plus'],
+            'vendor': ['vue', 'vue-router', 'pinia']
+          }
         }
-      })
+      }
     }
+  },
+
+  // 构建前运行自定义代码
+  hooks: {
+    'build:before': () => {
+      console.log('在构建前运行自定义代码')
+    },
+    'dev:before': () => {
+      console.log('在开发模式运行自定义代码')
+    }
+  },
+
+  // 性能优化
+  performance: {
+    gzip: true,
+    prefetch: false,
+    preload: false
+  },
+
+  // 实验性功能
+  experimental: {
+    payloadExtraction: false
+  },
+
+  // 路由配置
+  router: {
+    options: {
+      strict: false
+    }
+  },
+
+  // 类型检查
+  typescript: {
+    strict: false,
+    typeCheck: false
   }
 })
-
-

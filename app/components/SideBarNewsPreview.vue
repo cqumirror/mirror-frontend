@@ -1,8 +1,8 @@
 <template>
   <div style="margin: 0;padding: 0;" id="index-news-container">
     <ul>
-      <li v-for="item in content">
-        <NuxtLink :to="{name: 'news-page', params: { page: item.slug }}">
+      <li v-for="item in content" :key="item.path">
+        <NuxtLink :to="item.path">
           <div :style="styleNews" id="news-list">
             {{ item.date + " " }}{{ item.title }}
           </div>
@@ -28,9 +28,8 @@ export default {
     'max-age': 600,
     'stale-when-revalidate': 5
   }),
-  async fetch() {
-    this.content = await this.$content('news').only(['title','slug','date'])
-      .sortBy('date', 'desc').limit(3).fetch()
+  async mounted() {
+    await this.loadContent()
   },
   props: {
     styleNews: { type: String }
@@ -40,6 +39,23 @@ export default {
       content: []
     }
   },
+  methods: {
+    async loadContent() {
+      const docs = await queryCollection('content').all()
+      this.content = docs
+        .map((doc) => {
+          const path = doc.path || doc._path || ''
+          return {
+            ...doc,
+            path,
+            slug: path.split('/').pop()
+          }
+        })
+        .filter((doc) => doc.path.startsWith('/news/'))
+        .sort((a, b) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime())
+        .slice(0, 3)
+    }
+  }
 }
 </script>
 

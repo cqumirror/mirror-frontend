@@ -9,14 +9,17 @@
     <div class="nav-right">
       <ul class="nav">
         <li v-for="item in menu" :key="item.key">
-          <NuxtLink :to="item.index" :custom="true" v-if="item.type !== 'url'">
-            <a @click="handleToggle">
-              {{ item.label }}
-            </a>
-          </NuxtLink>
-          <a @click="handleToggle" :href="item.url" target="_blank" v-else>
+          <a
+            v-if="item.type === 'url' && item.url"
+            @click="handleToggle"
+            :href="item.url"
+            target="_blank"
+          >
             {{ item.label }}
           </a>
+          <NuxtLink v-else :to="item.index" @click="handleToggle">
+            {{ item.label }}
+          </NuxtLink>
         </li>
       </ul>
     </div>
@@ -29,29 +32,29 @@ export default {
   name: "Navbar",
   data() {
     return {
-      siteTitle: process.env.siteTitle,
+      siteTitle: useRuntimeConfig().public.siteTitle,
       isOpened: false,
       activeIndex: '/',
       menu: [
         {
           label: "HOME",
           key: "home_page",
-          index: "/"
+          index: "/",
         },
         {
           label: "STATUS",
           key: "mirror_status",
-          index: "/status"
+          index: "/status",
         },
         {
           label: "NEWS",
           key: "news",
-          index: "/news"
+          index: "/news",
         },
         {
           label: "WIKI",
           key: "wiki",
-          index: "/wiki"
+          index: "/wiki",
         },
         {
           label: 'LANUNION',

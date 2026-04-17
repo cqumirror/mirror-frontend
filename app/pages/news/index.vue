@@ -2,12 +2,12 @@
   <div style="margin: 0;padding: 0">
     <div id="news-page-title">NEWS HISTORY</div>
     <ul id="news-page-list" v-loading="loading">
-      <template v-for="article in articles" :key="article.slug">
+      <template v-for="article in pagedArticles" :key="article.path">
         <li>
           <div>
             <!--title-->
             <div class="article-block">
-              <NuxtLink :to="{name: 'news-page', params: { page: article.slug }}">
+              <NuxtLink :to="article.path">
                 <div class="article-title">
                   {{ article.title }}
                 </div>
@@ -39,73 +39,53 @@
   </div>
 </template>
 
-<script>
-// import '@/assets/css/main.scss'
+<script setup>
+import { computed, ref } from 'vue'
+import cacheControl from '~/middleware/cacheControl'
 
-import cacheControl from "~/middleware/cacheControl";
-
-export default {
-  name: "news",
+definePageMeta({
   middleware: cacheControl({
     'max-age': 600,
     'stale-when-revalidate': 5
-  }),
-  data() {
-    return {
-      articles: [],
-      currentPage: 0,
-      pageSize: process.env.newsPage.pageSize,
-      total: 1000,
-      loading: false,
-    }
-  },
-  methods: {
-    formatDate(date) {
-      const y = this.formatByIntl(date, {year: 'numeric'})
-      const m = this.formatByIntl(date, {month: '2-digit'})
-      const d = this.formatByIntl(date, {day: '2-digit'})
-      return (y + "-" + m + "-" + d) // TODO: use navigator to get locale
-      // return date
-    },
-    formatByIntl(date, option) {
-      const dateStr = new Date(date)
-      return new Intl.DateTimeFormat('en', option).format(dateStr)
-    },
-    async handleCurrentChange(currentPage) {
-      this.currentPage = currentPage
-      const articles = await this.queryContent(this.currentPage)
-      this.articles = JSON.parse(JSON.stringify(articles))
+  })
+})
 
-    },
-    async queryContent(currentPage) {
-      this.loadingCheck()
-      const pageSize = this.pageSize
-      const skipSize = (currentPage - 1) * pageSize
-      const articles = await this.$content('news')
-        .only(['title', 'description', 'img', 'slug', 'author', 'date'])
-        .sortBy('date', 'desc').skip(skipSize)
-        .limit(pageSize).fetch()
-      this.loadingCheck()
-      return articles
-    },
-    loadingCheck() {
-      this.loading = !this.loading
-    }
-  },
-  async fetch() {
-    this.loadingCheck()
-    const articles = await this.$content('news')
-      .only(['title', 'description', 'img', 'slug', 'author', 'date'])
-      .sortBy('date', 'desc')
-      .fetch()
-    this.total = articles.length
-    this.articles = articles.slice(0, this.pageSize)
-    console.log(articles)
+const currentPage = ref(1)
+const pageSize = useRuntimeConfig().public.newsPage.pageSize
 
-    // initialize with start pageSize
-    this.currentPage = 1
-    this.loadingCheck()
-  }
+const { data: allNews, pending } = await useAsyncData('news-list', async () => {
+  const docs = await queryCollection('content').all()
+
+  return docs
+    .filter(doc => {
+      const path = doc.path || doc._path || ''
+      return path.startsWith('/news/')
+    })
+    .map(doc => {
+      const path = doc.path || doc._path
+      return {
+        ...doc,
+        path,
+        slug: path.split('/').pop()
+      }
+    })
+    .sort((a, b) => {
+      const aDate = new Date(a.date || 0).getTime()
+      const bDate = new Date(b.date || 0).getTime()
+      return bDate - aDate
+    })
+})
+
+const loading = computed(() => pending.value)
+const total = computed(() => allNews.value?.length || 0)
+const pagedArticles = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  const end = start + pageSize
+  return (allNews.value || []).slice(start, end)
+})
+
+function handleCurrentChange(page) {
+  currentPage.value = page
 }
 </script>
 

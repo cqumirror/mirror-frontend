@@ -13,15 +13,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ModalsContainer } from 'vue-final-modal'
 
-export default {
-  name: "default",
-  components: {
-    ModalsContainer
-  }
-}
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 </script>
 
 <style lang="scss">
