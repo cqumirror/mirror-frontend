@@ -3,7 +3,7 @@
     <h1>{{ article?.title }}</h1>
     <div class="wiki-content-container">
       <article id="md-content" class="wiki-page-content" @click="imgProxy">
-        <ContentRenderer v-if="article" :value="article" />
+        <ContentRenderer v-if="article" :value="article" class="nuxt-content" />
       </article>
       <aside v-if="tocLinks.length > 0" class="wiki-content-toc">
         <div class="wiki-toc">

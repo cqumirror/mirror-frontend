@@ -1,5 +1,3 @@
-import shiki from 'shiki';
-
 export default defineNuxtConfig({
   compatibilityDate: '2026-04-11',
 
@@ -49,6 +47,7 @@ export default defineNuxtConfig({
 
   // CSS 配置
   css: [
+    '@fortawesome/fontawesome-free/css/all.min.css',
     '@fortawesome/fontawesome-svg-core/styles.css',
     '@/assets/css/lib/fontawesome.min.css',
     '@/assets/css/fonts.css',
@@ -66,9 +65,9 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@pinia/nuxt',
     '@vite-pwa/nuxt'
+    // '@nuxt/ui'
   ],
 
-  // Content 模块配置
   content: {
     markdown: {
       remarkPlugins: [
@@ -76,12 +75,16 @@ export default defineNuxtConfig({
         '@/utils/shortcode',
         '@/utils/expand'
       ],
-      highlighter: 'shiki',
-      shiki: {
-        theme: 'nord'
+      highlight: {
+        theme: 'nord',
+        preload: ['bash', 'javascript', 'typescript', 'json', 'vue', 'css', 'scss']
       }
     },
     documentDriven: false
+  },
+
+  ui: {
+    prose: false  // 全局禁用 prose 样式
   },
 
   // Google Fonts 配置

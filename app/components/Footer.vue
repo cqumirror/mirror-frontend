@@ -7,7 +7,7 @@
         <el-row>
           <el-col>
             本站在<a style="text-decoration: none;color: white" href="http://net.cqu.edu.cn/" target="_blank"><b>重庆大学
-            信息化办公室</b></a>的支持下创办，由<a style="text-decoration: none;color: white" href="http://lanunion.cqu.edu.cn/" target="_blank"><b>重庆大学蓝盟</b></a>运营维护。
+            信息化办公室</b></a>的支持下创办，由<a style="text-decoration: none;color: white" href="https://mirrors.cqu.edu.cn/introductions/" target="_blank"><b>重庆大学蓝盟</b></a>运营维护。
             <br/>
           </el-col>
         </el-row>

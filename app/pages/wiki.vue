@@ -1,7 +1,9 @@
 <template>
   <div class="wiki-container">
     <button id="nav-open" @click="handleShowNav">
-      <i class="nav-open-icon"/>
+      <fa :icon="['fa', 'bars-staggered']" class="nav-open-icon" />
+      <span class="nav-open-text">全部文档</span>
+
     </button>
     <transition name="slide">
       <div v-if="showNav" class="wiki-nav-container">
@@ -23,6 +25,7 @@
             </template>
           </el-tree>
           <button id="nav-close" @click="handleCloseNav">
+            <fa :icon="['fa', 'circle-xmark']" class="nav-close-icon" font-style="normal" font-size="2rem" />
             <i class="el-icon-close"/>
           </button>
         </div>

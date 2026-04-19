@@ -83,16 +83,7 @@ img {
   #more-news {
     text-decoration: none;
     text-align: end;
-    padding-right: 0vw;
-  }
-
-  #more-news:first-child:after {
-    font-family: "Font Awesome 5 Free";
-    content: "\f101";
-    font-size: 0.8rem;
-    margin-left: 0.5px;
-
-
+    padding-right: 0;
   }
 }
 
@@ -268,22 +259,12 @@ img {
     #news-detail-date {
       font-size: 0.9em;
       text-align: center;
-
-      &:before {
-        font-family: "Font Awesome 5 Free";
-        content: '\f073';
-      }
     }
 
     #news-detail-author {
       margin-left: 2vw;
       font-size: 0.9em;
       text-align: center;
-
-      &:before {
-        font-family: "Font Awesome 5 Free";
-        content: '\f007';
-      }
     }
   }
 
@@ -411,12 +392,6 @@ img {
   font-size: 2rem;
   color: #424242;
 
-  &:before {
-    font-family: "Font Awesome 5 Free";
-    content: '\f1ea';
-    margin-right: 6px;
-  }
-
   @media (max-width: $mobile-size) {
     margin-left: 2.5vw;
     font-size: 1rem;
@@ -431,11 +406,11 @@ img {
 
 //// news page breadcrumb
 .el-breadcrumb__separator{
-  &:before {
-    content: '\f105';
-    font-family: "Font Awesome 5 Free";
-    font-style: normal;
-  }
+  //&:before {
+  //  content: '\f105';
+  //  font-family: "Font Awesome 6 Free";
+  //  font-style: normal;
+  //}
 }
 
 //// pagination
@@ -507,21 +482,11 @@ img {
       margin-left: 2vw;
       font-size: 0.7em;
       text-align: center;
-
-      &:before {
-        font-family: "Font Awesome 5 Free";
-        content: '\f007';
-      }
     }
 
     .article-time {
       font-size: 0.7em;
       text-align: center;
-
-      &:before {
-        font-family: "Font Awesome 5 Free";
-        content: '\f073';
-      }
     }
   }
 }
@@ -531,38 +496,38 @@ img {
 .site-notice {
   padding-top: 0.8vh;
 
-  // take place of element ui icon
-  .el-icon-success {
-    &:before {
-      font-family: "Font Awesome 5 Free";
-      content: '\f058';
-      font-style: normal; // required
-    }
-  }
-
-  .el-icon-info {
-    &:before {
-      font-family: "Font Awesome 5 Free";
-      content: '\f05a';
-      font-style: normal; // required
-    }
-  }
-
-  .el-icon-warning {
-    &:before {
-      font-family: "Font Awesome 5 Free";
-      content: '\f06a';
-      font-style: normal; // required
-    }
-  }
-
-  .el-icon-error {
-    &:before {
-      font-family: "Font Awesome 5 Free";
-      content: '\f057';
-      font-style: normal; // required
-    }
-  }
+  //// take place of element ui icon
+  //.el-icon-success {
+  //  &:before {
+  //    font-family: "Font Awesome 6 Free";
+  //    content: '\f058';
+  //    font-style: normal; // required
+  //  }
+  //}
+  //
+  //.el-icon-info {
+  //  &:before {
+  //    font-family: "Font Awesome 6 Free";
+  //    content: '\f05a';
+  //    font-style: normal; // required
+  //  }
+  //}
+  //
+  //.el-icon-warning {
+  //  &:before {
+  //    font-family: "Font Awesome 6 Free";
+  //    content: '\f06a';
+  //    font-style: normal; // required
+  //  }
+  //}
+  //
+  //.el-icon-error {
+  //  &:before {
+  //    font-family: "Font Awesome 6 Free";
+  //    content: '\f057';
+  //    font-style: normal; // required
+  //  }
+  //}
 }
 
 // float button
@@ -579,17 +544,17 @@ img {
   cursor: pointer;
 
   // el-backtop
-  .el-backtop {
-    color: #1ccb4c;
-    &:hover {
-      background-color: #e5eee4;
-    }
-
-    &:before {
-      font-family: "Font Awesome 5 Free";
-      content: '\f062';
-    }
-  }
+  //.el-backtop {
+  //  color: #1ccb4c;
+  //  &:hover {
+  //    background-color: #e5eee4;
+  //  }
+  //
+  //  &:before {
+  //    font-family: "Font Awesome 6 Free";
+  //    content: '\f062';
+  //  }
+  //}
 
   .float-tools-item {
 
@@ -634,16 +599,6 @@ img {
   }
   font-size: 20px;
   line-height: 30px;
-  .nav-open-icon:before {
-    font-family: "Font Awesome 5 Free";
-    content: '\f550';
-  }
-  .nav-open-icon:after {
-    font-family: "Noto Sans SC", monospace;
-    font-style: normal;
-    margin-left: 5px;
-    content: ' 全部文档';
-  }
 }
 
 // wiki page (wiki/index.vue)
@@ -676,13 +631,6 @@ img {
       background-color: transparent;
     }
     i {
-      &:before {
-        content: '\f35a';
-        font-family: "Font Awesome 5 Free";
-        font-style: normal;
-        font-size: 2rem;
-
-      }
       @media (max-width: $mobile-size) {
         font-size: 50px;
         text-align: center;
@@ -747,12 +695,12 @@ img {
 
       .el-tree-node__expand-icon:before {
         content: '\f0da';
-        font-family: "Font Awesome 5 Free";
+        font-family: "Font Awesome 6 Free";
         color: #8e8f9a !important;
       }
       .el-tree-node__expand-icon.is-leaf:before {
         content: '\f22d';
-        font-family: "Font Awesome 5 Free";
+        font-family: "Font Awesome 6 Free";
         color: #C0C4CC!important; // override element-ui default setting
       }
 

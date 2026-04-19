@@ -9,13 +9,15 @@
       <div id="news-detail-title">{{ article?.title }}</div>
       <div class="news-detail-container">
         <div id="news-detail-date">
+          <fa :icon="['fa', 'calendar-alt']"/>
           {{ article?.date }}
         </div>
         <div id="news-detail-author">
+          <fa :icon="['fa', 'user']"/>
           {{ article?.author }}
         </div>
       </div>
-      <ContentRenderer v-if="article" :value="article" />
+      <ContentRenderer v-if="article" :value="article" class="nuxt-content" />
     </article>
   </div>
 
@@ -34,6 +36,18 @@ const slug = computed(() => {
   return Array.isArray(value) ? value[0] : value
 })
 
+function normalizeNewsDoc(doc) {
+  const meta = doc.meta || {}
+  const frontmatter = doc.frontmatter || {}
+
+  return {
+    ...doc,
+    title: doc.title || meta.title || frontmatter.title || '',
+    date: doc.date || meta.date || frontmatter.date || '',
+    author: doc.author || meta.author || frontmatter.author || ''
+  }
+}
+
 const { data: article } = await useAsyncData(`news-${slug.value}`, async () => {
   if (!slug.value) {
     throw createError({ statusCode: 404, statusMessage: 'Page not found' })
@@ -44,7 +58,7 @@ const { data: article } = await useAsyncData(`news-${slug.value}`, async () => {
     throw createError({ statusCode: 404, statusMessage: 'Page not found' })
   }
 
-  return doc
+  return normalizeNewsDoc(doc)
 })
 
 function imgProxy(e) {

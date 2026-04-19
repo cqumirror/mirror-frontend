@@ -69,7 +69,7 @@ function shortcodes(options) {
                 classMap[mapTag.tag]
               + '">' + '<p class="shortcode-block">' + mapTag.text
               // console.log(startHtml)
-              const endTag = nodeCopy.children[index].children[endIndex].value.replace("{{% /notice %}}","")
+              const endTag = nodeCopy.children[index].children[endIndex].value.replace("::","")
               const endHtml = endTag + '</p></div>'
 
               const start = {

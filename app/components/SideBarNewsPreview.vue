@@ -12,6 +12,7 @@
     <div>
       <NuxtLink to="/news">
         <div id="more-news" :style="styleNews">more</div>
+        <fa :icon="['fa', 'angle-right']"/>
       </NuxtLink>
     </div>
   </div>
@@ -40,19 +41,30 @@ export default {
     }
   },
   methods: {
+    normalizeNewsDoc(doc) {
+      const path = doc.path || doc._path || ''
+      const meta = doc.meta || {}
+      const frontmatter = doc.frontmatter || {}
+
+      return {
+        ...doc,
+        path,
+        slug: path.split('/').pop(),
+        title: doc.title || meta.title || frontmatter.title || '',
+        date: doc.date || meta.date || frontmatter.date || '',
+        author: doc.author || meta.author || frontmatter.author || ''
+      }
+    },
+    toTimestamp(dateValue) {
+      const ts = Date.parse(String(dateValue || ''))
+      return Number.isNaN(ts) ? 0 : ts
+    },
     async loadContent() {
       const docs = await queryCollection('content').all()
       this.content = docs
-        .map((doc) => {
-          const path = doc.path || doc._path || ''
-          return {
-            ...doc,
-            path,
-            slug: path.split('/').pop()
-          }
-        })
+        .map(this.normalizeNewsDoc)
         .filter((doc) => doc.path.startsWith('/news/'))
-        .sort((a, b) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime())
+        .sort((a, b) => this.toTimestamp(b.date) - this.toTimestamp(a.date))
         .slice(0, 3)
     }
   }

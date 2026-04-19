@@ -92,25 +92,25 @@ yarn generate
 #### Hugo shortcode
 Hugo shortcode 提供了一种非常棒的写作体验，在文档中你可以这样来使用：
 ```markdown
-{{% notice note %}}
+::note
 this is a notice
-{{% /notice %}}
+::
 
-{{% notice info %}}
+::info
 this is a notice
-{{% /notice %}}
+::
 
 {{% notice %}}
 this is a notice
-{{% /notice %}}
+::
 
 {{% notice warn %}}
 this is a notice
-{{% /notice %}}
+::
 
-{{% notice error %}}
+::error
 this is a notice
-{{% /notice %}}
+::
 
 {{% expand "summary" %}}
 detail
@@ -120,16 +120,16 @@ detail
 由于解析器中对换行敏感（将在 AST 中解析为多个 block ），请不要出现以下情况
 <pre><code>
 # 这将发生渲染出错
-{{% notice error %}}
+::error
 
 this is a notice
-{{% /notice %}}
+::
 
 # 这将发生渲染出错
-{{% notice error %}}
+::error
 this is a notice
 
-{{% /notice %}}
+::
 
 # 这将导致文档不被渲染
 {% notice error %}}
@@ -137,7 +137,7 @@ this is a notice
 ```bash
  ls
 ```
-{{% /notice %}}
+::
 
 </code></pre>
 
@@ -217,7 +217,7 @@ filepath: '/wiki/mirror-wiki/centos/_index'
 
 {{% notice %}}
 链接内容
-{{% /notice %}}
+::
 
 </code>
 </pre>

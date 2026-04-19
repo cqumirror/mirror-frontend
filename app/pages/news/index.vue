@@ -1,6 +1,10 @@
 <template>
   <div style="margin: 0;padding: 0">
-    <div id="news-page-title">NEWS HISTORY</div>
+    <div id="news-page-title">
+      <fa :icon="['fa', 'newspaper']"/>
+      NEWS HISTORY
+    </div>
+
     <ul id="news-page-list" v-loading="loading">
       <template v-for="article in pagedArticles" :key="article.path">
         <li>
@@ -14,9 +18,11 @@
               </NuxtLink>
               <div class="article-detail-container">
                 <div class="article-time">
+                  <fa :icon="['fa', 'calendar-alt']"/>
                   {{ article.date }}
                 </div>
                 <div class="article-author">
+                  <fa :icon="['fa', 'user']"/>
                   {{ article.author }}
                 </div>
               </div>
@@ -53,25 +59,37 @@ definePageMeta({
 const currentPage = ref(1)
 const pageSize = useRuntimeConfig().public.newsPage.pageSize
 
+function normalizeNewsDoc(doc) {
+  const path = doc.path || doc._path || ''
+  const meta = doc.meta || {}
+  const frontmatter = doc.frontmatter || {}
+
+  return {
+    ...doc,
+    path,
+    slug: path.split('/').pop(),
+    title: doc.title || meta.title || frontmatter.title || '',
+    date: doc.date || meta.date || frontmatter.date || '',
+    author: doc.author || meta.author || frontmatter.author || ''
+  }
+}
+
+function toTimestamp(dateValue) {
+  const ts = Date.parse(String(dateValue || ''))
+  return Number.isNaN(ts) ? 0 : ts
+}
+
 const { data: allNews, pending } = await useAsyncData('news-list', async () => {
   const docs = await queryCollection('content').all()
-
   return docs
     .filter(doc => {
       const path = doc.path || doc._path || ''
       return path.startsWith('/news/')
     })
-    .map(doc => {
-      const path = doc.path || doc._path
-      return {
-        ...doc,
-        path,
-        slug: path.split('/').pop()
-      }
-    })
+    .map(normalizeNewsDoc)
     .sort((a, b) => {
-      const aDate = new Date(a.date || 0).getTime()
-      const bDate = new Date(b.date || 0).getTime()
+      const aDate = toTimestamp(a.date)
+      const bDate = toTimestamp(b.date)
       return bDate - aDate
     })
 })

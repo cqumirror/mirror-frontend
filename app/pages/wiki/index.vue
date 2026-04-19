@@ -1,6 +1,6 @@
 <template>
   <article id="md-content" class="wiki-page-content">
-    <ContentRenderer v-if="article" :value="article" />
+    <ContentRenderer v-if="article" :value="article" class="nuxt-content" />
   </article>
 </template>
 

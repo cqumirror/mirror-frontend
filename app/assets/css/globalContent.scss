@@ -11,39 +11,7 @@
 
   .nuxt-content {
     // short code
-    .notice-tip {
-      button {
-        display: none;
-      }
 
-      border-top: 30px solid #5cb85c;
-      background: #E6F9E6;
-      position: relative;
-      padding: 15px;
-      display: block;
-      font-size: 1rem;
-      margin-top: 0rem;
-      margin-bottom: 0rem;
-      color: #666;
-
-      p:first-child:before {
-        position: absolute;
-        top: -22px;
-        color: #fff;
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        content: "\f06a";
-        left: 10px;
-      }
-
-      p:first-child:after {
-        position: absolute;
-        top: -28px;
-        color: #fff;
-        left: 2rem;
-        content: 'Tip';
-      }
-    }
 
     .notice-note {
 
@@ -193,42 +161,39 @@
 
     // content style start
     //// title
-    #title {
-
-    }
-
-    //// title-1
-    #title-1 {
+    h1 {
       &:before {
-        content: '#';
+        content: '# ';
       }
     }
 
-    //// title-2
-    #title-2 {
+    h2 {
       &:before {
-        content: '#';
+        content: '## ';
       }
     }
 
-    //// title-3
-    #title-3 {
+    h3 {
       &:before {
-        content: '#';
+        content: '### ';
       }
     }
 
-    //// title-4
-    #title-4 {
+    h4 {
       &:before {
-        content: '#';
+        content: '#### ';
       }
     }
 
-    //// title-5
-    #title-5 {
+    h5 {
       &:before {
-        content: '#';
+        content: '##### ';
+      }
+    }
+
+    h6 {
+      &:before {
+        content: '###### ';
       }
     }
 
@@ -266,31 +231,30 @@
       }
     }
 
-
-    //// codeblock
-    .nuxt-content-highlight {
+    pre.shiki {
       position: relative;
+      padding: 1.5em;
+      padding-top: 2.5em;  // 给文件名和按钮留空间
+      font-size: 0.75rem !important;
+      overflow-y: auto;
+      background-color: #2e3440 !important;
+      margin: 1.5em 0;
+      border-radius: 5px;
 
-      .filename {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        color: #708090;
-        border-radius: 5px;
-
-        &:before {
-          content: '# ';
-          margin-left: 5px;
-        }
+      code {
+        background: transparent;
+        color: #d8dee9;
       }
 
+      // 复制按钮
       .copy-btn {
         position: absolute;
-        top: 2px;
-        right: 0;
-        //width: 10px;
+        top: 5px;
+        right: 5px;
         border: none;
         background-color: transparent;
+        padding: 5px 8px;
+        border-radius: 4px;
 
         &:hover {
           background-color: rgba(243, 243, 243, 0.1);
@@ -299,29 +263,25 @@
 
         #clipboard-copy {
           padding: 2px 1px;
-
           &:after {
             font-family: "Font Awesome 5 Free";
+            font-weight: 900;
             content: '\f0c5';
             color: #c4c4c4;
-            font-size: 20px;
+            font-size: 16px;
           }
         }
 
         #clipboard-check {
           padding: 2px 1px;
-
           &:after {
             font-family: "Font Awesome 5 Free";
+            font-weight: 900;
             content: '\f058';
-            color: #b7b7b7;
-            font-size: 20px;
+            color: #6ab04c;
+            font-size: 16px;
           }
         }
-      }
-
-      pre[class*="language-"] {
-        padding-top: 1.5em;
       }
     }
 
@@ -381,6 +341,12 @@
         width: 100%;
       }
     }
-
+    // 标题内锚点链接恢复默认
+    h1, h2, h3, h4, h5, h6 {
+      a[href^="#"] {
+        color: inherit;
+        &:after { display: none; }
+      }
+    }
   }
 }

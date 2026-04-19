@@ -1,14 +1,18 @@
 import { library, config } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faBook } from '@fortawesome/free-solid-svg-icons' // \f02d 对应的图标
-// import part of the icons
 import {
+  faBook,
   faNewspaper,
   faPaperclip,
   faInbox,
   faEnvelope,
   faLayerGroup,
-  faTerminal
+  faTerminal,
+  faCalendarAlt,
+  faAngleRight,
+  faUser,
+  faBarsStaggered,
+  faCircleXmark
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faFileArchive,
@@ -28,6 +32,11 @@ library.add(faFileArchive)
 library.add(faPaperPlane)
 library.add(faGithub)
 library.add(faBook)
+library.add(faCalendarAlt)
+library.add(faAngleRight)
+library.add(faUser)
+library.add(faBarsStaggered)
+library.add(faCircleXmark)
 config.autoAddCss = false
 config.showMissingIcons = true
 
