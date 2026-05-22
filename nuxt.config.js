@@ -220,7 +220,8 @@ export default {
       ]
     },
     whiteListDomain: [
-      'mirrors.cqu.edu.cn'
+      'mirrors.cqu.edu.cn',
+      'zhaosheng.cqu.edu.cn'
     ]
   },
 

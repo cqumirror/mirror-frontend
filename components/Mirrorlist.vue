@@ -57,7 +57,8 @@
               :prop="item.prop"
               :label="item.label"
             ><template slot-scope="scope">
-              <a class="mirror-href" :href="'/' + scope.row.name + '/'">{{ scope.row.name }}</a>
+<!--              使用getmirrorlink处理/xxx.git跳转到/git/xxx.git-->
+              <a class="mirror-href" :href="getMirrorLink(scope.row.name)">{{ scope.row.name }}</a>
             </template>
             </el-table-column>
           </template>
@@ -216,6 +217,14 @@ export default {
         options
       ).format(UTCDate)
       return timeObject.toString()
+    },
+    getMirrorLink(name) {
+      // 判断是否以 .git 结尾
+      if (name.endsWith('.git')) {
+        return '/git/' + name + '/';
+      }
+      // 非 git 仓库保持原路径
+      return '/' + name + '/';
     },
   },
 }
