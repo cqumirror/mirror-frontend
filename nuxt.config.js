@@ -28,8 +28,8 @@ export default {
         .then(files => {
           return files.map(file => file.path.replace('/_index',''))
         })
-
-      return [...blogRoutes, ...newsRoutes]
+      const errorRoutes = ['/error/403', '/error/404', '/error/500', '/error/502', '/error/503', '/error/504']
+      return [...blogRoutes, ...newsRoutes, ...errorRoutes]
     }
   },
   router: {
@@ -220,7 +220,8 @@ export default {
       ]
     },
     whiteListDomain: [
-      'mirrors.cqu.edu.cn'
+      'mirrors.cqu.edu.cn',
+      'zhaosheng.cqu.edu.cn'
     ]
   },
 
