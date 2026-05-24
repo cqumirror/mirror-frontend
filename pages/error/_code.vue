@@ -15,6 +15,10 @@
     <div class="contact-message">
       {{ errorDetails.contactMessage }}
     </div>
+    <div class="data-box" v-if="dataParam">
+      <div class="data-label">反馈时请提供下方错误信息：</div>
+      <pre class="data-content">{{ dataParam }}</pre>
+    </div>
     <hr>
     <div class="link">
       <template v-for="(link, idx) in errorDetails.links">
@@ -25,11 +29,24 @@
 </template>
 
 <script>
+const getDataParam = () => {
+  const match = window.location.href.match(/[?&]data=([^&#]*)/)
+  return match ? match[1] : ''
+}
 export default {
   layout: 'empty',
+  data() {
+    return {
+      dataParam: ''
+    }
+  },
   asyncData({ params }) {
     const statusCode = parseInt(params.code) || 404
     return { statusCode }
+  },
+  mounted() {
+    const match = window.location.href.match(/[?&]data=([^&#]*)/)
+    this.dataParam = match ? match[1] : ''
   },
   computed: {
     // 注意需要修改nuxt.config.js的路由部分    const errorRoutes = ['/error/403', '/error/404', '/error/500', '/error/502', '/error/503', '/error/504']
@@ -56,6 +73,11 @@ export default {
           short: 'Bad Gateway',
           long: '糟糕，服务宕机了!'
         },
+        503: {
+          code: 503,
+          short: 'Service Unavailable',
+          long: '呜喵，服务暂不可用！'
+        }
       }
       //确保用户在/#/error/后面自定义的内容统一转为404(但是内容不一样)，避免出现攻击
       return messages[status] || { code: "404", short: 'Error', long: '哎呀，出了点小问题！' }
@@ -70,7 +92,7 @@ export default {
             items: [
               '1. 所使用的出口IP因滥用而被封禁；',
               '2. 使用不受支持的下载器或自动化脚本；',
-              '3. 访问的内容实施了访客限制；'
+              '3. 访问的内容开启访客限制。'
             ]
           },
           contactMessage: '建议您稍后更换网络和下载工具重新尝试。\n若问题仍未解决，请查看官网页脚“Contact Us”部分反馈。',
@@ -129,6 +151,36 @@ export default {
           },
           contactMessage: '建议您稍后更换网络和下载工具重新尝试。\n若问题仍未解决，请查看官网页脚“Contact Us”部分反馈。',
           links: [
+            {
+              text: '查看WIKI',
+              url: '/wiki',
+              isNuxtLink: true
+            },
+            {
+              text: '返回主页',
+              url: '/',
+              isNuxtLink: true
+            }
+          ]
+        }
+      }
+
+      if (status === 503) {
+        return {
+          introduction: {
+            title: '您可能遇到了这些问题：',
+            items: [
+              '1. 所使用的出口IP因滥用而被封禁；',
+              '2. 访问速度过快触发了访问限制；'
+            ]
+          },
+          contactMessage: '建议您稍后更换网络和下载工具重新尝试。\n若问题仍未解决，请查看官网页脚“Contact Us”部分反馈。',
+          links: [
+            {
+              text: '查看公告',
+              url: '/news/2023-03-27-ban-p2p-tools',
+              isNuxtLink: true
+            },
             {
               text: '查看WIKI',
               url: '/wiki',
@@ -224,5 +276,30 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+.data-box {
+  margin: 20px auto;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  text-align: center;
+  font-family: monospace;
+}
+.data-label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.data-content {
+  margin: 0;
+  padding: 10px;
+  background: #fff;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 200px;
+  overflow: auto;
 }
 </style>
