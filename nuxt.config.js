@@ -142,7 +142,7 @@ export default {
   },
   pwa: {
     meta: {
-      theme_color: '#ffffff',
+      theme_color: '#ffffff'
     },
     manifest: {
       name: '重庆大学开源软件镜像站',
@@ -164,11 +164,46 @@ export default {
       offlineStrategy: 'StaleWhileRevalidate',
       runtimeCaching: [
         {
-          urlPattern: '/*',
+          urlPattern: '/_nuxt/.*',
+          handler: 'cacheFirst',  // 带 hash 的文件优先用缓存
+          method: 'GET'
+        },
+
+        {
+          urlPattern: '/static/.*',
+          handler: 'staleWhileRevalidate',
+          method: 'GET'
+        },
+        {
+          urlPattern: '/(index|basic|200)\\.html$',
+          handler: 'networkFirst',
+          method: 'GET'
+        },
+        {
+          urlPattern: '/(favicon|icon)\\.(ico|png)$',
+          handler: 'cacheFirst',
+          method: 'GET'
+        },
+        {
+          urlPattern: '/',
           handler: 'networkFirst',
           method: 'GET'
         }
-      ]
+      ],
+
+      // 相关资源
+      preCaching: [
+        '/index.html',
+        '/basic.html',
+        '/200.html',
+        '/favicon.ico',
+        '/favicon.png',
+        '/icon.ico',
+        '/icon.png'
+      ],
+      cleanupOutdatedCaches: true,
+      clientsClaim: true,
+      skipWaiting: true
     }
   },
   env: {
