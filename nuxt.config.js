@@ -160,8 +160,7 @@ export default {
         precache: 'prc',
         runtime: 'rtm'
       },
-      offline: true,
-      offlineStrategy: 'StaleWhileRevalidate',
+      offline: false,
       runtimeCaching: [
         {
           urlPattern: '/_nuxt/.*',
@@ -191,7 +190,6 @@ export default {
         }
       ],
 
-      // 相关资源
       preCaching: [
         '/index.html',
         '/basic.html',
