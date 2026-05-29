@@ -163,41 +163,20 @@ export default {
       offline: false,
       runtimeCaching: [
         {
-          urlPattern: '/_nuxt/.*',
-          handler: 'cacheFirst',  // 带 hash 的文件优先用缓存
-          method: 'GET'
-        },
-
-        {
           urlPattern: '/static/.*',
           handler: 'staleWhileRevalidate',
           method: 'GET'
         },
         {
           urlPattern: '/(index|basic|200)\\.html$',
-          handler: 'networkFirst',
+          handler: 'staleWhileRevalidate',
           method: 'GET'
         },
         {
           urlPattern: '/(favicon|icon)\\.(ico|png)$',
-          handler: 'cacheFirst',
-          method: 'GET'
-        },
-        {
-          urlPattern: '/',
-          handler: 'networkFirst',
+          handler: 'staleWhileRevalidate',
           method: 'GET'
         }
-      ],
-
-      preCaching: [
-        '/index.html',
-        '/basic.html',
-        '/200.html',
-        '/favicon.ico',
-        '/favicon.png',
-        '/icon.ico',
-        '/icon.png'
       ],
       cleanupOutdatedCaches: true,
       clientsClaim: true,
