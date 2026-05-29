@@ -109,7 +109,7 @@
                 class="footer-image-link"
               >
                 <img
-                  src="/static/img/maintain-placeholder.png"
+                  src="/static/img/maintain-placeholder.PNG"
                   alt="运营维护"
                   class="footer-image"
                 />
