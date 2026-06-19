@@ -2,17 +2,17 @@ const cheerio = require('cheerio');
 const https = require('https');
 const fs = require('fs');
 
-const url = 'https://documentation.ubuntu.com/project/release-team/list-of-releases/';
+const url = 'https://ubuntu.com/project/docs/release-team/list-of-releases/';
 const template = './utils/thirdparty/GrabUbuntuRelease/_index.template.ubuntu.md';
 const target = './content/wiki/mirror-wiki/ubuntu-releases/_index.md';
 
 function parseURL(uri) {
   if (!uri) return '';
   if (uri.startsWith('http')) return uri;
-  if (uri.startsWith('/')) return 'https://documentation.ubuntu.com' + uri;
+  if (uri.startsWith('/')) return 'https://ubuntu.com' + uri;
   // 处理 Sphinx 的相对路径，去除 ../ 等
   const cleanUri = uri.replace(/^(\.\.\/)+/, '');
-  return 'https://documentation.ubuntu.com/project/release-team/list-of-releases/' + cleanUri;
+  return 'https://ubuntu.com/project/docs/release-team/list-of-releases/' + cleanUri;
 }
 
 function parseTable(html) {
