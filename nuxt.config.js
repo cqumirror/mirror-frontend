@@ -52,7 +52,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/static/favicon.png' }
+      { rel: 'icon', type: 'image/svg+xml', href: '/static/favicon.svg' }
     ]
   },
   hooks: {
